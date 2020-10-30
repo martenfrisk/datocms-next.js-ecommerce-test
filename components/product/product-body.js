@@ -4,7 +4,7 @@ export default function ProductBody({ content }) {
   return (
       <div
         className={markdownStyles['markdown']}
-        dangerouslySetInnerHtml={{ __html: content }}
+        dangerouslySetInnerHTML={{ __html: content }}
       />
   )
 }
