@@ -1,4 +1,4 @@
-import { getPreviewPostBySlug } from '../../lib/api'
+import { getPreviewProductBySlug } from '../../lib/api'
 
 export default async (req, res) => {
   // Check the secret and next parameters
@@ -11,18 +11,18 @@ export default async (req, res) => {
   }
 
   // Fetch the headless CMS to check if the provided `slug` exists
-  const post = await getPreviewPostBySlug(req.query.slug)
+  const product = await getPreviewProductBySlug(req.query.slug)
 
   // If the slug doesn't exist prevent preview mode from being enabled
-  if (!post) {
+  if (!product) {
     return res.status(401).json({ message: 'Invalid slug' })
   }
 
   // Enable Preview Mode by setting the cookies
   res.setPreviewData({})
 
-  // Redirect to the path from the fetched post
+  // Redirect to the path from the fetched product
   // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  res.writeHead(307, { Location: `/products/${post.slug}` })
+  res.writeHead(307, { Location: `/products/${product.slug}` })
   res.end()
 }
