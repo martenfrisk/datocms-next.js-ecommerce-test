@@ -26,7 +26,7 @@ export default function ProductPreview({
       <div className="text-lg mb-4">
         {retailPrice} kr
       </div>
-      <p className="text-sm font-light leading-snug mb-4">{descriptionShort ? descriptionShort : description}</p>
+      <p className="text-sm hidden md:block font-light leading-snug mb-4">{descriptionShort ? descriptionShort : description}</p>
     </div>
   )
 }

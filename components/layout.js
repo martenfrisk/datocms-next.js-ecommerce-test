@@ -1,4 +1,3 @@
-import Footer from '../components/footer'
 import Meta from '../components/meta'
 
 export default function Layout({ children }) {
@@ -8,7 +7,6 @@ export default function Layout({ children }) {
       <div className="min-h-screen">
         <main>{children}</main>
       </div>
-      <Footer />
     </>
   )
 }
