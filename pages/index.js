@@ -1,15 +1,15 @@
 import Container from '../components/container'
-import MoreStories from '../components/more-stories'
-import HeroPost from '../components/hero-post'
+import MoreProducts from '../components/product/more-products'
+import HeroProduct from '../components/product/hero-product'
 import Intro from '../components/intro'
 import Layout from '../components/layout'
-import { getAllPostsForHome } from '../lib/api'
+import { getAllProductsForHome } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
 
-export default function Index({ allPosts }) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+export default function Index({ allProducts }) {
+  const heroProduct = allProducts[0]
+  const moreProducts = allProducts.slice(1)
   return (
     <>
       <Layout>
@@ -18,17 +18,17 @@ export default function Index({ allPosts }) {
         </Head>
         <Container>
           <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
+          {heroProduct && (
+            <HeroProduct
+              productName={heroProduct.productName}
+              slug={heroProduct.slug}
+              description={heroProduct.description}
+              descriptionShort={heroProduct.descriptionShort}
+              retailPrice={heroProduct.retailPrice}
+              cover={heroProduct.cover}
             />
           )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          {moreProducts.length > 0 && <MoreProducts products={moreProducts} />}
         </Container>
       </Layout>
     </>
@@ -36,8 +36,8 @@ export default function Index({ allPosts }) {
 }
 
 export async function getStaticProps({ preview }) {
-  const allPosts = await getAllPostsForHome(preview)
+  const allProducts = await getAllProductsForHome(preview)
   return {
-    props: { allPosts },
+    props: { allProducts },
   }
 }
