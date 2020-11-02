@@ -54,9 +54,34 @@ const testItem = [
     quantity: 2,
   },
 ];
+function setLocalStorage(key, value) {
+    try {
+        window.localStorage.setItem(key, JSON.stringify(value))
+    } catch (e) {
+        console.error(e)
+    }
+}
+function getLocalStorage(key, initialValue) {
+    try {
+        const value = window.localStorage.getItem(key)
+        return value ? JSON.parse(value) : initialValue
+    } catch (e) {
+        console.error(e)
+        return initialValue
+    }
+}
+// const localState = JSON.parse(localStorage.getItem("cart"))
+const initialState = []
 
 export const CartProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, testItem);
+    const [localState, setLocalState] = React.useState()
+    React.useEffect(() => {
+        setLocalState(getLocalStorage("cart", initialState))
+    }, [])
+  const [state, dispatch] = useReducer(reducer, localState || initialState);
+  React.useEffect(() => {
+      setLocalStorage("cart", state)
+  }, [state])
   return (
     <CartDispatch.Provider value={dispatch}>
       <CartContext.Provider value={state}>{children}</CartContext.Provider>
