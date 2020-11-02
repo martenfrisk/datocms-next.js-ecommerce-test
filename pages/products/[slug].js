@@ -15,9 +15,22 @@ import Head from "next/head";
 import { CMS_NAME } from "../../lib/constants";
 import markdownToHtml from "../../lib/markdownToHtml";
 import CoverImage from "../../components/cover-image";
+import { useDispatchCart, useCart } from "../../components/cart/cart-context"
 
 export default function Product({ product, moreProducts, preview }) {
   const router = useRouter();
+  const dispatch = useDispatchCart()
+  const state = useCart()
+  const handleAddToCart = () => {
+    dispatch({
+      type: "ADD_ITEM",
+      payload: {
+        item: product.productName,
+        quantity: 1
+      } 
+    })
+    console.log(state)
+  }
   if (!router.isFallback && !product?.slug) {
     return <ErrorPage statusCode={404} />;
   }
@@ -50,7 +63,7 @@ export default function Product({ product, moreProducts, preview }) {
                   <p className="text-3xl font-bold">
                     {product.retailPrice}:-
                   </p>
-                  <button className="bg-black text-white rounded-md text-lg px-6 py-1 cursor-pointer hover:bg-white hover:text-black border-2 border-black transition-200">Buy</button>
+                  <button className="bg-black text-white rounded-md text-lg px-6 py-1 cursor-pointer hover:bg-white hover:text-black border-2 border-black transition-200" onClick={handleAddToCart}>Buy</button>
                   </div>
                   <div className="w-full px-4 md:px-0 md:w-2/3">
                     <ProductBody content={product.description} />
