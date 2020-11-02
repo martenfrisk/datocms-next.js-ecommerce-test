@@ -36,9 +36,9 @@ const Cart = () => {
           }`}
         >
           <div className="border-b border-gray-500 tracking-wide absolute top-0 py-px text-sm" style={{ width: 'max-content'}}>Your Shopping Cart</div>
-          {state.length === 0
+          {state && state.length === 0
             ? <div className="w-48">Your cart is empty. Add an item and check back here later.</div>
-            : state.map((myCartItem) => (
+            : state && state.map((myCartItem) => (
                 <div key={myCartItem.id} className="w-48 flex justify-between">
                   {myCartItem.item} ({myCartItem.quantity}){" "}
                   <span

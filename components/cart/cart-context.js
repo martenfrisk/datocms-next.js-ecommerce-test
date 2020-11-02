@@ -7,21 +7,21 @@ const CartDispatch = createContext();
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-        if(state.some(i => i.item === action.payload.item)) {
-            state.map(item => {
-                if (item.item === action.payload.item) {
-                    return {...item, quantity: item.quantity++}
-                } else {
-                    return item
-                }
-            })
-        } else {
-            return state.concat({
-                item: action.payload.item,
-                id: uuid(),
-                quantity: action.payload.quantity,
-            });
-        }    
+      if (state && state.some((i) => i.item === action.payload.item)) {
+        state.map((item) => {
+          if (item.item === action.payload.item) {
+            return { ...item, quantity: item.quantity++ };
+          } else {
+            return item;
+          }
+        });
+      } else {
+        return state.concat({
+          item: action.payload.item,
+          id: uuid(),
+          quantity: action.payload.quantity,
+        });
+      }
     case "REMOVE":
       return state.filter((i) => i.id !== action.payload.id);
     case "INCREASE":
@@ -45,8 +45,6 @@ const reducer = (state, action) => {
   }
 };
 
-
-
 const testItem = [
   {
     item: "Tomb Raider",
@@ -55,33 +53,37 @@ const testItem = [
   },
 ];
 function setLocalStorage(key, value) {
-    try {
-        window.localStorage.setItem(key, JSON.stringify(value))
-    } catch (e) {
-        console.error(e)
-    }
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.error(e);
+  }
 }
 function getLocalStorage(key, initialValue) {
-    try {
-        const value = window.localStorage.getItem(key)
-        return value ? JSON.parse(value) : initialValue
-    } catch (e) {
-        console.error(e)
-        return initialValue
-    }
+  try {
+    const value = window.localStorage.getItem(key);
+    return value ? JSON.parse(value) : initialValue;
+  } catch (e) {
+    console.error(e);
+    // return initialValue
+  }
 }
 // const localState = JSON.parse(localStorage.getItem("cart"))
-const initialState = []
+const initialState = [{
+    item: '',
+    id: '',
+    quantity: 0
+}];
 
 export const CartProvider = ({ children }) => {
-    const [localState, setLocalState] = React.useState()
-    React.useEffect(() => {
-        setLocalState(getLocalStorage("cart", initialState))
-    }, [])
-  const [state, dispatch] = useReducer(reducer, localState || initialState);
+  const [localState, setLocalState] = React.useState(() => getLocalStorage("cart", initialState));
+//   React.useEffect(() => {
+//     setLocalState(getLocalStorage("cart", initialState));
+//   }, []);
+  const [state, dispatch] = useReducer(reducer, localState);
   React.useEffect(() => {
-      setLocalStorage("cart", state)
-  }, [state])
+    setLocalStorage("cart", state);
+  }, [state]);
   return (
     <CartDispatch.Provider value={dispatch}>
       <CartContext.Provider value={state}>{children}</CartContext.Provider>
@@ -90,4 +92,4 @@ export const CartProvider = ({ children }) => {
 };
 
 export const useCart = () => useContext(CartContext);
-export const useDispatchCart = () => useContext(CartDispatch)
+export const useDispatchCart = () => useContext(CartDispatch);

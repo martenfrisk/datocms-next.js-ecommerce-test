@@ -3,7 +3,7 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   purge: {
-    enabled: false,
+    enabled: true,
     // mode: 'all',
     content: [
       './pages/**/*.{js,jsx,ts,tsx}',
