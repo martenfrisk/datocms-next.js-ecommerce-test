@@ -8,7 +8,7 @@ export default function Intro() {
         Games.
       </h1>
       <div className="flex flex-col md:flex-row items-center mt-2 md:mt-0">
-        <h4 className="text-center md:text-right w-64  text-sm  md:mr-6 order-last md:order-first mt-4 md:mt-0 ">
+        <h2 className="text-center md:text-right w-64  text-sm  md:mr-6 order-last md:order-first mt-4 md:mt-0 ">
           A statically generated e-commerce site using{" "}
           <a
             href="https://nextjs.org/"
@@ -24,7 +24,7 @@ export default function Intro() {
             {CMS_NAME}
           </a>
           .
-        </h4>
+        </h2>
         <UserButtons />
       </div>
     </section>
