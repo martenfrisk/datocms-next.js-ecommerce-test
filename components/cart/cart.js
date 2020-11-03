@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
-import { ShoppingCart32 } from "@carbon/icons-react";
+import { ShoppingCart32, AddAlt32, SubtractAlt32 } from "@carbon/icons-react";
 
 import { useCart, useDispatchCart } from "./cart-context";
 
@@ -33,13 +33,13 @@ const Cart = () => {
 
   return (
     <>
-      <div className="sticky w-20 bottom-0 flex items-end left-0 mb-20 ml-10  right-0">
+      <div className="sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20 ml-0 flex-col md:flex-row md:ml-10  right-0">
         <div
           onClick={() => setShowCartItems((prev) => !prev)}
-          className={`cursor-pointer w-12 h-12 flex-col shadow-3xl p-2 border-2 flex justify-center items-center mb-6 rounded-full ${
+          className={`cursor-pointer w-12 h-12 flex-col shadow-3xl p-2 border-2 flex justify-center order-2 md:order-1 items-center mb-6 rounded-full ${
             showCartItems
-              ? "bg-gray-700 border-white text-white"
-              : "bg-white border-black text-black"
+              ? "bg-blue-600 border-white text-white"
+              : "bg-white border-blue-700 text-blue-700"
           }`}
         >
           {state && state.length > 0 && (
@@ -50,7 +50,7 @@ const Cart = () => {
           <ShoppingCart32 className="mx-auto my-0" />
         </div>
         <div
-          className={`text-center bg-white rounded-md pt-10 pb-4 px-4 flex flex-col items-center justify-start w-auto ml-4 mb-6 bg-opacity-75 ${
+          className={`text-center bg-white rounded-lg pt-10 pb-4 px-4 flex flex-col items-center justify-start w-auto md:ml-4 mb-2 md:mb-6 bg-opacity-90 border border-blue-400 order-1 md:order-2 ${
             showCartItems ? "visible" : "invisible"
           }`}
         >
@@ -70,10 +70,10 @@ const Cart = () => {
                 {state.map((myCartItem) => (
                   <div
                     key={myCartItem.id}
-                    className="mb-2 w-full flex-wrap flex justify-between items-center border-b border-gray-400"
+                    className="mb-2 w-full flex-wrap flex justify-between items-center border-b border-gray-400 bg-blue-100 p-1 bg-opacity-25"
                   >
                     <div
-                      className="w-full flex items-start"
+                      className="w-full flex items-center"
                       style={{ width: "max-content" }}
                     >
                       <span
@@ -82,7 +82,7 @@ const Cart = () => {
                       >
                         X
                       </span>
-                      <span className="text-left border-b border-opacity-0 border-blue-800 hover:border-opacity-100 mx-2">
+                      <span className="text-left hover:text-blue-900 mx-2 underline ml-4">
                         <Link
                           as={`/products/${myCartItem.slug}`}
                           href="/products/[slug]"
@@ -91,25 +91,28 @@ const Cart = () => {
                         </Link>
                       </span>
                     </div>
-                    <div className="w-full flex justify-between">
-                      <span className="w-3/4 text-sm font-light text-left">
+                    <div className="w-full flex  py-1 justify-between">
+                      <span className="w-3/4 text-base justify-start flex items-center font-light text-left">
                         <button
                           onClick={() =>
                             handleAdjustQuantity(myCartItem.id, "DECREASE")
                           }
-                          className={`focus:outline-none ${myCartItem.quantity === 1 && 'text-gray-300'}`}
+                          className={`focus:outline-none  ${myCartItem.quantity === 1 && 'text-gray-300'}`}
                           disabled={myCartItem.quantity === 1 ? true : false}
                         >
-                          -
+                          <SubtractAlt32 className="w-4 h-4" />
                         </button>
-                        &nbsp;{myCartItem.quantity}&nbsp;
+                        <span className="mx-2">
+
+                        {myCartItem.quantity}
+                        </span>
                         <button
                           onClick={() =>
                             handleAdjustQuantity(myCartItem.id, "INCREASE")
                           }
-                          className={`focus:outline-none`}
+                          className={`focus:outline-none `}
                         >
-                          +
+                          <AddAlt32 className="w-4 h-4" />
                         </button>
                       </span>
                       <span className="w-1/4 text-right">

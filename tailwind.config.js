@@ -12,6 +12,11 @@ module.exports = {
   },
   theme: {
     extend: {
+      opacity: {
+        '80': '0.8',
+        '90': '0.9',
+        '95': '0.95',
+      },
       colors: {
         'accent-1': '#FAFAFA',
         'accent-2': '#EAEAEA',
