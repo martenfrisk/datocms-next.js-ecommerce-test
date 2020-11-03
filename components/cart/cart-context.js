@@ -29,17 +29,21 @@ const reducer = (state, action) => {
     case "REMOVE":
       return state.filter((i) => i.id !== action.payload.id);
     case "INCREASE":
-      return state.map((item) => {
-        if (item.id === action.payload.id) {
-          return { ...item, quantity: quantity++ };
+      return state.map((i) => {
+        if (i.id === action.payload.id) {
+          return { ...i, quantity: i.quantity + 1 };
         } else {
-          return item;
+          return i;
         }
       });
     case "DECREASE":
       return state.map((item) => {
         if (item.id === action.payload.id) {
-          return { ...item, quantity: quantity-- };
+          if (item.quantity === 1) {
+            return item
+          } else {
+            return { ...item, quantity: item.quantity - 1 };
+          }
         } else {
           return item;
         }

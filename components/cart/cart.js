@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useState } from 'react'
+import { useState } from "react";
 import { ShoppingCart32 } from "@carbon/icons-react";
 
 import { useCart, useDispatchCart } from "./cart-context";
@@ -8,7 +8,6 @@ const Cart = () => {
   const [showCartItems, setShowCartItems] = useState(false);
   const state = useCart();
   const dispatch = useDispatchCart();
-  console.log(state);
   const handleRemoveItem = (id) => {
     dispatch({
       type: "REMOVE",
@@ -16,7 +15,14 @@ const Cart = () => {
         id,
       },
     });
-    console.log(state);
+  };
+  const handleAdjustQuantity = (id, action) => {
+    dispatch({
+      type: action,
+      payload: {
+        id,
+      },
+    });
   };
 
   let sumTotal, itemCount;
@@ -60,7 +66,7 @@ const Cart = () => {
             </div>
           ) : (
             state && (
-              <div className="flex justify-end flex-wrap">
+              <div className="flex w-64 justify-end flex-wrap">
                 {state.map((myCartItem) => (
                   <div
                     key={myCartItem.id}
@@ -87,7 +93,24 @@ const Cart = () => {
                     </div>
                     <div className="w-full flex justify-between">
                       <span className="w-3/4 text-sm font-light text-left">
-                        #{myCartItem.quantity}
+                        <button
+                          onClick={() =>
+                            handleAdjustQuantity(myCartItem.id, "DECREASE")
+                          }
+                          className={`focus:outline-none ${myCartItem.quantity === 1 && 'text-gray-300'}`}
+                          disabled={myCartItem.quantity === 1 ? true : false}
+                        >
+                          -
+                        </button>
+                        &nbsp;{myCartItem.quantity}&nbsp;
+                        <button
+                          onClick={() =>
+                            handleAdjustQuantity(myCartItem.id, "INCREASE")
+                          }
+                          className={`focus:outline-none`}
+                        >
+                          +
+                        </button>
                       </span>
                       <span className="w-1/4 text-right">
                         {myCartItem.price} :-
