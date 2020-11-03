@@ -15,7 +15,7 @@ export default function ProductPreview({
         <CoverImage
           slug={slug}
           productName={productName}
-          responsiveImage={cover.url}
+          responsiveImage={cover.responsiveImage}
         />
       </div>
       <h3 className="text-2xl mb-3 leading-snug">

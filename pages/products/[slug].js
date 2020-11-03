@@ -50,14 +50,14 @@ export default function Product({ product, moreProducts, preview }) {
                   {product.productName} | Next.js Ecommerce Example with{" "}
                   {CMS_NAME}
                 </title>
-                {/* <meta property="og:image" content={product.ogImage.url} /> */}
+                <meta property="og:image" content={product.ogImage.responsiveImage} />
               </Head>
               <ProductTitle>{product.productName}</ProductTitle>
               <div className="flex flex-col md:flex-row items-center md:items-start">
                 <div className="w-2/3 md:w-1/3 h-auto">
                   <CoverImage
                     productName={product.productName}
-                    responsiveImage={product.cover.url}
+                    responsiveImage={product.cover.responsiveImage}
                   />
                 </div>
                 <div className="w-full md:w-2/3 md:pl-8">

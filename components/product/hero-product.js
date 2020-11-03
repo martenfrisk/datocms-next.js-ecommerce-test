@@ -15,7 +15,7 @@ export default function HeroProduct({
         <div className="w-48 mx-auto h-48 mb-8">
           <CoverImage
             productName={productName}
-            responsiveImage={cover.url}
+            responsiveImage={cover.responsiveImage}
             slug={slug}
             rotate={true}
           />
