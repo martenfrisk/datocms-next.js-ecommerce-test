@@ -1,10 +1,11 @@
 import Link from "next/link";
+import { useState } from 'react'
 import { ShoppingCart32 } from "@carbon/icons-react";
 
 import { useCart, useDispatchCart } from "./cart-context";
 
 const Cart = () => {
-  const [showCartItems, setShowCartItems] = React.useState(false);
+  const [showCartItems, setShowCartItems] = useState(false);
   const state = useCart();
   const dispatch = useDispatchCart();
   console.log(state);

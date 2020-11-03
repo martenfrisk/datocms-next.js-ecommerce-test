@@ -1,9 +1,10 @@
 import { useDrop } from "react-dnd";
+import { useState } from 'react'
 import Cart from "./cart";
 import update from "immutability-helper";
 
 const CartWrapper = () => {
-  const [carts, setCarts] = React.useState({
+  const [carts, setCarts] = useState({
     bottom: 20,
     left: 80,
   });

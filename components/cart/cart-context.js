@@ -1,4 +1,4 @@
-import { useReducer, useContext, createContext } from "react";
+import { useReducer, useContext, createContext, useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 
 const CartContext = createContext();
@@ -81,12 +81,12 @@ function getLocalStorage(key, initialValue) {
 const initialState = [];
 
 export const CartProvider = ({ children }) => {
-  const [localState, setLocalState] = React.useState(() => isBrowser && getLocalStorage("cart", initialState));
-//   React.useEffect(() => {
+  const [localState, setLocalState] = useState(() => isBrowser && getLocalStorage("cart", initialState));
+//   useEffect(() => {
 //     setLocalState(getLocalStorage("cart", initialState));
 //   }, []);
   const [state, dispatch] = useReducer(reducer, localState);
-  React.useEffect(() => {
+  useEffect(() => {
     setLocalStorage("cart", state);
   }, [state]);
   return (

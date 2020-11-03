@@ -8,7 +8,7 @@ export default function ProductHeader({ productName, cover }) {
       <div className="w-1/3 h-auto">
         <CoverImage
           productName={productName}
-          responsiveImage={cover.responsiveImage}
+          responsiveImage={cover.url}
         />
       </div>
     </>
