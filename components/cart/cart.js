@@ -33,24 +33,24 @@ const Cart = () => {
 
   return (
     <>
-      <div className="sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20 ml-0 flex-col md:flex-row md:ml-10  right-0">
+      <div className="sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20 ml-0 flex-col md:flex-row md:ml-10 pointer-events-none right-0">
         <div
           onClick={() => setShowCartItems((prev) => !prev)}
-          className={`cursor-pointer w-12 h-12 flex-col shadow-3xl p-2 border-2 flex justify-center order-2 md:order-1 items-center mb-6 rounded-full ${
+          className={`cursor-pointer w-12 h-12 flex-col shadow-3xl p-2 border-2 flex justify-center order-2 md:order-1 items-center mb-6 rounded-full pointer-events-auto ${
             showCartItems
               ? "bg-blue-600 border-white text-white"
               : "bg-white border-blue-700 text-blue-700"
           }`}
         >
           {state && state.length > 0 && (
-            <div className="absolute mb-6 bottom-0 text-blue-600 bg-white ml-10 rounded-full border-2 border-blue-600 text-center w-5 h-5 text-xs">
+            <div className="absolute mb-6 bottom-0 text-blue-600 bg-white ml-10 rounded-full border-2 pointer-events-auto border-blue-600 text-center w-5 h-5 text-xs">
               {state.reduce((acc, curr) => acc + curr.quantity, 0)}
             </div>
           )}
           <ShoppingCart32 className="mx-auto my-0" />
         </div>
         <div
-          className={`text-center bg-white rounded-lg pt-10 pb-4 px-4 flex flex-col items-center justify-start w-auto md:ml-4 mb-2 md:mb-6 bg-opacity-90 border border-blue-400 order-1 md:order-2 ${
+          className={`text-center bg-white rounded-lg pt-10 pb-4 px-4 flex flex-col items-center justify-start w-auto pointer-events-auto md:ml-4 mb-2 md:mb-6 bg-opacity-90 border border-blue-400 order-1 md:order-2 ${
             showCartItems ? "visible" : "invisible"
           }`}
         >
