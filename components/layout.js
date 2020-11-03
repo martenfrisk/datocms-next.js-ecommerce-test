@@ -1,13 +1,24 @@
 import Meta from '../components/meta'
 import Cart from './cart/cart'
+import { useCart } from '../components/cart/cart-context'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+export default function Layout({ children, showCartButton = 'true'}) {
+  const router = useRouter()
+  const { showCart } = useCart()
+  const [ visible, setVisible ] = showCart
 
-export default function Layout({ children }) {
+  useEffect(() => {
+    setVisible(false)
+    console.log(router)
+  }, [router.asPath])
+
   return (
     <>
       <Meta />
       <div className="min-h-screen">
         <main>{children}</main>
-          <Cart />
+        {showCartButton === 'true' && <Cart />}
       </div>
     </>
   )

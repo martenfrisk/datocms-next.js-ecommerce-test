@@ -1,17 +1,23 @@
-import { useReducer, useContext, createContext, useState, useEffect } from "react";
+import {
+  useReducer,
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+} from "react";
 import { v4 as uuid } from "uuid";
 
 const CartContext = createContext();
 const CartDispatch = createContext();
 
-const isBrowser = typeof window !== 'undefined'
+const isBrowser = typeof window !== "undefined";
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      if (state && state.some((i) => i.item === action.payload.item)) {
+      if (state.some((i) => i.slug === action.payload.slug)) {
         state.map((item) => {
-          if (item.item === action.payload.item) {
+          if (item.slug === action.payload.slug) {
             return { ...item, quantity: item.quantity++ };
           } else {
             return item;
@@ -40,7 +46,7 @@ const reducer = (state, action) => {
       return state.map((item) => {
         if (item.id === action.payload.id) {
           if (item.quantity === 1) {
-            return item
+            return item;
           } else {
             return { ...item, quantity: item.quantity - 1 };
           }
@@ -48,6 +54,9 @@ const reducer = (state, action) => {
           return item;
         }
       });
+    case "CLEAR":
+      console.log('clearing cart...')
+      return (state = initialState);
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }
@@ -85,17 +94,20 @@ function getLocalStorage(key, initialValue) {
 const initialState = [];
 
 export const CartProvider = ({ children }) => {
-  const [localState, setLocalState] = useState(() => isBrowser && getLocalStorage("cart", initialState));
-//   useEffect(() => {
-//     setLocalState(getLocalStorage("cart", initialState));
-//   }, []);
+  const [localState, setLocalState] = useState(
+    () => isBrowser && getLocalStorage("cart", initialState)
+  );
+  const [ visible, setVisible ] = useState(false)
+  //   useEffect(() => {
+  //     setLocalState(getLocalStorage("cart", initialState));
+  //   }, []);
   const [state, dispatch] = useReducer(reducer, localState);
   useEffect(() => {
     setLocalStorage("cart", state);
   }, [state]);
   return (
     <CartDispatch.Provider value={dispatch}>
-      <CartContext.Provider value={state}>{children}</CartContext.Provider>
+      <CartContext.Provider value={{ state, showCart: [visible, setVisible]}}>{children}</CartContext.Provider>
     </CartDispatch.Provider>
   );
 };

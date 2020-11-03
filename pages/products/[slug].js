@@ -20,7 +20,9 @@ import { useDispatchCart, useCart } from "../../components/cart/cart-context"
 export default function Product({ product, moreProducts, preview }) {
   const router = useRouter();
   const dispatch = useDispatchCart()
-  const state = useCart()
+  const { state, showCart } = useCart()
+  const [ visible, setVisible ] = showCart
+
   const handleAddToCart = () => {
     dispatch({
       type: "ADD_ITEM",
@@ -31,13 +33,14 @@ export default function Product({ product, moreProducts, preview }) {
         slug: product.slug
       } 
     })
+    setVisible(true)
     console.log(state)
   }
   if (!router.isFallback && !product?.slug) {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <Layout preview={preview}>
+    <Layout preview={preview} showCartButton={'true'}>
       <Container>
         <Header />
         {router.isFallback ? (

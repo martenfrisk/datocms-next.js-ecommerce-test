@@ -12,7 +12,7 @@ export default function Index({ allProducts }) {
   const moreProducts = allProducts.slice(1)
   return (
     <>
-      <Layout>
+      <Layout showCartButton={'true'}>
         <Head>
           <title>Next.js Blog Example with {CMS_NAME}</title>
         </Head>

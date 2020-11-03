@@ -12,12 +12,12 @@ export default function CoverImage({ productName, responsiveImage, slug, rotate 
         ...responsiveImage,
         alt: `Cover Image for ${productName}`,
       }}
-      className="hover:shadow-4xl shadow-3xl transition-shadow duration-200 hover:translate-y-2"
+      className="hover:shadow-4xl shadow-3xl transition-shadow duration-200 hover:-translate-y-1 transform"
       style={willRotate}
     />
   )
   return (
-    <div className="-mx-5 sm:mx-0 hover:translate-y-4" style={{ perspective: '1000px'}}>
+    <div className="-mx-5 sm:mx-0 transition duration-200 ease-in transform hover:-translate-y-1" style={{ perspective: '1000px'}}>
       {slug ? (
         <Link as={`/products/${slug}`} href="/products/[slug]">
           <a aria-label={productName}>{image}</a>
