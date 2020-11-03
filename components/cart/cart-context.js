@@ -4,6 +4,8 @@ import { v4 as uuid } from "uuid";
 const CartContext = createContext();
 const CartDispatch = createContext();
 
+const isBrowser = typeof window !== 'undefined'
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
@@ -20,6 +22,8 @@ const reducer = (state, action) => {
           item: action.payload.item,
           id: uuid(),
           quantity: action.payload.quantity,
+          price: action.payload.price,
+          slug: action.payload.slug,
         });
       }
     case "REMOVE":
@@ -69,14 +73,15 @@ function getLocalStorage(key, initialValue) {
   }
 }
 // const localState = JSON.parse(localStorage.getItem("cart"))
-const initialState = [{
-    item: '',
-    id: '',
-    quantity: 0
-}];
+// const initialState = [{
+//     item: '',
+//     id: '',
+//     quantity: 0
+// }];
+const initialState = [];
 
 export const CartProvider = ({ children }) => {
-  const [localState, setLocalState] = React.useState(() => getLocalStorage("cart", initialState));
+  const [localState, setLocalState] = React.useState(() => isBrowser && getLocalStorage("cart", initialState));
 //   React.useEffect(() => {
 //     setLocalState(getLocalStorage("cart", initialState));
 //   }, []);

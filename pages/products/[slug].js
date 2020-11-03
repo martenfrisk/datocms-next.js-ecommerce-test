@@ -26,7 +26,9 @@ export default function Product({ product, moreProducts, preview }) {
       type: "ADD_ITEM",
       payload: {
         item: product.productName,
-        quantity: 1
+        price: product.retailPrice,
+        quantity: 1,
+        slug: product.slug
       } 
     })
     console.log(state)
