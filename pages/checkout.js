@@ -12,7 +12,7 @@ import {
 
 export default function Checkout() {
   const { state } = useCart();
-    console.log(state)
+    // console.log(state)
   const dispatch = useDispatchCart();
   const handleRemoveItem = (id) => {
     dispatch({
