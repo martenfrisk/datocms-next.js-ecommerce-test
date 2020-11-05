@@ -1,7 +1,7 @@
 import Container from '../components/container'
 import MoreProducts from '../components/product/more-products'
 import HeroProduct from '../components/product/hero-product'
-import Intro from '../components/intro'
+import Header from '../components/header'
 import Layout from '../components/layout'
 import { getAllProductsForHome } from '../lib/api'
 import Head from 'next/head'
@@ -17,7 +17,7 @@ export default function Index({ allProducts }) {
           <title>Next.js Blog Example with {CMS_NAME}</title>
         </Head>
         <Container>
-          <Intro />
+          <Header frontPage={true} />
           {heroProduct && (
             <HeroProduct
               productName={heroProduct.productName}
