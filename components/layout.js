@@ -10,7 +10,6 @@ export default function Layout({ children, showCartButton = 'true'}) {
 
   useEffect(() => {
     setVisible(false)
-    console.log(router)
   }, [router.asPath])
 
   return (

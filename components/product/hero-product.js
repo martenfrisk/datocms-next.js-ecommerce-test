@@ -10,7 +10,7 @@ export default function HeroProduct({
   cover,
 }) {
   return (
-    <section className="flex items-center flex-wrap">
+    <section className="flex mb-16 items-center flex-wrap">
       <div className="w-full order-last md:order-first md:w-1/3">
         <div className="w-48 mx-auto h-48 mb-8">
           <CoverImage
