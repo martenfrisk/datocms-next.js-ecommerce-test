@@ -1,12 +1,16 @@
-import Meta from '../components/meta'
-import Cart from './cart/cart'
-import { useCart } from '../components/cart/cart-context'
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-export default function Layout({ children, showCartButton = 'true'}) {
+import Meta from './meta'
+import Cart from './cart/cart'
+import { useCart } from './cart/cart-context'
+
+export default function Layout({ children, showCartButton = 'true' }: { children: object, showCartButton: string }) {
   const router = useRouter()
+  // @ts-ignore
   const { showCart } = useCart()
-  const [ visible, setVisible ] = showCart
+  const [, setVisible] = showCart
 
   useEffect(() => {
     setVisible(false)

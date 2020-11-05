@@ -1,7 +1,8 @@
-import { useDrop } from "react-dnd";
-import { useState } from 'react'
-import Cart from "./cart";
-import update from "immutability-helper";
+/* eslint-disable */
+import { useDrop } from 'react-dnd';
+import { useState } from 'react';
+import update from 'immutability-helper';
+import Cart from './cart';
 
 const CartWrapper = () => {
   const [carts, setCarts] = useState({
@@ -9,7 +10,7 @@ const CartWrapper = () => {
     left: 80,
   });
   const [, drop] = useDrop({
-    accept: "cart",
+    accept: 'cart',
     drop(item, monitor) {
       const delta = monitor.getDifferenceFromInitialOffset();
       const left = Math.round(item.left + delta.x);
@@ -20,19 +21,19 @@ const CartWrapper = () => {
   });
   const moveCart = (left, bottom) => {
     setCarts(
-        update(carts, {
-            $merge: { left, bottom },
-        })
+      update(carts, {
+        $merge: { left, bottom },
+      }),
     );
   };
   return (
     <div ref={drop}>
-          <Cart
-            left={carts.left}
-            bottom={carts.bottom}
-          />
+      <Cart
+        left={carts.left}
+        bottom={carts.bottom}
+      />
     </div>
   );
 };
 
-export default CartWrapper
+export default CartWrapper;

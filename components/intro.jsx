@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { CMS_NAME, CMS_URL } from "../lib/constants";
-import UserButtons from "./user-buttons";
+import { CMS_NAME, CMS_URL } from '../lib/constants'
+import UserButtons from './user-buttons'
 
 export default function Intro() {
   return (
@@ -8,19 +8,22 @@ export default function Intro() {
       <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
         <Link href="/">
 
-        Games.
+          Games.
         </Link>
       </h1>
       <div className="flex flex-col md:flex-row items-center mt-2 md:mt-0">
         <h2 className="text-center md:text-right w-64  text-sm  md:mr-6 order-last md:order-first mt-4 md:mt-0 ">
-          A statically generated e-commerce site using{" "}
+          A statically generated e-commerce site using
+          {' '}
           <a
             href="https://nextjs.org/"
             className="underline hover:text-success duration-200 transition-colors"
           >
             Next.js
-          </a>{" "}
-          and{" "}
+          </a>
+          {' '}
+          and
+          {' '}
           <a
             href={CMS_URL}
             className="underline hover:text-success duration-200 transition-colors"

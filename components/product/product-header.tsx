@@ -1,7 +1,15 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable import/extensions */
 import CoverImage from '../cover-image'
 import ProductTitle from './product-title'
 
-export default function ProductHeader({ productName, cover }) {
+export default function ProductHeader({
+  productName,
+  cover,
+}: {
+  productName: string;
+  cover: { responsiveImage: any };
+}) {
   return (
     <>
       <ProductTitle>{productName}</ProductTitle>
@@ -12,5 +20,5 @@ export default function ProductHeader({ productName, cover }) {
         />
       </div>
     </>
-  )
+  );
 }

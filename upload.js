@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const products = [
     {
        "artnr":"GB-MARIOLAND","artnamn":"Super Mario Land","price":"599.00","text":"Super Mario Land[a]&#160;is a 1989&#160;side-scrolling&#160;platform video game&#160;developed and published by&#160;Nintendo&#160;as a&#160;launch title&#160;for their&#160;Game Boy&#160;handheld game console. It is the first&#160;Mario&#160;platform game ever to be released for a handheld console. In gameplay similar to that of the 1985&#160;Super Mario Bros., but resized for the smaller device's screen, the player advances&#160;Mario&#160;to the end of 12&#160;levels&#160;by moving to the right and jumping across platforms to avoid enemies and pitfalls.","Text_Kort_SV":"Super Mario Land[a] is a 1989 side-scrolling platform video game developed and published by Nintendo as a launch title for their Game Boy handheld game console."  },

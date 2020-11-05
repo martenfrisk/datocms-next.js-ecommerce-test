@@ -1,23 +1,30 @@
-import ProductPreview from './product-preview'
+import ProductPreview from './product-preview';
 
-export default function MoreProducts({ products, header = "More Products"}) {
+type MoreProductsProps = {
+  products: any[]
+}
+
+export default function MoreProducts(
+  { products, header = 'More Products' }: { products: MoreProductsProps['products'], header: string},
+): React.ReactElement<MoreProductsProps> {
   return (
     <section>
       <h2 className="my-8 text-4xl md:text-5xl font-bold tracking-tighter leading-tight">
         {header}
       </h2>
       <div className="
-      grid 
-      grid-cols-2 
+      grid
+      grid-cols-2
       col-gap-20
-      md:grid-cols-3 
-      md:col-gap-40 
-      row-gap-10 
+      md:grid-cols-3
+      md:col-gap-40
+      row-gap-10
       mx-4
       md:mx-16
-      md:row-gap-20 
-      mb-32">
-        {products.map(product => (
+      md:row-gap-20
+      mb-32"
+      >
+        {products.map((product) => (
           <ProductPreview
             key={product.slug}
             productName={product.productName}
@@ -30,5 +37,5 @@ export default function MoreProducts({ products, header = "More Products"}) {
         ))}
       </div>
     </section>
-  )
+  );
 }
