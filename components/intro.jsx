@@ -1,34 +1,15 @@
-import Link from 'next/link'
-import { CMS_NAME, CMS_URL } from "../lib/constants";
+import Link from "next/link";
 import UserButtons from "./user-buttons";
+import Nav from "./nav";
 
 export default function Intro() {
   return (
-    <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-4 md:mb-12 justify-start">
-      <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8">
-        <Link href="/">
-
-        Games.
-        </Link>
+    <section className="flex-col md:flex-row flex items-start md:justify-between mt-20 mb-4 md:mb-12 justify-start">
+      <h1 className="text-6xl -mt-8 md:text-7xl font-bold tracking-tighter leading-tight md:pr-8">
+        <Link href="/">Games.</Link>
       </h1>
-      <div className="flex flex-col md:flex-row items-center mt-2 md:mt-0">
-        <h2 className="text-center md:text-right w-64  text-sm  md:mr-6 order-last md:order-first mt-4 md:mt-0 ">
-          A statically generated e-commerce site using{" "}
-          <a
-            href="https://nextjs.org/"
-            className="underline hover:text-success duration-200 transition-colors"
-          >
-            Next.js
-          </a>{" "}
-          and{" "}
-          <a
-            href={CMS_URL}
-            className="underline hover:text-success duration-200 transition-colors"
-          >
-            {CMS_NAME}
-          </a>
-          .
-        </h2>
+      <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row w-full md:w-auto items-start mt-2 md:mt-0">
+        <Nav />
         <UserButtons />
       </div>
     </section>

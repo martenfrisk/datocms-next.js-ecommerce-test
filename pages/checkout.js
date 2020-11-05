@@ -12,7 +12,7 @@ import {
 
 export default function Checkout() {
   const { state } = useCart();
-    console.log(state)
+    // console.log(state)
   const dispatch = useDispatchCart();
   const handleRemoveItem = (id) => {
     dispatch({
@@ -56,7 +56,7 @@ export default function Checkout() {
                 <div className="w-full bg-gradient-to-b rounded-md from-blue-100 to-transparent p-4 flex hover:shadow-lg shadow-md mb-4 flex-wrap items-center justify-between">
                   <div className="w-full md:w-3/5 ">
                     <Link
-                      as={`/products/${cartItem.slug}`}
+                      as={`/products/${cartItem.Friendly_SV}`}
                       href="/products/[slug]"
                     >
                       <a

@@ -1,31 +1,26 @@
 import ProductPreview from './product-preview'
 
-export default function MoreProducts({ products }) {
+export default function MoreProducts({ products, header = "More Products" }) {
   return (
-    <section>
+    <section className="flex flex-col items-center">
       <h2 className="my-8 text-4xl md:text-5xl font-bold tracking-tighter leading-tight">
-        More Products
+        {header}
       </h2>
       <div className="
-      grid 
-      grid-cols-2 
-      col-gap-20
-      md:grid-cols-3 
-      md:col-gap-40 
-      row-gap-10 
-      mx-4
-      md:mx-16
-      md:row-gap-20 
-      mb-32">
+      flex flex-wrap
+      justify-around
+      md:mx-32
+      mb-20">
         {products.map(product => (
           <ProductPreview
-            key={product.slug}
-            productName={product.productName}
-            slug={product.slug}
-            description={product.description}
-            descriptionShort={product.descriptionShort}
-            retailPrice={product.retailPrice}
-            cover={product.cover}
+            key={product.Artnr}
+            productId={product.Artnr}
+            productName={product.Beskr_SV}
+            slug={product.Friendly_SV}
+            // description={product.description}
+            // descriptionShort={product.descriptionShort}
+            retailPrice={product.Pris}
+            // cover={product.cover}
           />
         ))}
       </div>

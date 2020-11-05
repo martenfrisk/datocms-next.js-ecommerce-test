@@ -15,9 +15,9 @@ const isBrowser = typeof window !== "undefined";
 const reducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      if (state.some((i) => i.slug === action.payload.slug)) {
+      if (state.some((i) => i.item === action.payload.item)) {
         state.map((item) => {
-          if (item.slug === action.payload.slug) {
+          if (item.item === action.payload.item) {
             return { ...item, quantity: item.quantity++ };
           } else {
             return item;

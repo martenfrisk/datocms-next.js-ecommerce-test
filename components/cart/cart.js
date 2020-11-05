@@ -84,7 +84,7 @@ const Cart = () => {
                     >
                       <span className="text-left hover:text-blue-900 underline ml-2">
                         <Link
-                          as={`/products/${myCartItem.slug}`}
+                          as={`/products/${myCartItem.Friendly_SV}`}
                           href="/products/[slug]"
                         >
                           {myCartItem.item}
