@@ -1,6 +1,6 @@
 import Container from '../components/container'
 import MoreProducts from '../components/product/more-products'
-import Intro from '../components/intro'
+import Header from '../components/header'
 import Layout from '../components/layout'
 import { getAllProductsForHome } from '../lib/api'
 import Head from 'next/head'
@@ -14,7 +14,7 @@ export default function AllGames({ allProducts }) {
           <title>Next.js Shop Test</title>
         </Head>
         <Container>
-          <Intro />
+          <Header />
           {moreProducts.length > 0 && <MoreProducts products={moreProducts} header="All Games" />}
         </Container>
       </Layout>

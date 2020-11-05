@@ -7,7 +7,7 @@ export default function Nav() {
         <ul className="flex w-full md:w-auto justify-between space-x-10 md:mr-16">
             <li>
                 <Link href="/all-games">
-                    <a className="hover:underline">Products</a>
+                    <a className="hover:underline">Games</a>
                 </Link>
             </li>
             <li>

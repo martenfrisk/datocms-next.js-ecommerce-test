@@ -1,15 +1,21 @@
 import Link from "next/link";
 import { useState, useContext } from "react";
-import { ShoppingCart32, AddAlt16, SubtractAlt16, TrashCan16 } from "@carbon/icons-react";
+import {
+  ShoppingCart32,
+  AddAlt16,
+  SubtractAlt16,
+  TrashCan16,
+} from "@carbon/icons-react";
 
-import { useCart, useDispatchCart } from "./cart-context";
+import { useCart, useDispatchCart, ActionType } from "./cart-context";
 
 const Cart = () => {
   const [showCartItems, setShowCartItems] = useState(false);
+  // @ts-ignore
   const { state, showCart } = useCart();
-  const [ visible, setVisible ] = showCart
-  const dispatch = useDispatchCart();
-  const handleRemoveItem = (id) => {
+  const [visible, setVisible] = showCart;
+  const dispatch: any = useDispatchCart();
+  const handleRemoveItem = (id: string) => {
     dispatch({
       type: "REMOVE",
       payload: {
@@ -17,7 +23,7 @@ const Cart = () => {
       },
     });
   };
-  const handleAdjustQuantity = (id, action) => {
+  const handleAdjustQuantity = (id: string, action: ActionType["type"]) => {
     dispatch({
       type: action,
       payload: {
@@ -30,17 +36,25 @@ const Cart = () => {
       type: "CLEAR",
     });
   };
-  let sumTotal, itemCount;
+  let sumTotal: number, itemCount: number;
   if (state) {
-    sumTotal = state.reduce((acc, curr) => acc + curr.quantity * curr.price, 0);
-    itemCount = state.reduce((acc, curr) => acc + curr.quantity, 0);
+    sumTotal = state.reduce(
+      (acc: number, curr: { quantity: number; price: number }) =>
+        acc + curr.quantity * curr.price,
+      0
+    );
+    itemCount = state.reduce(
+      (acc: number, curr: { quantity: number; price: number }) =>
+        acc + curr.quantity,
+      0
+    );
   }
 
   return (
     <>
       <div className="sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20 ml-0 flex-col md:flex-row md:ml-10 pointer-events-none right-0">
         <div
-          onClick={() => setVisible((prev) => !prev)}
+          onClick={() => setVisible((prev: boolean) => !prev)}
           className={`cursor-pointer w-12 h-12 flex-col shadow-3xl p-2 border-2 flex justify-center order-2 md:order-1 items-center mb-6 rounded-full pointer-events-auto ${
             visible
               ? "bg-blue-600 border-white text-white"
@@ -49,7 +63,11 @@ const Cart = () => {
         >
           {state && state.length > 0 && (
             <div className="absolute mb-6 bottom-0 text-blue-600 bg-white ml-10 rounded-full border-2 pointer-events-auto border-blue-600 text-center w-5 h-5 text-xs">
-              {state.reduce((acc, curr) => acc + curr.quantity, 0)}
+              {state.reduce(
+                (acc: number, curr: { quantity: number }) =>
+                  acc + curr.quantity,
+                0
+              )}
             </div>
           )}
           <ShoppingCart32 className="mx-auto my-0" />
@@ -72,7 +90,7 @@ const Cart = () => {
           ) : (
             state && (
               <div className="flex w-64 justify-end flex-wrap">
-                {state.map((myCartItem) => (
+                {state.map((myCartItem: ActionType["payload"]) => (
                   <div
                     key={myCartItem.id}
                     className="mb-2 w-full flex-wrap flex justify-between items-center rounded-md shadow-md p-2 bg-opacity-100 bg-white"
@@ -103,14 +121,15 @@ const Cart = () => {
                           onClick={() =>
                             handleAdjustQuantity(myCartItem.id, "DECREASE")
                           }
-                          className={`focus:outline-none  ${myCartItem.quantity === 1 && 'text-gray-300'}`}
+                          className={`focus:outline-none  ${
+                            myCartItem.quantity === 1 && "text-gray-300"
+                          }`}
                           disabled={myCartItem.quantity === 1 ? true : false}
                         >
                           <SubtractAlt16 className="w-4 h-4" />
                         </button>
                         <span className="w-6 text-center">
-
-                        {myCartItem.quantity}
+                          {myCartItem.quantity}
                         </span>
                         <button
                           onClick={() =>
@@ -138,9 +157,7 @@ const Cart = () => {
                 <div className="w-full flex justify-between mt-2 text-sm cursor-pointer text-gray-700">
                   <span onClick={() => handleRemoveAll()}>Clear cart</span>
                   <span className="border-b border-gray-600 border-dashed hover:text-black hover:border-gray-800">
-                    <Link href="/checkout">
-                    checkout
-                    </Link>
+                    <Link href="/checkout">checkout</Link>
                   </span>
                 </div>
               </div>

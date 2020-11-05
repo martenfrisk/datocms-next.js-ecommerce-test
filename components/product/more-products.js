@@ -1,10 +1,10 @@
 import ProductPreview from './product-preview'
 
-export default function MoreProducts({ products }) {
+export default function MoreProducts({ products, header = "More Products"}) {
   return (
     <section>
       <h2 className="my-8 text-4xl md:text-5xl font-bold tracking-tighter leading-tight">
-        More Products
+        {header}
       </h2>
       <div className="
       grid 
