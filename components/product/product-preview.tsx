@@ -19,7 +19,7 @@ export default function ProductPreview({
 
 }) {
   return (
-    <div className="w-1/2 sm:w-1/3 px-8 sm:px-4">
+    <div className="w-1/2 sm:w-1/3 lg:w-1/4 px-8 sm:px-4">
       <div className="mb-5">
         <CoverImage
           slug={slug}
@@ -37,7 +37,7 @@ export default function ProductPreview({
         {' '}
         kr
       </div>
-      <p className="text-sm hidden md:block font-light leading-snug mb-4">{descriptionShort || description}</p>
+      <p className="text-sm hidden md:block font-light leading-snug mb-8">{descriptionShort || description}</p>
     </div>
   )
 }

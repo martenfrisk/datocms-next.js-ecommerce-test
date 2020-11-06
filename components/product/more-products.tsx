@@ -14,6 +14,7 @@ export default function MoreProducts(
       </h2>
       <div className="
       flex flex-wrap
+      justify-evenly
       mx-4
       md:mx-16
       mb-32"

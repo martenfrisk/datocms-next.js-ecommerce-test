@@ -88,8 +88,11 @@ export default function Product({
                       </button>
                     </OutsideCloseCart>
                   </div>
-                  <div className="w-full px-4 md:px-0 md:w-2/3">
-                    <ProductBody content={product.description} />
+                  <div className="w-full px-4 pt-6 md:px-0 md:w-2/3">
+                    <ProductBody content={
+                      product.description ? product.description : product.descriptionShort
+                      }
+                    />
                   </div>
                 </div>
               </div>

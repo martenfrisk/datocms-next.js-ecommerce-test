@@ -86,7 +86,7 @@ const Cart = () => {
               Your Shopping Cart
             </div>
             {state && state.length === 0 ? (
-              <div className="w-48  text-sm mx-4">
+              <div className="w-48 select-none text-sm mx-4">
                 Your cart is empty. Add an item and check back here later.
               </div>
             ) : (
