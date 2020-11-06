@@ -5,7 +5,7 @@ type MoreProductsProps = {
 }
 
 export default function MoreProducts(
-  { products, header = 'More Products' }: { products: MoreProductsProps['products'], header: string},
+  { products, header = 'More Products' }: { products: MoreProductsProps['products'], header?: string},
 ): React.ReactElement<MoreProductsProps> {
   return (
     <section>
@@ -32,4 +32,8 @@ export default function MoreProducts(
       </div>
     </section>
   );
+}
+
+MoreProducts.defaultProps = {
+  header: 'More Products',
 }

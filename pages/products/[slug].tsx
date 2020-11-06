@@ -19,12 +19,12 @@ import { CMS_NAME } from '../../lib/constants';
 import markdownToHtml from '../../lib/markdownToHtml';
 
 export default function Product({
-  product, moreProducts, preview,
-}: { product: ProductType, moreProducts: any[], preview: boolean }) {
+  product, moreProducts,
+}: { product: ProductType, moreProducts: any[] }) {
   const router = useRouter();
   const dispatch: any = useDispatchCart()
   const { state, showCart } = useCart()
-  const [visible, setVisible] = showCart
+  const [, setVisible] = showCart
 
   const handleAddToCart = () => {
     dispatch({
@@ -37,13 +37,14 @@ export default function Product({
       },
     })
     setVisible(true)
+    // eslint-disable-next-line no-console
     console.log(state)
   }
   if (!router.isFallback && !product?.slug) {
     return <ErrorPage statusCode={404} />;
   }
   return (
-    <Layout preview={preview} showCartButton="true">
+    <Layout showCartButton="true">
       <Container>
         <Header />
         {router.isFallback ? (
@@ -59,7 +60,6 @@ export default function Product({
                   {' '}
                   {CMS_NAME}
                 </title>
-                <meta property="og:image" content={product.ogImage.responsiveImage} />
               </Head>
               <ProductTitle>{product.productName}</ProductTitle>
               <div className="flex flex-col md:flex-row items-center md:items-start">
@@ -75,7 +75,13 @@ export default function Product({
                       {product.retailPrice}
                       :-
                     </p>
-                    <button className="bg-black text-white rounded-md text-lg px-6 py-1 cursor-pointer hover:bg-white hover:text-black border-2 border-black transition-200" onClick={handleAddToCart}>Buy</button>
+                    <button
+                      type="button"
+                      className="bg-black text-white rounded-md text-lg px-6 py-1 cursor-pointer hover:bg-white hover:text-black border-2 border-black transition-200"
+                      onClick={handleAddToCart}
+                    >
+                      Buy
+                    </button>
                   </div>
                   <div className="w-full px-4 md:px-0 md:w-2/3">
                     <ProductBody content={product.description} />

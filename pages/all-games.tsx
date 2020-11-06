@@ -1,15 +1,15 @@
-import Container from '../components/container'
-import MoreProducts from '../components/product/more-products'
-import Header from '../components/header'
-import Layout from '../components/layout'
-import { getAllProductsForHome } from '../lib/api'
 import Head from 'next/head'
+import Container from '@/components/container'
+import MoreProducts from '@/components/product/more-products'
+import Header from '@/components/header'
+import Layout from '@/components/layout'
+import { getAllProductsForHome } from '../lib/api'
 
-export default function AllGames({ allProducts }) {
+export default function AllGames({ allProducts }: { allProducts: any[]}) {
   const moreProducts = allProducts.slice(1, 20)
   return (
     <>
-      <Layout showCartButton={'true'}>
+      <Layout showCartButton="true">
         <Head>
           <title>Next.js Shop Test</title>
         </Head>

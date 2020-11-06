@@ -9,8 +9,12 @@ import {
 } from 'react';
 import { v4 as uuid } from 'uuid';
 
-// @ts-ignore
-const CartContext = createContext();
+interface ICartContext {
+  state: any,
+  showCart: any
+}
+
+const CartContext = createContext<ICartContext>(null);
 // @ts-ignore
 const CartDispatch = createContext();
 
@@ -130,5 +134,10 @@ export const CartProvider = ({ children }: { children: any }) => {
   );
 };
 
-export const useCart = () => useContext(CartContext);
+// interface useCartContext {
+//   state: any,
+//   dispatch: any
+// }
+
+export const useCart = () => useContext<ICartContext>(CartContext)
 export const useDispatchCart = () => useContext(CartDispatch);
