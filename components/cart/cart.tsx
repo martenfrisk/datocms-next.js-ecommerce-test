@@ -2,12 +2,16 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import Link from 'next/link';
 import OutsideCloseCart from '@/lib/click-outside';
-import {
-  ShoppingCart32,
-  AddAlt16,
-  SubtractAlt16,
-  TrashCan16,
-} from '@carbon/icons-react';
+// import {
+//   ShoppingCart32,
+//   AddAlt16,
+//   SubtractAlt16,
+//   TrashCan16,
+// } from '@carbon/icons-react';
+import ShoppingCart from '@carbon/icons-react/lib/shopping--cart/32'
+import AddAlt from '@carbon/icons-react/lib/add--alt/16'
+import SubtractAlt from '@carbon/icons-react/lib/subtract--alt/16'
+import TrashCan from '@carbon/icons-react/lib/trash-can/16'
 
 import { useCart, useDispatchCart, ActionType } from './cart-context';
 
@@ -70,7 +74,7 @@ const Cart = () => {
               )}
             </div>
           )}
-          <ShoppingCart32 className="mx-auto my-0" />
+          <ShoppingCart className="mx-auto my-0" />
         </div>
 
         <OutsideCloseCart>
@@ -114,7 +118,7 @@ const Cart = () => {
                           className="cursor-pointer text-gray-700 pr-2 text-xs hover:underline"
                           onClick={() => handleRemoveItem(myCartItem.id)}
                         >
-                          <TrashCan16 />
+                          <TrashCan />
                         </span>
                       </div>
                       <div className="w-full flex  py-1 justify-between">
@@ -127,7 +131,7 @@ const Cart = () => {
                             }`}
                             disabled={myCartItem.quantity === 1}
                           >
-                            <SubtractAlt16 className="w-4 h-4" />
+                            <SubtractAlt className="w-4 h-4" />
                           </button>
                           <span className="w-6 text-center">
                             {myCartItem.quantity}
@@ -137,7 +141,7 @@ const Cart = () => {
                             onClick={() => handleAdjustQuantity(myCartItem.id, 'INCREASE')}
                             className="focus:outline-none "
                           >
-                            <AddAlt16 className="w-4 h-4" />
+                            <AddAlt className="w-4 h-4" />
                           </button>
                         </span>
                         <span className="w-1/4 text-right">

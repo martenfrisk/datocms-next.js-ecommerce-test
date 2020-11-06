@@ -1,12 +1,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import Link from 'next/link';
-import {
-  Undo16,
-  TrashCan16,
-  SubtractAlt16,
-  AddAlt16,
-} from '@carbon/icons-react';
+// import {
+//   Undo16,
+//   TrashCan16,
+//   SubtractAlt16,
+//   AddAlt16,
+// } from '@carbon/icons-react';
+import Undo from '@carbon/icons-react/lib/undo/16'
+import AddAlt from '@carbon/icons-react/lib/add--alt/16'
+import SubtractAlt from '@carbon/icons-react/lib/subtract--alt/16'
+import TrashCan from '@carbon/icons-react/lib/trash-can/16'
 import Container from '../components/container';
 import Layout from '../components/layout';
 import { useCart, useDispatchCart } from '../components/cart/cart-context';
@@ -41,7 +45,7 @@ export default function Checkout() {
           <div className="mb-20 w-full flex flex-col flex-wrap items-center">
             <Link href="/">
               <div className="cursor-pointer self-start flex w-auto mb-4 -mt-6 text-left">
-                <Undo16 className="w-6 h-6" />
+                <Undo className="w-6 h-6" />
                 &nbsp;
                 <span className="border-b border-opacity-0 hover:border-opacity-100 border-blue-700 border-dotted ">
                   Continue shopping
@@ -57,7 +61,7 @@ export default function Checkout() {
                   <>
                     {state.map((cartItem) => (
                       <div className="w-full bg-gradient-to-b rounded-md from-blue-100 to-transparent p-4 flex hover:shadow-lg shadow-md mb-4 flex-wrap items-center justify-between">
-                        <div className="w-full md:w-3/5 ">
+                        <div className="w-full md:w-1/2 ">
                           <Link
                             as={`/products/${cartItem.slug}`}
                             href="/products/[slug]"
@@ -70,7 +74,7 @@ export default function Checkout() {
                             </a>
                           </Link>
                         </div>
-                        <div className="w-1/3 md:w-1/5 flex items-center text-right text-sm">
+                        <div className="w-1/3 md:w-1/4 flex items-center text-right text-sm">
                           <button
                             type="button"
                             onClick={() => handleAdjustQuantity(cartItem.id, 'DECREASE')}
@@ -79,24 +83,24 @@ export default function Checkout() {
                             }`}
                             disabled={cartItem.quantity === 1}
                           >
-                            <SubtractAlt16 className="w-4 h-4" />
+                            <SubtractAlt className="w-4 h-4" />
                           </button>
-                          <span className="w-6 text-center">{cartItem.quantity}</span>
+                          <span className="w-6 mx-1 text-center">{cartItem.quantity}</span>
                           <button
                             type="button"
                             onClick={() => handleAdjustQuantity(cartItem.id, 'INCREASE')}
                             className="focus:outline-none "
                           >
-                            <AddAlt16 className="w-4 h-4" />
+                            <AddAlt className="w-4 h-4" />
                           </button>
                           <span
                             className="cursor-pointer text-gray-700 pl-2 text-xs hover:underline"
                             onClick={() => handleRemoveItem(cartItem.id)}
                           >
-                            <TrashCan16 />
+                            <TrashCan />
                           </span>
                         </div>
-                        <div className="w-1/3 md:w-1/5 text-right">
+                        <div className="w-1/3 md:w-1/4 text-right">
                           {cartItem.quantity * cartItem.price}
                           {' '}
                           :-
