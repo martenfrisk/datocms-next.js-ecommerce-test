@@ -1,29 +1,50 @@
-import Link from "next/link";
-import { useState, useContext } from "react";
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import Link from 'next/link';
+import { useEffect, useRef } from 'react';
 import {
   ShoppingCart32,
   AddAlt16,
   SubtractAlt16,
   TrashCan16,
-} from "@carbon/icons-react";
+} from '@carbon/icons-react';
 
-import { useCart, useDispatchCart, ActionType } from "./cart-context";
+import { useCart, useDispatchCart, ActionType } from './cart-context';
 
 const Cart = () => {
-  const [showCartItems, setShowCartItems] = useState(false);
+  // const [showCartItems, setShowCartItems] = useState(false);
   // @ts-ignore
   const { state, showCart } = useCart();
   const [visible, setVisible] = showCart;
   const dispatch: any = useDispatchCart();
   const handleRemoveItem = (id: string) => {
     dispatch({
-      type: "REMOVE",
+      type: 'REMOVE',
       payload: {
         id,
       },
     });
   };
-  const handleAdjustQuantity = (id: string, action: ActionType["type"]) => {
+
+  const useOutsideClick = (ref: any) => {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          setVisible(() => false)
+        }
+      }
+
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
+    }, [ref])
+  }
+
+  const wrapperRef = useRef(null)
+  useOutsideClick(wrapperRef)
+
+  const handleAdjustQuantity = (id: string, action: ActionType['type']) => {
     dispatch({
       type: action,
       payload: {
@@ -33,40 +54,38 @@ const Cart = () => {
   };
   const handleRemoveAll = () => {
     dispatch({
-      type: "CLEAR",
+      type: 'CLEAR',
     });
   };
-  let sumTotal: number, itemCount: number;
+  let sumTotal: number; let
+    itemCount: number;
   if (state) {
     sumTotal = state.reduce(
-      (acc: number, curr: { quantity: number; price: number }) =>
-        acc + curr.quantity * curr.price,
-      0
+      (acc: number, curr: { quantity: number; price: number }) => acc + curr.quantity * curr.price,
+      0,
     );
     itemCount = state.reduce(
-      (acc: number, curr: { quantity: number; price: number }) =>
-        acc + curr.quantity,
-      0
+      (acc: number, curr: { quantity: number; price: number }) => acc + curr.quantity,
+      0,
     );
   }
 
   return (
     <>
-      <div className="sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20 ml-0 flex-col md:flex-row md:ml-10 pointer-events-none right-0">
+      <div className="sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20 ml-0 flex-col md:flex-row md:ml-10 pointer-events-none right-0" ref={wrapperRef}>
         <div
           onClick={() => setVisible((prev: boolean) => !prev)}
           className={`cursor-pointer w-12 h-12 flex-col shadow-3xl p-2 border-2 flex justify-center order-2 md:order-1 items-center mb-6 rounded-full pointer-events-auto ${
             visible
-              ? "bg-blue-600 border-white text-white"
-              : "bg-white border-blue-700 text-blue-700"
+              ? 'bg-blue-600 border-white text-white'
+              : 'bg-white border-blue-700 text-blue-700'
           }`}
         >
           {state && state.length > 0 && (
             <div className="absolute mb-6 bottom-0 text-blue-600 bg-white ml-10 rounded-full border-2 pointer-events-auto border-blue-600 text-center w-5 h-5 text-xs">
               {state.reduce(
-                (acc: number, curr: { quantity: number }) =>
-                  acc + curr.quantity,
-                0
+                (acc: number, curr: { quantity: number }) => acc + curr.quantity,
+                0,
               )}
             </div>
           )}
@@ -74,12 +93,12 @@ const Cart = () => {
         </div>
         <div
           className={`text-center bg-white rounded-lg pt-10 pb-4 px-4 flex flex-col items-center justify-start w-auto shadow-lg pointer-events-auto md:ml-4 mb-2 md:mb-6 bg-opacity-95 border border-blue-400 order-1 md:order-2 ${
-            visible ? "visible" : "invisible"
+            visible ? 'visible' : 'invisible'
           }`}
         >
           <div
             className="border-b border-gray-500 tracking-wide absolute top-0 pt-2 text-sm"
-            style={{ width: "max-content" }}
+            style={{ width: 'max-content' }}
           >
             Your Shopping Cart
           </div>
@@ -90,7 +109,7 @@ const Cart = () => {
           ) : (
             state && (
               <div className="flex w-64 justify-end flex-wrap">
-                {state.map((myCartItem: ActionType["payload"]) => (
+                {state.map((myCartItem: ActionType['payload']) => (
                   <div
                     key={myCartItem.id}
                     className="mb-2 w-full flex-wrap flex justify-between items-center rounded-md shadow-md p-2 bg-opacity-100 bg-white"
@@ -118,13 +137,12 @@ const Cart = () => {
                     <div className="w-full flex  py-1 justify-between">
                       <span className="w-3/4 text-base justify-start flex items-center font-light text-left pl-4">
                         <button
-                          onClick={() =>
-                            handleAdjustQuantity(myCartItem.id, "DECREASE")
-                          }
+                          type="button"
+                          onClick={() => handleAdjustQuantity(myCartItem.id, 'DECREASE')}
                           className={`focus:outline-none  ${
-                            myCartItem.quantity === 1 && "text-gray-300"
+                            myCartItem.quantity === 1 && 'text-gray-300'
                           }`}
-                          disabled={myCartItem.quantity === 1 ? true : false}
+                          disabled={myCartItem.quantity === 1}
                         >
                           <SubtractAlt16 className="w-4 h-4" />
                         </button>
@@ -132,26 +150,33 @@ const Cart = () => {
                           {myCartItem.quantity}
                         </span>
                         <button
-                          onClick={() =>
-                            handleAdjustQuantity(myCartItem.id, "INCREASE")
-                          }
-                          className={`focus:outline-none `}
+                          type="button"
+                          onClick={() => handleAdjustQuantity(myCartItem.id, 'INCREASE')}
+                          className="focus:outline-none "
                         >
                           <AddAlt16 className="w-4 h-4" />
                         </button>
                       </span>
                       <span className="w-1/4 text-right">
-                        {myCartItem.price} :-
+                        {myCartItem.price}
+                        {' '}
+                        :-
                       </span>
                     </div>
                   </div>
                 ))}
                 <div className="mt-4 flex justify-between w-full items-end">
                   <span className="w-2/3 text-sm">
-                    Total {itemCount > 0 && itemCount} items
+                    Total
+                    {' '}
+                    {itemCount > 0 && itemCount}
+                    {' '}
+                    items
                   </span>
                   <span className="w-1/3 text-right">
-                    {sumTotal > 0 && sumTotal} :-
+                    {sumTotal > 0 && sumTotal}
+                    {' '}
+                    :-
                   </span>
                 </div>
                 <div className="w-full flex justify-between mt-2 text-sm cursor-pointer text-gray-700">

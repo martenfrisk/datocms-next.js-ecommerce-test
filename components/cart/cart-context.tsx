@@ -1,18 +1,20 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-console */
 import {
   useReducer,
   useContext,
   createContext,
   useState,
   useEffect,
-} from "react";
-import { v4 as uuid } from "uuid";
+} from 'react';
+import { v4 as uuid } from 'uuid';
 
 // @ts-ignore
 const CartContext = createContext();
 // @ts-ignore
 const CartDispatch = createContext();
 
-const isBrowser = typeof window !== "undefined";
+const isBrowser = typeof window !== 'undefined';
 
 export type ActionType = {
   type: 'ADD_ITEM' | 'REMOVE' | 'INCREASE' | 'DECREASE' | 'CLEAR',
@@ -25,16 +27,17 @@ export type ActionType = {
   }
 }
 
+const initialState = [];
+
 const reducer = (state: any, action: ActionType) => {
   switch (action.type) {
-    case "ADD_ITEM":
-      if (state.some((i: ActionType["payload"]) => i.slug === action.payload.slug)) {
-        state.map((item: ActionType["payload"]) => {
+    case 'ADD_ITEM':
+      if (state.some((i: ActionType['payload']) => i.slug === action.payload.slug)) {
+        state.map((item: ActionType['payload']) => {
           if (item.slug === action.payload.slug) {
-            return { ...item, quantity: item.quantity++ };
-          } else {
-            return item;
+            return { ...item, quantity: item.quantity + 1 };
           }
+          return item;
         });
       } else {
         return state.concat({
@@ -45,30 +48,29 @@ const reducer = (state: any, action: ActionType) => {
           slug: action.payload.slug,
         });
       }
-    case "REMOVE":
-      return state.filter((i: ActionType["payload"]) => i.id !== action.payload.id);
-    case "INCREASE":
-      return state.map((i: ActionType["payload"]) => {
+    // eslint-disable-next-line no-fallthrough
+    case 'REMOVE':
+      return state.filter((i: ActionType['payload']) => i.id !== action.payload.id);
+    case 'INCREASE':
+      return state.map((i: ActionType['payload']) => {
         if (i.id === action.payload.id) {
           return { ...i, quantity: i.quantity + 1 };
-        } else {
-          return i;
         }
+        return i;
       });
-    case "DECREASE":
-      return state.map((item: ActionType["payload"]) => {
+    case 'DECREASE':
+      return state.map((item: ActionType['payload']) => {
         if (item.id === action.payload.id) {
           if (item.quantity === 1) {
             return item;
-          } else {
-            return { ...item, quantity: item.quantity - 1 };
           }
-        } else {
-          return item;
+          return { ...item, quantity: item.quantity - 1 };
         }
+        return item;
       });
-    case "CLEAR":
+    case 'CLEAR':
       console.log('Clearing cart...')
+      // eslint-disable-next-line no-return-assign
       return (state = initialState);
     default:
       throw new Error(`Unknown action: ${action.type}`);
@@ -95,20 +97,14 @@ function getLocalStorage(key: string, initialValue: any[]) {
     return value ? JSON.parse(value) : initialValue;
   } catch (e) {
     console.error(e);
-    // return initialValue
+    return null
   }
 }
-// const localState = JSON.parse(localStorage.getItem("cart"))
-// const initialState = [{
-//     item: '',
-//     id: '',
-//     quantity: 0
-// }];
-const initialState = [];
 
-export const CartProvider = ({ children }) => {
+export const CartProvider = ({ children }: { children: any }) => {
+  // eslint-disable-next-line no-unused-vars
   const [localState, setLocalState] = useState(
-    () => isBrowser && getLocalStorage("cart", initialState)
+    () => isBrowser && getLocalStorage('cart', initialState),
   );
 
   const [visible, setVisible] = useState(false)
@@ -120,12 +116,16 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, localState);
 
   useEffect(() => {
-    setLocalStorage("cart", state);
+    setLocalStorage('cart', state);
   }, [state]);
 
   return (
     <CartDispatch.Provider value={dispatch}>
-      <CartContext.Provider value={{ state, showCart: [visible, setVisible] }}>{children}</CartContext.Provider>
+      <CartContext.Provider
+        value={{ state, showCart: [visible, setVisible] }}
+      >
+        {children}
+      </CartContext.Provider>
     </CartDispatch.Provider>
   );
 };

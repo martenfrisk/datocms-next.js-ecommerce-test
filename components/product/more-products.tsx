@@ -13,15 +13,9 @@ export default function MoreProducts(
         {header}
       </h2>
       <div className="
-      grid
-      grid-cols-2
-      col-gap-20
-      md:grid-cols-3
-      md:col-gap-40
-      row-gap-10
+      flex flex-wrap
       mx-4
       md:mx-16
-      md:row-gap-20
       mb-32"
       >
         {products.map((product) => (
