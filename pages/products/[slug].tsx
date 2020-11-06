@@ -14,9 +14,10 @@ import {
   getProductAndMoreProducts,
 } from '@/lib/api';
 import { ProductType } from '@/lib/types'
+import OutsideCloseCart from '@/lib/click-outside'
 import ProductTitle from '@/product/product-title';
-import { CMS_NAME } from '../../lib/constants';
-import markdownToHtml from '../../lib/markdownToHtml';
+import { CMS_NAME } from '@/lib/constants';
+import markdownToHtml from '@/lib/markdownToHtml';
 
 export default function Product({
   product, moreProducts,
@@ -25,7 +26,8 @@ export default function Product({
   const dispatch: any = useDispatchCart()
   const { state, showCart } = useCart()
   const [, setVisible] = showCart
-
+  // const ref = useRef(null)
+  // useOutsideClick(ref)
   const handleAddToCart = () => {
     dispatch({
       type: 'ADD_ITEM',
@@ -75,13 +77,16 @@ export default function Product({
                       {product.retailPrice}
                       :-
                     </p>
-                    <button
-                      type="button"
-                      className="bg-black text-white rounded-md text-lg px-6 py-1 cursor-pointer hover:bg-white hover:text-black border-2 border-black transition-200"
-                      onClick={handleAddToCart}
-                    >
-                      Buy
-                    </button>
+                    <OutsideCloseCart>
+                      <button
+                        type="button"
+                        className="bg-black text-white rounded-md text-lg px-6 py-1 cursor-pointer hover:bg-white hover:text-black border-2 border-black transition-200"
+                        onClick={handleAddToCart}
+                        // ref={ref}
+                      >
+                        Buy
+                      </button>
+                    </OutsideCloseCart>
                   </div>
                   <div className="w-full px-4 md:px-0 md:w-2/3">
                     <ProductBody content={product.description} />

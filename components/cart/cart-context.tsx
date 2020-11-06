@@ -39,7 +39,8 @@ const reducer = (state: any, action: ActionType) => {
       if (state.some((i: ActionType['payload']) => i.slug === action.payload.slug)) {
         state.map((item: ActionType['payload']) => {
           if (item.slug === action.payload.slug) {
-            return { ...item, quantity: item.quantity + 1 };
+            // eslint-disable-next-line no-plusplus
+            return { ...item, quantity: item.quantity++ };
           }
           return item;
         });
