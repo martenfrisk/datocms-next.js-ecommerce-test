@@ -1,7 +1,6 @@
 import Link from 'next/link'
-import { Product } from '@/lib/types'
+import { ProductType } from '@/lib/types'
 import CoverImage from '../cover-image'
-
 
 export default function ProductPreview({
   productName,
@@ -11,12 +10,12 @@ export default function ProductPreview({
   retailPrice,
   cover,
 }: {
-    productName: Product['productName'],
-    slug: Product['slug'],
-    description: Product['description'],
-    descriptionShort: Product['descriptionShort'],
-    retailPrice: Product['retailPrice'],
-    cover: Product['cover']
+    productName: ProductType['productName'],
+    slug: ProductType['slug'],
+    description: ProductType['description'],
+    descriptionShort: ProductType['descriptionShort'],
+    retailPrice: ProductType['retailPrice'],
+    cover: ProductType['cover']
 
 }) {
   return (
