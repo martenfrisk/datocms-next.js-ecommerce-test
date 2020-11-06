@@ -15,9 +15,10 @@ export default function MoreProducts(
       <div className="
       flex flex-wrap
       justify-evenly
-      mx-4
+      mx-2
       md:mx-16
-      mb-32"
+      mb-0
+      sm:mb-20"
       >
         {products.map((product) => (
           <ProductPreview

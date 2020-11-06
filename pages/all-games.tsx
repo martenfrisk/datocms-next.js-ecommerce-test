@@ -6,7 +6,7 @@ import Layout from '@/components/layout'
 import { getAllProductsForHome } from '../lib/api'
 
 export default function AllGames({ allProducts }: { allProducts: any[]}) {
-  const moreProducts = allProducts.slice(1, 20)
+  const moreProducts = allProducts
   return (
     <>
       <Layout showCartButton="true">

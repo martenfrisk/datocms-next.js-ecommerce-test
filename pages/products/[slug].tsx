@@ -8,6 +8,7 @@ import Header from '@/components/header';
 import SectionSeparator from '@/components/section-separator';
 import Layout from '@/components/layout';
 import CoverImage from '@/components/cover-image';
+import Rating from '@/components/rating'
 import { useDispatchCart, useCart } from '@/cart/cart-context'
 import {
   getAllProductsWithSlug,
@@ -71,7 +72,7 @@ export default function Product({
                     responsiveImage={product.cover.responsiveImage}
                   />
                 </div>
-                <div className="w-full md:w-2/3 md:pl-8">
+                <div className="w-full flex flex-wrap flex-col sm:flex-row md:w-2/3 md:pl-8">
                   <div className="w-full mt-4 md:mt-0 px-10 md:px-0 md:w-2/3 flex justify-between">
                     <p className="text-3xl font-bold">
                       {product.retailPrice}
@@ -88,6 +89,7 @@ export default function Product({
                       </button>
                     </OutsideCloseCart>
                   </div>
+                  <Rating rating={product.rating} />
                   <div className="w-full px-4 pt-6 md:px-0 md:w-2/3">
                     <ProductBody content={
                       product.description ? product.description : product.descriptionShort

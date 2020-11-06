@@ -1,5 +1,5 @@
-import Link from "next/link";
-import CoverImage from "../cover-image";
+import Link from 'next/link';
+import CoverImage from '../cover-image';
 
 export default function HeroProduct({
   productName,
@@ -17,7 +17,7 @@ export default function HeroProduct({
             productName={productName}
             responsiveImage={cover.responsiveImage}
             slug={slug}
-            rotate={true}
+            rotate
           />
         </div>
       </div>
@@ -29,11 +29,15 @@ export default function HeroProduct({
               <a className="hover:underline">{productName}</a>
             </Link>
           </h3>
-          <div className="mb-4 text-lg">{retailPrice} kr</div>
+          <div className="mb-4 text-lg">
+            {retailPrice}
+            {' '}
+            kr
+          </div>
         </div>
         <div className="w-full hidden md:block">
           <p className="text-sm font-light leading-relaxed md:mr-48">
-            {descriptionShort ? descriptionShort : description}
+            {descriptionShort || description}
           </p>
         </div>
       </div>
