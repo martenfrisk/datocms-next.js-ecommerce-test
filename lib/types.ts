@@ -5,5 +5,6 @@ export type ProductType = {
     description: string,
     descriptionShort: string,
     retailPrice: string,
+    platform: string,
     cover: { responsiveImage: any }
   }

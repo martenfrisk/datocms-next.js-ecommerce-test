@@ -15,7 +15,7 @@ export default function SearchBar() {
         && (
         <div className="flex flex-col">
           <input
-            className="border-b mb-2 w-full sm:w-auto sm:ml-2 sm:mr-3 px-2 py-1 focus:outline-none border-blue-600 text-blue-700"
+            className="border-b mb-2 sm:mb-0 w-full sm:w-auto sm:ml-2 sm:mr-3 px-2 focus:outline-none border-blue-600 text-blue-700"
             type="text"
             value={searchTerm}
             onChange={async (e) => {
