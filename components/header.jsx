@@ -1,3 +1,4 @@
+import SearchBar from '@/components/search-bar'
 import Link from 'next/link'
 import UserButtons from './user-buttons'
 import Nav from './nav'
@@ -16,9 +17,12 @@ export default function Header({ frontPage = false }) {
         </Link>
         .
       </h2>
-      <div className="flex flex-col space-y-4 md:space-y-0 md:flex-row w-full md:w-auto items-start mt-2 md:mt-0">
+      <div className="flex items-center flex-col space-y-4 md:space-y-0 md:flex-row w-full md:w-auto mt-2 md:mt-0">
         <Nav />
-        <UserButtons />
+        <div className="flex space-x-4 w-full items-center justify-center flex-wrap">
+          <SearchBar />
+          <UserButtons />
+        </div>
 
       </div>
     </div>
