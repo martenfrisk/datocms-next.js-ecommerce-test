@@ -20,13 +20,11 @@ export default function UserButtons() {
       )}
       {session && (
         <>
-          <p>
-            signed in as
-            {' '}
-            {JSON.stringify(session)}
-          </p>
           <Link href="/user/profile">
-            <User className="cursor-pointer hover:text-blue-700 duration-200 transition-colors" />
+            <div>
+              <User className="cursor-pointer hover:text-blue-700 duration-200 transition-colors" />
+              <p className="absolute mt-1 -ml-1 text-xs">{session.user.name}</p>
+            </div>
           </Link>
           <Link href="/user/favorites">
             <Favorite className="cursor-pointer hover:text-blue-700 duration-200 transition-colors" />
