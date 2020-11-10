@@ -147,14 +147,14 @@ export default function Checkout() {
                       </p>
                     </div>
                     <div className="w-full flex justify-center">
-                      <button
-                        className="bg-blue-600 shadow-xl translate-y-0 hover:-translate-y-px hover:shadow-2xl duration-150 rounded-md px-6 transform transition py-2 text-lg text-white"
-                        type="button"
-                      >
-                        <Link href="/thanks">
+                      <Link href="/thanks">
+                        <button
+                          className="bg-blue-600 shadow-xl translate-y-0 hover:-translate-y-px hover:shadow-2xl duration-150 rounded-md px-6 transform transition py-2 text-lg text-white"
+                          type="button"
+                        >
                           Order
-                        </Link>
-                      </button>
+                        </button>
+                      </Link>
                     </div>
                   </>
                 )
