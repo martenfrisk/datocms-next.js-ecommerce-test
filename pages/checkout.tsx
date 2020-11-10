@@ -9,19 +9,22 @@ import TrashCan from '@carbon/icons-react/lib/trash-can/16'
 import CoverImage from '@/components/cover-image'
 import Container from '@/components/container';
 import Layout from '@/components/layout';
-import { useCart, useDispatchCart } from '@/components/cart/cart-context';
+import { useCart, useDispatchCart, ActionType } from '@/components/cart/cart-context';
 import Header from '@/components/header';
 
 export default function Checkout() {
   const { state } = useCart()
   const [session] = useSession()
-  const totalCost = state.reduce(
-    (acc, curr) => acc + curr.quantity * curr.price,
-    0,
-  )
+  let totalCost: number
+  if (state) {
+    totalCost = state.reduce(
+      (acc: number, curr: { quantity: number; price: number }) => acc + curr.quantity * curr.price,
+      0,
+    )
+  }
   // console.log(state)
-  const dispatch = useDispatchCart();
-  const handleRemoveItem = (id) => {
+  const dispatch: any = useDispatchCart();
+  const handleRemoveItem = (id: any) => {
     dispatch({
       type: 'REMOVE',
       payload: {
@@ -29,7 +32,7 @@ export default function Checkout() {
       },
     });
   };
-  const handleAdjustQuantity = (id, action) => {
+  const handleAdjustQuantity = (id: any, action: ActionType['type']) => {
     dispatch({
       type: action,
       payload: {

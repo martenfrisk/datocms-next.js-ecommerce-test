@@ -28,5 +28,10 @@ Testbutiken
   - Varukorgen utnyttjar Reacts Context API (tänk redux) för global state
       Sparar varukorgen i localstorage
 
+  - Skriven i TypeScript vilket minskar risken för buggar, framför allt när man hämtar data från api. 
+    Varnar när något inte stämmer. 
+
   - Just nu deployad på netlify med 100/100 på alla fyra lighthouse scores
-      testbutik.netlify.app
+    Se testbutik.netlify.app
+
+  - Style-ad med Tailwind CSS
