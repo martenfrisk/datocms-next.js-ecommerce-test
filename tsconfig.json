@@ -28,7 +28,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "components/search.jsx"
+    "**/*.tsx", "components/search.jsx", "components/product/drag-box.jsx"
   ],
   "exclude": [
     "node_modules"

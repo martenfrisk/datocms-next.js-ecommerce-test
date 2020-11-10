@@ -1,4 +1,4 @@
-import ProductPreview from './product-preview';
+import ProductPreview from '@/product/product-preview';
 
 type MoreProductsProps = {
   products: any[]

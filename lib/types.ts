@@ -8,3 +8,7 @@ export type ProductType = {
     platform: string,
     cover: { responsiveImage: any }
   }
+
+export const ItemTypes = {
+  PRODUCT: 'product',
+}

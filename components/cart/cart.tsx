@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+import { useEffect } from 'react'
 import Link from 'next/link';
+import { useDrop } from 'react-dnd'
+import { ItemTypes } from '@/lib/types'
 import OutsideCloseCart from '@/lib/click-outside';
 // import {
 //   ShoppingCart32,
@@ -18,7 +21,20 @@ import { useCart, useDispatchCart, ActionType } from './cart-context';
 const Cart = () => {
   const { state, showCart } = useCart();
   const [visible, setVisible] = showCart;
-
+  const [{ canDrop, isOver }, drop] = useDrop({
+    accept: ItemTypes.PRODUCT,
+    drop: () => ({ name: 'Cart' }),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop(),
+    }),
+  })
+  const isActive = canDrop && isOver
+  useEffect(() => {
+    if (isActive) {
+      setVisible(true)
+    }
+  }, [isActive])
   const dispatch: any = useDispatchCart();
   const handleRemoveItem = (id: string) => {
     dispatch({
@@ -57,7 +73,10 @@ const Cart = () => {
 
   return (
     <>
-      <div className="sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20 ml-0 flex-col md:flex-row md:ml-10 pointer-events-none right-0">
+      <div
+        className={`sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20 ml-0 flex-col md:flex-row md:ml-10 pointer-events-none right-0 transform ${isActive && 'scale-110'}`}
+        ref={drop}
+      >
         <div
           onClick={() => setVisible((prev: boolean) => !prev)}
           className={`cursor-pointer w-12 h-12 flex-col shadow-3xl p-2 border-2 flex justify-center order-last md:order-first items-center mb-6 rounded-full pointer-events-auto ${
