@@ -10,10 +10,10 @@ export default function UserButtons() {
       {loading && <p>Loading...</p>}
       {!session && (
         <>
-          <button onClick={signIn} type="button">
+          <button onClick={() => signIn} type="button">
             <User className="cursor-pointer hover:text-blue-700 duration-200 transition-colors" />
           </button>
-          <button onClick={signIn} type="button">
+          <button onClick={() => signIn} type="button">
             <Favorite className="cursor-pointer hover:text-blue-700 duration-200 transition-colors" />
           </button>
         </>
