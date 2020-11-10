@@ -13,9 +13,6 @@
     "export": "next build && next export",
     "analyze": "ANALYZE=true yarn build"
   },
-  "resolutions": {
-    "typeorm": "0.2.28"
-  },
   "dependencies": {
     "@carbon/icons-react": "^10.20.0",
     "@next/bundle-analyzer": "^10.0.1",
@@ -28,7 +25,6 @@
     "isomorphic-unfetch": "3.0.0",
     "mongodb": "^3.6.3",
     "next": "^10.0.1-canary.6",
-    "next-auth": "^3.1.0",
     "next-on-netlify": "^2.6.0",
     "react": "^17.0.1",
     "react-datocms": "1.2.1",
@@ -39,7 +35,6 @@
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.1.0",
-    "@types/next-auth": "^3.1.14",
     "@types/node": "^14.14.6",
     "@types/react": "^16.9.55",
     "@typescript-eslint/eslint-plugin": "^4.6.1",

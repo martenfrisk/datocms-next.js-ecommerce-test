@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import Link from 'next/link';
-import { useSession, signIn } from 'next-auth/client'
 import Undo from '@carbon/icons-react/lib/undo/16'
 import AddAlt from '@carbon/icons-react/lib/add--alt/16'
 import SubtractAlt from '@carbon/icons-react/lib/subtract--alt/16'
@@ -14,7 +13,6 @@ import Header from '@/components/header';
 
 export default function Checkout() {
   const { state } = useCart()
-  const [session] = useSession()
   let totalCost: number
   if (state) {
     totalCost = state.reduce(
@@ -149,24 +147,14 @@ export default function Checkout() {
                       </p>
                     </div>
                     <div className="w-full flex justify-center">
-                      {session ? (
-                        <button
-                          className="bg-blue-600 shadow-xl translate-y-0 hover:-translate-y-px hover:shadow-2xl duration-150 rounded-md px-6 transform transition py-2 text-lg text-white"
-                          type="button"
-                        >
-                          <Link href="/thanks">
-                            Order
-                          </Link>
-                        </button>
-                      ) : (
-                        <button
-                          className="bg-blue-600 shadow-xl translate-y-0 hover:-translate-y-px hover:shadow-2xl duration-150 rounded-md px-6 transform transition py-2 text-lg text-white"
-                          type="button"
-                          onClick={() => signIn(null, { callbackUrl: '/checkout' })}
-                        >
-                          Log in and order
-                        </button>
-                      )}
+                      <button
+                        className="bg-blue-600 shadow-xl translate-y-0 hover:-translate-y-px hover:shadow-2xl duration-150 rounded-md px-6 transform transition py-2 text-lg text-white"
+                        type="button"
+                      >
+                        <Link href="/thanks">
+                          Order
+                        </Link>
+                      </button>
                     </div>
                   </>
                 )
