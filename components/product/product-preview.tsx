@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useDispatchCart, useCart } from '@/cart/cart-context'
 import { ProductType, ItemTypes } from '@/lib/types'
 import CoverImage from '@/components/cover-image'
-import { Preview } from 'react-dnd-multi-backend'
+// import { Preview } from 'react-dnd-multi-backend'
 import { useDrag } from 'react-dnd'
 
 export default function ProductPreview({
@@ -42,7 +42,7 @@ export default function ProductPreview({
     console.log(state)
   }
   const [{ isDragging }, drag] = useDrag({
-    item: { productName, type: ItemTypes.PRODUCT },
+    item: { cover: cover.responsiveImage, type: ItemTypes.PRODUCT },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult()
       if (item && dropResult) {
@@ -54,13 +54,13 @@ export default function ProductPreview({
     }),
   })
   const opacity = isDragging ? 0.4 : 1
-  const generatePreview = (type, item, style) => (
-    <div style={style}><img src={cover.responsiveImage} alt="" /></div>
-  )
+  // const generatePreview = (type, item, style) => (
+  //   <div style={style}><img src={cover.responsiveImage} alt="" /></div>
+  // )
 
   return (
     <>
-      <Preview generator={generatePreview} />
+      {/* <Preview generator={generatePreview} /> */}
       <div className="w-1/2 sm:w-1/3 lg:w-1/4 px-2 sm:px-4">
         <div className="mb-5">
           <div ref={drag} style={{ opacity }} className="cursor-move">
