@@ -13,6 +13,7 @@ export default function Profile() {
         <div className="flex justify-center">
           {session && !loading ? (
             <div className="flex flex-col space-y-4 items-center">
+              <img src={session.user.image} alt="" className="w-20 border-4 border-blue-400 shadow-inner h-20 rounded-full" />
               <h2>
                 Welcome to your profile page
                 {' '}

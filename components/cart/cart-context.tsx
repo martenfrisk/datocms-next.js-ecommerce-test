@@ -27,7 +27,8 @@ export type ActionType = {
     item: string,
     quantity: number,
     price: number,
-    id: string
+    id: string,
+    responsiveImage: any
   }
 }
 
@@ -51,6 +52,7 @@ const reducer = (state: any, action: ActionType) => {
           quantity: action.payload.quantity,
           price: action.payload.price,
           slug: action.payload.slug,
+          responsiveImage: action.payload.responsiveImage,
         });
       }
     // eslint-disable-next-line no-fallthrough

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import UserButtons from './user-buttons';
 import Nav from './nav';
 
-export default function Header({ frontPage = false }) {
+export default function Header({ frontPage = false }: { frontPage?: boolean }) {
   return (
     <div className="sticky top-0 flex z-20 bg-white pt-5 sm:pt-10 pb-2 sm:pb-4 bg-opacity-95 flex-col md:flex-row  justify-between items-start mb-4">
       <h2
@@ -26,4 +26,8 @@ export default function Header({ frontPage = false }) {
       </div>
     </div>
   );
+}
+
+Header.defaultProps = {
+  frontPage: false,
 }

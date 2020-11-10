@@ -3,9 +3,9 @@ import { Image } from 'react-datocms'
 import Link from 'next/link'
 
 export default function CoverImage({
-  productName, responsiveImage, slug, rotate = false,
+  productName, responsiveImage, slug, rotate = false, shadow = true,
 }:{
-  productName: string, responsiveImage: any, slug?: string, rotate?: boolean
+  productName: string, responsiveImage: any, slug?: string, rotate?: boolean, shadow?: boolean
 }) {
   let willRotate: object
   if (rotate) {
@@ -22,12 +22,12 @@ export default function CoverImage({
         ...responsiveImage,
         alt: `Cover Image for ${productName}`,
       }}
-      className="hover:shadow-4xl shadow-3xl transition-shadow duration-200 hover:-translate-y-1 transform"
+      className={`${shadow && 'hover:shadow-4xl shadow-3xl'} transition-shadow duration-200 hover:-translate-y-1 transform`}
       style={willRotate}
     />
   )
   return (
-    <div className="sm:mx-0 transition duration-200 ease-in transform hover:-translate-y-1" style={{ perspective: '1000px' }}>
+    <div className="sm:mx-0 cursor-pointer transition duration-200 ease-in transform hover:-translate-y-1" style={{ perspective: '1000px' }}>
       {slug ? (
         <Link as={`/products/${slug}`} href="/products/[slug]">
           <a aria-label={productName}>{image}</a>

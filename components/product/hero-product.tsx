@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import CoverImage from '../cover-image';
+import CoverImage from '@/components/cover-image';
+import { ProductType } from '@/lib/types'
 
 export default function HeroProduct({
   productName,
@@ -8,7 +9,7 @@ export default function HeroProduct({
   descriptionShort,
   retailPrice,
   cover,
-}) {
+}: ProductType) {
   return (
     <section className="flex mb-16 items-center flex-wrap">
       <div className="w-full order-last md:order-first md:w-1/3">

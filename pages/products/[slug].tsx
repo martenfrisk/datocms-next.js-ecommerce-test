@@ -37,6 +37,7 @@ export default function Product({
         price: product.retailPrice,
         quantity: 1,
         slug: product.slug,
+        responsiveImage: product.cover.responsiveImage,
       },
     })
     setVisible(true)
