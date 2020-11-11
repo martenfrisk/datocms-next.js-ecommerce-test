@@ -20,7 +20,7 @@ export default function Thanks() {
         <Container>
           <Header />
           <div className="flex flex-col flex-wrap items-center w-full">
-            <div className="flex flex-col w-full md:w-1/2">
+            <div className="flex flex-col items-center w-full md:w-1/2">
               <p className="mb-4">
                 Thank you purchasing
                 {' '}
@@ -40,6 +40,16 @@ export default function Thanks() {
                 </Link>
                 {' '}
                 to do some more shopping!
+              </p>
+              <p>
+                <Link href="/user/profile">
+                  <button
+                    type="button"
+                    className="px-6 py-2 mt-6 text-white transform bg-blue-700 rounded-md shadow-lg hover:translate-y-px"
+                  >
+                    Your orders
+                  </button>
+                </Link>
               </p>
               <p className="mt-10 text-xs">
                 * Average delivery time is 2-4 months. If you have not received

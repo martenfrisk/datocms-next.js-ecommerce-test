@@ -37,9 +37,9 @@ export default function SearchBar() {
             }}
           />
           {searchResults.length > 0 && (
-            <div className="absolute z-20 flex flex-col px-4 py-4 mt-10 bg-white shadow-md bg-opacity-95 space-y-4">
+            <div className="absolute z-20 flex flex-col px-4 py-4 mt-10 space-y-4 bg-white shadow-md bg-opacity-95">
               {searchResults !== [] && searchResults.slice(0, 5).map((hit) => (
-                <div className="underline">
+                <div className="underline" key={hit.slug}>
                   <Link href={`/products/${hit.slug}`}>
                     {hit.productName}
                   </Link>

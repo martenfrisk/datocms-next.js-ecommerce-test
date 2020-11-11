@@ -123,7 +123,7 @@ const Cart = () => {
                     {state.map((myCartItem: ActionType['payload']) => (
                       <div
                         key={myCartItem.id}
-                        className="flex flex-wrap items-center justify-between w-full px-2 py-1 pb-2 bg-white border-b border-blue-400 bg-opacity-100 border-opacity-50 md:p-2"
+                        className="flex flex-wrap items-center justify-between w-full px-4 py-1 pb-2 bg-white bg-opacity-100 border-b border-blue-400 border-opacity-50 md:p-2"
                       >
                         <div
                           className="flex items-start justify-between w-full"

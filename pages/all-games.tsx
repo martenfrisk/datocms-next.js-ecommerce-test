@@ -98,7 +98,7 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                   </button>
                 </div>
               </div>
-              <div className="flex justify-center w-1/4 mt-2  sm:mt-0">
+              <div className="flex justify-center w-1/4 mt-2 sm:mt-0">
                 <List className="mr-4 cursor-pointer" onClick={() => setProductView('list')} />
                 <Grid className="cursor-pointer" onClick={() => setProductView('grid')} />
               </div>
@@ -108,19 +108,13 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                 type="text"
                 value={searchProduct}
                 onChange={(e) => setSearchProduct(e.target.value)}
-                className="px-4 py-2 bg-blue-200 focus:outline-none bg-opacity-25 rounded-md"
+                className="px-4 py-2 bg-blue-200 bg-opacity-25 rounded-md focus:outline-none"
                 placeholder="Search product..."
               />
             </div>
             {productView === 'grid' && (
               <div
-                className="flex 
-  flex-wrap
- justify-evenly
- mx-2
- sm:mx-16
- mb-0
- sm:mb-20"
+                className="flex flex-wrap mx-2 mb-0 justify-evenly sm:mx-16 sm:mb-20"
               >
                 {items
                   .filter((el) => (filter !== '' ? el.platform === filter : el))
@@ -144,7 +138,7 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                   .filter((el) => (filter !== '' ? el.platform === filter : el))
                   .filter((el) => (searchProduct !== '' ? el.productName.match(new RegExp(searchProduct, 'i')) || el.description.match(new RegExp(searchProduct, 'i')) : el))
                   .map((product: ProductType, i: number) => (
-                    <Link href={`/products/${product.slug}`}>
+                    <Link href={`/products/${product.slug}`} key={product.slug}>
                       <div className={`${i % 2 === 0 ? 'bg-blue-100' : 'bg-white'} hover:shadow-md flex my-2 px-2 py-2 items-center cursor-pointer`}>
                         <div className="w-8 h-8 sm:w-12 sm:h-12">
                           <CoverImage
