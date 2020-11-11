@@ -5,7 +5,7 @@ import Nav from './nav';
 
 export default function Header({ frontPage = false }: { frontPage?: boolean }) {
   return (
-    <div className="sticky top-0 flex z-20 bg-white pt-5 sm:pt-10 pb-2 sm:pb-4 bg-opacity-95 flex-col md:flex-row  justify-between items-start mb-4">
+    <div className="sticky top-0 z-20 flex flex-col items-start justify-between pt-5 pb-2 mb-4 bg-white sm:pt-10 sm:pb-4 bg-opacity-95 md:flex-row ">
       <h2
         className={`
           ${frontPage ? 'text-4xl md:text-7xl' : 'text-4xl md:text-6xl'}
@@ -17,9 +17,9 @@ export default function Header({ frontPage = false }: { frontPage?: boolean }) {
         </Link>
         .
       </h2>
-      <div className="flex items-center flex-col space-y-4 md:space-y-0 md:flex-row w-full md:w-auto">
+      <div className="flex flex-col items-center w-full space-y-4 md:space-y-0 md:flex-row md:w-auto">
         <Nav />
-        <div className="flex space-x-4 w-full items-center justify-center flex-wrap">
+        <div className="flex flex-wrap items-center justify-center w-full space-x-4">
           <SearchBar />
           <UserButtons />
         </div>

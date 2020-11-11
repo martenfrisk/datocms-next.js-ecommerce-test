@@ -44,25 +44,25 @@ export default function Checkout() {
       <Layout showCartButton="false">
         <Container>
           <Header />
-          <div className="mb-20 w-full flex flex-col flex-wrap items-center">
+          <div className="flex flex-col flex-wrap items-center w-full mb-20">
             <Link href="/">
-              <div className="cursor-pointer self-start flex w-auto mb-4  text-left">
+              <div className="flex self-start w-auto mb-4 text-left cursor-pointer ">
                 <Undo className="w-6 h-6" />
                 &nbsp;
-                <span className="border-b border-opacity-0 hover:border-opacity-100 border-blue-700 border-dotted ">
+                <span className="border-b border-blue-700 border-dotted border-opacity-0 hover:border-opacity-100 ">
                   Continue shopping
                 </span>
               </div>
             </Link>
-            <div className="bg-white border border-blue-700 w-full py-8 px-4 md:w-1/2 rounded-md">
-              <p className="w-full text-center mb-8">
+            <div className="w-full px-4 py-8 bg-white border border-blue-700 md:w-1/2 rounded-md">
+              <p className="w-full mb-8 text-center">
                 Please review your order before continuing.
               </p>
               {state.length > 0
                 ? (
                   <>
                     {state.map((cartItem) => (
-                      <div className="w-full rounded-md p-4 flex hover:shadow-lg shadow-md mb-4 flex-wrap items-center justify-between">
+                      <div className="flex flex-wrap items-center justify-between w-full p-4 mb-4 shadow-md rounded-md hover:shadow-lg">
                         <div className="w-1/5 h-auto">
                           <CoverImage
                             productName={cartItem.productName}
@@ -71,7 +71,7 @@ export default function Checkout() {
                             slug={cartItem.slug}
                           />
                         </div>
-                        <div className="w-4/5 pl-4 flex flex-wrap">
+                        <div className="flex flex-wrap w-4/5 pl-4">
 
                           <div className="w-3/4">
                             <Link
@@ -79,14 +79,14 @@ export default function Checkout() {
                               href="/products/[slug]"
                             >
                               <a
-                                className="border-b border-opacity-0 hover:border-opacity-100 border-blue-700 border-dotted hover:text-blue-800"
+                                className="border-b border-blue-700 border-dotted border-opacity-0 hover:border-opacity-100 hover:text-blue-800"
                                 target="_blank"
                               >
                                 {cartItem.item}
                               </a>
                             </Link>
                           </div>
-                          <div className="w-1/4 flex items-center text-right text-sm">
+                          <div className="flex items-center w-1/4 text-sm text-right">
                             <button
                               type="button"
                               onClick={() => handleAdjustQuantity(cartItem.id, 'DECREASE')}
@@ -106,15 +106,15 @@ export default function Checkout() {
                               <AddAlt className="w-4 h-4" />
                             </button>
                             <span
-                              className="cursor-pointer text-gray-700 pl-2 text-xs hover:underline"
+                              className="pl-2 text-xs text-gray-700 cursor-pointer hover:underline"
                               onClick={() => handleRemoveItem(cartItem.id)}
                             >
                               <TrashCan />
                             </span>
                           </div>
-                          <div className="w-full flex items-center justify-between">
+                          <div className="flex items-center justify-between w-full">
 
-                            <div className="w-2/3 my-2 text-sm text-gray-700 text-left">
+                            <div className="w-2/3 my-2 text-sm text-left text-gray-700">
                               Buying
                               {' '}
                               {cartItem.quantity}
@@ -126,7 +126,7 @@ export default function Checkout() {
                               :-
                               each
                             </div>
-                            <div className="w-1/3  text-right">
+                            <div className="w-1/3 text-right ">
                               {cartItem.quantity * cartItem.price}
                               {' '}
                               :-
@@ -137,7 +137,7 @@ export default function Checkout() {
                         </div>
                       </div>
                     ))}
-                    <div className="pr-2 w-full flex justify-end">
+                    <div className="flex justify-end w-full pr-2">
                       <p>
                         Total cost:
                         {' '}
@@ -146,10 +146,10 @@ export default function Checkout() {
                         :-
                       </p>
                     </div>
-                    <div className="w-full flex justify-center">
+                    <div className="flex justify-center w-full">
                       <Link href="/thanks">
                         <button
-                          className="bg-blue-600 shadow-xl translate-y-0 hover:-translate-y-px hover:shadow-2xl duration-150 rounded-md px-6 transform transition py-2 text-lg text-white"
+                          className="px-6 py-2 text-lg text-white bg-blue-600 shadow-xl translate-y-0 hover:-translate-y-px hover:shadow-2xl duration-150 rounded-md transform transition"
                           type="button"
                         >
                           Order
@@ -159,7 +159,7 @@ export default function Checkout() {
                   </>
                 )
                 : (
-                  <p className="text-center text-lg">
+                  <p className="text-lg text-center">
                     Your shopping cart is empty. Add some items before checking out. Click
                     <Link href="/"><a className="border-b border-blue-600 border-dashed">here</a></Link>
                     {' '}

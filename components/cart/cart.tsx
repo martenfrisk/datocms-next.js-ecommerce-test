@@ -9,6 +9,7 @@ import ShoppingCart from '@carbon/icons-react/lib/shopping--cart/32'
 import AddAlt from '@carbon/icons-react/lib/add--alt/16'
 import SubtractAlt from '@carbon/icons-react/lib/subtract--alt/16'
 import TrashCan from '@carbon/icons-react/lib/trash-can/16'
+import Send from '@carbon/icons-react/lib/send/16'
 
 import { useCart, useDispatchCart, ActionType } from './cart-context';
 
@@ -75,10 +76,10 @@ const Cart = () => {
         {!visible && (
           <div
             onClick={() => setVisible(true)}
-            className="cursor-pointer w-12 h-12 flex-col shadow-3xl p-2 border-2 flex justify-center order-last md:order-first items-center mb-6 rounded-full pointer-events-auto bg-blue-600 border-white text-white"
+            className="flex flex-col items-center justify-center order-last w-12 h-12 p-2 mb-6 text-white bg-blue-600 border-2 border-white rounded-full cursor-pointer pointer-events-auto shadow-3xl md:order-first"
           >
             {state && state.length > 0 && (
-              <div className="absolute mb-6 bottom-0 text-blue-600 bg-white ml-10 rounded-full border-2 pointer-events-auto border-blue-600 text-center w-5 h-5 text-xs">
+              <div className="absolute bottom-0 w-5 h-5 mb-6 ml-10 text-xs text-center text-blue-600 bg-white border-2 border-blue-600 rounded-full pointer-events-auto">
                 {state.reduce(
                   (acc: number, curr: { quantity: number }) => acc + curr.quantity,
                   0,
@@ -91,41 +92,41 @@ const Cart = () => {
 
         <OutsideCloseCart>
           <div
-            className={`text-center bg-white rounded-lg pt-8 flex flex-col items-center justify-start w-auto shadow-lg pointer-events-auto mb-2 overflow-y-scroll  md:mb-6 bg-opacity-95 border border-blue-400 order-1 md:order-2 ${
+            className={`text-center bg-white rounded-lg pt-8 flex flex-col items-center justify-start w-auto shadow-lg pointer-events-auto mb-2 overflow-y-scroll  md:mb-6 bg-opacity-95 border border-blue-400  ${
               visible ? 'visible' : 'invisible'
             }`}
             style={{ maxHeight: '50vh' }}
           >
             {currentlyDragging && (
               <div
-                className="w-84 rounded-md pb-2 md:pb-6 h-full absolute z-30 top-0 bg-gray-700 bg-opacity-50 text-white flex justify-center items-center text-xl"
+                className="absolute top-0 z-30 flex items-center justify-center h-full pb-2 text-xl text-white bg-gray-700 bg-opacity-50 rounded-md w-84 md:pb-6"
                 style={{ maxHeight: '50vh' }}
               >
                 <p>Drop item here to add to cart.</p>
               </div>
             )}
             <div
-              className="px-4 w-auto tracking-wide absolute top-0 pt-2 text-sm select-none"
+              className="absolute top-0 w-auto px-4 pt-2 text-sm tracking-wide select-none"
               style={{ width: 'max-content' }}
             >
               Your Shopping Cart
             </div>
-            <div className="overflow-y-scroll max-h-screen">
+            <div className="max-h-screen overflow-y-scroll">
               {state && state.length === 0 ? (
-                <div className="w-48 select-none text-sm mx-4">
+                <div className="px-4 py-4 text-sm select-none w-84">
                   Your cart is empty. Add an item and check back here later.
                 </div>
               ) : (
                 state && (
-                <div className="flex w-84 max-w-screen-sm justify-end flex-wrap">
-                  <div className="h-1/2 w-full">
+                <div className="flex flex-wrap justify-end max-w-screen-sm w-84">
+                  <div className="w-full h-1/2">
                     {state.map((myCartItem: ActionType['payload']) => (
                       <div
                         key={myCartItem.id}
-                        className="pb-2 border-b border-blue-400 border-opacity-50 w-full flex-wrap flex justify-between items-center px-2 py-1 md:p-2 bg-opacity-100 bg-white"
+                        className="flex flex-wrap items-center justify-between w-full px-2 py-1 pb-2 bg-white border-b border-blue-400 bg-opacity-100 border-opacity-50 md:p-2"
                       >
                         <div
-                          className="w-full flex justify-between items-start"
+                          className="flex items-start justify-between w-full"
                         >
                           <span className="text-left hover:text-blue-900 ">
                             <Link
@@ -142,7 +143,7 @@ const Cart = () => {
                           </span>
                         </div>
 
-                        <div className="w-full flex  items-center justify-end">
+                        <div className="flex items-center justify-end w-full">
                           <button
                             type="button"
                             onClick={() => handleAdjustQuantity(myCartItem.id, 'DECREASE')}
@@ -164,7 +165,7 @@ const Cart = () => {
                             <AddAlt className="w-4 h-4" />
                           </button>
                           <span
-                            className="cursor-pointer text-gray-700 pl-4 text-xs hover:underline"
+                            className="pl-4 text-xs text-gray-700 cursor-pointer hover:underline"
                             onClick={() => handleRemoveItem(myCartItem.id)}
                           >
                             <TrashCan />
@@ -173,8 +174,8 @@ const Cart = () => {
                       </div>
                     ))}
                   </div>
-                  <div className="sticky  px-4 w-full h-20 bg-white left-auto bottom-0">
-                    <div className="mt-4 flex justify-between w-full items-center">
+                  <div className="sticky bottom-0 left-auto w-full h-20 px-4 bg-white">
+                    <div className="flex items-center justify-between w-full mt-4">
                       <span className="w-2/3 text-sm text-left">
                         Total
                         {' '}
@@ -188,18 +189,28 @@ const Cart = () => {
                         :-
                       </span>
                     </div>
-                    <div className="w-full flex justify-between mt-2 text-sm cursor-pointer text-gray-700">
-                      <span onClick={() => {
-                        handleRemoveAll()
-                        if (!visible) {
-                          setVisible(() => true)
-                        }
-                      }}
+                    <div className="flex justify-between w-full mt-2 text-sm text-gray-700 cursor-pointer">
+                      <span
+                        onClick={() => {
+                          handleRemoveAll()
+                          if (!visible) {
+                            setVisible(() => true)
+                          }
+                        }}
+                        className="border-b border-gray-600 border-dashed hover:text-black"
                       >
-                        Clear cart
+                        clear cart
                       </span>
-                      <span className="border-b border-gray-600 border-dashed hover:text-black hover:border-gray-800">
-                        <Link href="/checkout">checkout</Link>
+                      <span className="hover:text-black">
+                        <Link href="/checkout">
+                          <span className="flex items-center">
+                            <span className="mr-1 border-b border-gray-600 border-dashed">
+                              checkout
+                              {' '}
+                            </span>
+                            <Send />
+                          </span>
+                        </Link>
                       </span>
                     </div>
                   </div>

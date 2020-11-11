@@ -2,7 +2,7 @@
 import StarFilled from '@carbon/icons-react/lib/star--filled/24'
 
 const Rating = ({ rating }: { rating: number }) => (
-  <div className="flex w-full justify-center sm:justify-start mt-4">
+  <div className="flex justify-center w-full mt-4 sm:justify-start">
     {rating && (
       [...Array(rating)].map((value: undefined, index: number) => (
         <StarFilled className="text-yellow-400" key={index} />

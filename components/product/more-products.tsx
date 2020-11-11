@@ -9,16 +9,16 @@ export default function MoreProducts(
 ): React.ReactElement<MoreProductsProps> {
   return (
     <section>
-      <h2 className="my-8 text-4xl md:text-5xl font-bold tracking-tighter leading-tight">
+      <h2 className="my-8 text-4xl font-bold leading-tight tracking-tighter md:text-5xl">
         {header}
       </h2>
-      <div className="
-      flex flex-wrap
-      justify-evenly
-      mx-2
-      md:mx-16
-      mb-0
-      sm:mb-20"
+      <div className="flex 
+  flex-wrap
+ justify-evenly
+ mx-2
+ md:mx-16
+ mb-0
+ sm:mb-20"
       >
         {products.map((product) => (
           <ProductPreview

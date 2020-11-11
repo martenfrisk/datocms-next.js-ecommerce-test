@@ -66,15 +66,15 @@ export default function Product({
                 </title>
               </Head>
               <ProductTitle>{product.productName}</ProductTitle>
-              <div className="flex flex-col md:flex-row items-center md:items-start">
-                <div className="w-2/3 md:w-1/3 h-auto">
+              <div className="flex flex-col items-center md:flex-row md:items-start">
+                <div className="w-2/3 h-auto md:w-1/3">
                   <CoverImage
                     productName={product.productName}
                     responsiveImage={product.cover.responsiveImage}
                   />
                 </div>
-                <div className="w-full flex flex-wrap flex-col sm:flex-row md:w-2/3 md:pl-8">
-                  <div className="w-full mt-4 md:mt-0 px-10 md:px-0 md:w-2/3 flex justify-between">
+                <div className="flex flex-col flex-wrap w-full sm:flex-row md:w-2/3 md:pl-8">
+                  <div className="flex justify-between w-full px-10 mt-4 md:mt-0 md:px-0 md:w-2/3">
                     <p className="text-3xl font-bold">
                       {product.retailPrice}
                       :-
@@ -82,7 +82,7 @@ export default function Product({
                     <OutsideCloseCart>
                       <button
                         type="button"
-                        className="bg-black text-white rounded-md text-lg px-6 py-1 cursor-pointer hover:bg-white hover:text-black border-2 border-black transition-200"
+                        className="px-6 py-1 text-lg text-white bg-black border-2 border-black cursor-pointer rounded-md hover:bg-white hover:text-black transition-200"
                         onClick={handleAddToCart}
                         // ref={ref}
                       >

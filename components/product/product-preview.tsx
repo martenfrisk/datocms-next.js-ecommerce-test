@@ -72,7 +72,7 @@ export default function ProductPreview({
   return (
     <>
       {/* <Preview generator={generatePreview} /> */}
-      <div className="w-1/2 sm:w-1/3 lg:w-1/4 px-2 sm:px-4">
+      <div className="w-1/2 px-2 sm:w-1/3 lg:w-1/4 sm:px-4">
         <div ref={drag} style={{ opacity }} className="cursor-move">
           <div className="mb-5">
             <CoverImage
@@ -80,18 +80,25 @@ export default function ProductPreview({
               productName={productName}
               responsiveImage={cover.responsiveImage}
             />
+            <button
+              type="button"
+              className="absolute px-2 py-1 ml-1 -mt-10 text-white bg-gray-700 cursor-pointer bg-opacity-75 rounded-md focus:outline-none transform hover:-translate-y-1 transition-all duration-100 hover:shadow-md"
+              onClick={handleAddToCart}
+            >
+              Buy
+            </button>
           </div>
-          <h3 className="text-xl mb-1 leading-snug tracking-tight">
+          <h3 className="mb-1 text-xl leading-snug tracking-tight">
             <Link as={`/products/${slug}`} href="/products/[slug]">
               <a className="hover:underline">{productName}</a>
             </Link>
           </h3>
-          <div className="text-sm mb-4">
+          <div className="mb-4 text-sm">
             {retailPrice}
             {' '}
             kr
           </div>
-          <p className="text-sm hidden md:block font-light leading-snug mb-8">{descriptionShort || description}</p>
+          <p className="hidden mb-8 text-sm font-light leading-snug md:block">{descriptionShort || description}</p>
         </div>
       </div>
     </>

@@ -35,12 +35,11 @@ export type ActionType = {
 
 const initialState = [];
 
-// function moveToFirst(element: any, array: any) {
-//   if (array.includes(element)) {
-//     array.splice(array.indexOf(element), 1);
-//     array.unshift(element);
-//   }
-// }
+function moveToFirst(fromIndex: number, array: any[]) {
+  const arr = [...array]
+  arr.splice(0, 0, ...arr.splice(fromIndex, 1));
+  return arr
+}
 
 const reducer = (state: any, action: ActionType) => {
   switch (action.type) {
@@ -53,6 +52,11 @@ const reducer = (state: any, action: ActionType) => {
           }
           return item;
         })
+        const elPos = state.findIndex((x: ActionType['payload']) => x.slug === action.payload.slug)
+        state = moveToFirst(elPos, state)
+        // const el = state.filter((x: ActionType['payload']) => x.slug === action.payload.slug)
+        // state.splice(elPos, 1)
+        // state.unshift(el)
       } else {
         const newObj = [{
           item: action.payload.item,

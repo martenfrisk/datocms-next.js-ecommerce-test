@@ -37,15 +37,15 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
         <Container>
           <Header />
           <section>
-            <div className="w-full sm:mt-8 mb-2 flex-col sm:flex-row flex items-center justify-between">
-              <div className="flex flex-wrap w-full sm:w-3/4 justify-evenly sm:px-20 items-center sm:space-x-5 text-lg">
-                <p className="mr-4 text-xl w-full sm:w-auto text-center">Sort by</p>
+            <div className="flex flex-col items-center justify-between w-full mb-2 sm:mt-8 sm:flex-row">
+              <div className="flex flex-wrap items-center w-full text-lg sm:w-3/4 justify-evenly sm:px-20 sm:space-x-5">
+                <p className="w-full mr-4 text-xl text-center sm:w-auto">Sort by</p>
                 <button
                   type="button"
                   className="focus:outline-none"
                   onClick={() => requestSort('retailPrice')}
                 >
-                  <div className="flex focus:outline-none items-center">
+                  <div className="flex items-center focus:outline-none">
                     Price
                     {' '}
                     <div className="w-4">
@@ -67,7 +67,7 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                   className="focus:outline-none"
                   onClick={() => requestSort('productName')}
                 >
-                  <div className="flex focus:outline-none items-center">
+                  <div className="flex items-center focus:outline-none">
                     Name
                     {' '}
                     <div className="w-4">
@@ -84,7 +84,7 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                     </div>
                   </div>
                 </button>
-                <div className="items-center flex">
+                <div className="flex items-center">
                   Platform:
                   {' '}
                   <button type="button" className={`${filter === 'Playstation' && 'underline'} text-sm  focus:outline-none ml-2`} onClick={() => handleFilter('Playstation')}>
@@ -98,29 +98,29 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                   </button>
                 </div>
               </div>
-              <div className="flex w-1/4 justify-center  mt-2 sm:mt-0">
+              <div className="flex justify-center w-1/4 mt-2  sm:mt-0">
                 <List className="mr-4 cursor-pointer" onClick={() => setProductView('list')} />
                 <Grid className="cursor-pointer" onClick={() => setProductView('grid')} />
               </div>
             </div>
-            <div className="full flex justify-center my-5">
+            <div className="flex justify-center my-5 full">
               <input
                 type="text"
                 value={searchProduct}
                 onChange={(e) => setSearchProduct(e.target.value)}
-                className="bg-blue-200 focus:outline-none bg-opacity-25 px-4 py-2 rounded-md"
+                className="px-4 py-2 bg-blue-200 focus:outline-none bg-opacity-25 rounded-md"
                 placeholder="Search product..."
               />
             </div>
             {productView === 'grid' && (
               <div
-                className="
-                flex flex-wrap
-                justify-evenly
-                mx-2
-                sm:mx-16
-                mb-0
-                sm:mb-20"
+                className="flex 
+  flex-wrap
+ justify-evenly
+ mx-2
+ sm:mx-16
+ mb-0
+ sm:mb-20"
               >
                 {items
                   .filter((el) => (filter !== '' ? el.platform === filter : el))
@@ -139,21 +139,21 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
               </div>
             )}
             {productView === 'list' && (
-              <div className="flex-col flex sm:mx-16 mb-0 sm:mb-20">
+              <div className="flex flex-col mb-0 sm:mx-16 sm:mb-20">
                 {items
                   .filter((el) => (filter !== '' ? el.platform === filter : el))
                   .filter((el) => (searchProduct !== '' ? el.productName.match(new RegExp(searchProduct, 'i')) || el.description.match(new RegExp(searchProduct, 'i')) : el))
                   .map((product: ProductType, i: number) => (
                     <Link href={`/products/${product.slug}`}>
                       <div className={`${i % 2 === 0 ? 'bg-blue-100' : 'bg-white'} hover:shadow-md flex my-2 px-2 py-2 items-center cursor-pointer`}>
-                        <div className="w-8 sm:w-12 h-8 sm:h-12">
+                        <div className="w-8 h-8 sm:w-12 sm:h-12">
                           <CoverImage
                             slug={product.slug}
                             productName={product.productName}
                             responsiveImage={product.cover.responsiveImage}
                           />
                         </div>
-                        <div className="flex flex-wrap w-full justify-between px-4">
+                        <div className="flex flex-wrap justify-between w-full px-4">
                           <p className="w-full sm:w-auto">
                             {product.productName}
                           </p>

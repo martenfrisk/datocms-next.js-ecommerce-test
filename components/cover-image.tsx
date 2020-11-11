@@ -27,7 +27,7 @@ export default function CoverImage({
     />
   )
   return (
-    <div className="sm:mx-0 cursor-pointer transition duration-200 ease-in transform hover:-translate-y-1" style={{ perspective: '1000px' }}>
+    <div className="cursor-pointer sm:mx-0 transition duration-200 ease-in transform hover:-translate-y-1" style={{ perspective: '1000px' }}>
       {slug ? (
         <Link as={`/products/${slug}`} href="/products/[slug]">
           <a aria-label={productName}>{image}</a>

@@ -10,12 +10,12 @@ export default function SearchBar() {
 
   return (
     <>
-      <Search className="justify-self-start cursor-pointer " onClick={() => setShowSearch((prev) => !prev)} />
+      <Search className="cursor-pointer justify-self-start " onClick={() => setShowSearch((prev) => !prev)} />
       {showSearch
         && (
         <div className="flex flex-col">
           <input
-            className="border-b mb-2 sm:mb-0 w-full sm:w-auto sm:ml-2 sm:mr-3 px-2 focus:outline-none border-blue-600 text-blue-700"
+            className="w-full px-2 mb-2 text-blue-700 border-b border-blue-600 sm:mb-0 sm:w-auto sm:ml-2 sm:mr-3 focus:outline-none"
             type="text"
             value={searchTerm}
             onChange={async (e) => {
@@ -37,7 +37,7 @@ export default function SearchBar() {
             }}
           />
           {searchResults.length > 0 && (
-            <div className="bg-white z-20 bg-opacity-95 shadow-md px-4 py-4 absolute flex mt-10 flex-col space-y-4">
+            <div className="absolute z-20 flex flex-col px-4 py-4 mt-10 bg-white shadow-md bg-opacity-95 space-y-4">
               {searchResults !== [] && searchResults.slice(0, 5).map((hit) => (
                 <div className="underline">
                   <Link href={`/products/${hit.slug}`}>
@@ -46,7 +46,7 @@ export default function SearchBar() {
                 </div>
               ))}
               {searchTerm !== '' && (
-                <div className="italic text-sm">
+                <div className="text-sm italic">
                   <Link href={`/search${searchTerm !== '' && `?${searchTerm}`}`}>
                     More results
                   </Link>

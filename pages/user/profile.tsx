@@ -8,7 +8,7 @@ export default function Profile() {
       <Layout showCartButton="false">
         <Header />
         <div className="flex justify-center">
-          <div className="flex flex-col space-y-4 items-center">
+          <div className="flex flex-col items-center space-y-4">
             <h2>
               Welcome to your profile page.
             </h2>

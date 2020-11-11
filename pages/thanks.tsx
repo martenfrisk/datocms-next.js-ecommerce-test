@@ -19,8 +19,8 @@ export default function Thanks() {
       <Layout showCartButton="false">
         <Container>
           <Header />
-          <div className="w-full flex flex-col flex-wrap items-center">
-            <div className="w-full flex flex-col md:w-1/2">
+          <div className="flex flex-col flex-wrap items-center w-full">
+            <div className="flex flex-col w-full md:w-1/2">
               <p className="mb-4">
                 Thank you purchasing
                 {' '}
@@ -28,7 +28,7 @@ export default function Thanks() {
                 . A list of your items has been sent to Santa Claus and your items will
                 arrive in late December*.
               </p>
-              <div className="w-full text-center my-6 justify-center">
+              <div className="justify-center w-full my-6 text-center">
 
                 <img src="/images/santa.gif" className="mx-auto" alt="" />
               </div>
@@ -36,7 +36,7 @@ export default function Thanks() {
                 Return to the
                 {' '}
                 <Link href="/">
-                  <button type="button" className="border-b border-dashed border-blue-700">home screen</button>
+                  <button type="button" className="border-b border-blue-700 border-dashed">home screen</button>
                 </Link>
                 {' '}
                 to do some more shopping!
