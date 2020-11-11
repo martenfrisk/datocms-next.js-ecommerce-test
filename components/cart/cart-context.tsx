@@ -11,7 +11,8 @@ import { v4 as uuid } from 'uuid';
 
 interface ICartContext {
   state: any,
-  showCart: any
+  showCart: any,
+  dragging: any
 }
 
 const CartContext = createContext<ICartContext>(null);
@@ -34,6 +35,13 @@ export type ActionType = {
 
 const initialState = [];
 
+// function moveToFirst(element: any, array: any) {
+//   if (array.includes(element)) {
+//     array.splice(array.indexOf(element), 1);
+//     array.unshift(element);
+//   }
+// }
+
 const reducer = (state: any, action: ActionType) => {
   switch (action.type) {
     case 'ADD_ITEM':
@@ -44,16 +52,17 @@ const reducer = (state: any, action: ActionType) => {
             return { ...item, quantity: item.quantity++ };
           }
           return item;
-        });
+        })
       } else {
-        return state.concat({
+        const newObj = [{
           item: action.payload.item,
           id: uuid(),
           quantity: action.payload.quantity,
           price: action.payload.price,
           slug: action.payload.slug,
           responsiveImage: action.payload.responsiveImage,
-        });
+        }]
+        return newObj.concat(state);
       }
     // eslint-disable-next-line no-fallthrough
     case 'REMOVE':
@@ -115,7 +124,7 @@ export const CartProvider = ({ children }: { children: any }) => {
   );
 
   const [visible, setVisible] = useState(false)
-
+  const [currentlyDragging, setCurrentlyDragging] = useState(false)
   //   useEffect(() => {
   //     setLocalState(getLocalStorage("cart", initialState));
   //   }, []);
@@ -129,7 +138,11 @@ export const CartProvider = ({ children }: { children: any }) => {
   return (
     <CartDispatch.Provider value={dispatch}>
       <CartContext.Provider
-        value={{ state, showCart: [visible, setVisible] }}
+        value={{
+          state,
+          showCart: [visible, setVisible],
+          dragging: [currentlyDragging, setCurrentlyDragging],
+        }}
       >
         {children}
       </CartContext.Provider>
