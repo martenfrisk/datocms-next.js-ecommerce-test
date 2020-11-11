@@ -6,9 +6,8 @@
     "extends": "airbnb"
   },
   "scripts": {
-    "dev": "NODE_ENV=development NEXTAUTH_URL=http://localhost:3000 next",
+    "dev": "NODE_ENV=development next",
     "build": "next build",
-    "postbuild": "next-on-netlify",
     "start": "next start",
     "export": "next build && next export",
     "analyze": "ANALYZE=true yarn build"
