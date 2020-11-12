@@ -25,6 +25,7 @@ export default function Index({ allProducts }: { allProducts: ProductType[]}) {
           {heroProduct && (
             <HeroProduct
               productName={heroProduct.productName}
+              subname={heroProduct.subname}
               slug={heroProduct.slug}
               description={heroProduct.description}
               descriptionShort={heroProduct.descriptionShort}

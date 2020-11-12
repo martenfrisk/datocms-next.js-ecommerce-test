@@ -7,6 +7,7 @@ import { ProductType, ItemTypes } from '@/lib/types'
 
 export default function HeroProduct({
   productName,
+  subname,
   slug,
   description,
   descriptionShort,
@@ -58,7 +59,7 @@ export default function HeroProduct({
   const opacity = isDragging ? 0.4 : 1
 
   return (
-    <section className="flex flex-wrap items-center mt-8 mb-16">
+    <section className="flex flex-wrap items-center mt-0 mb-16 sm:mt-8">
       <div className="order-last w-full md:order-first md:w-1/3">
         <div ref={drag} style={{ opacity }} className="cursor-move">
           <div className="w-48 h-48 mx-auto mb-8 animate-float">
@@ -82,11 +83,26 @@ export default function HeroProduct({
         </div>
       </div>
 
-      <div className="flex flex-col flex-wrap justify-center w-full mt-4 mb-4 md:w-2/3 md:mb-20 md:flex-row">
+      <div className="flex flex-col flex-wrap justify-start w-full mt-4 mb-4 md:w-1/2 md:mb-20 md:flex-row">
         <div className="flex flex-col items-center w-full md:items-start">
-          <h3 className="mb-4 text-3xl leading-tight lg:text-4xl">
+          <h3 className="mb-4 text-3xl leading-tight md:text-4xl">
             <Link as={`/products/${slug}`} href="/products/[slug]">
-              <a className="hover:underline">{productName}</a>
+              <a className="hover:underline">
+                {subname ? (
+                  <>
+                    <span>
+                      {productName}
+                      :
+                      {' '}
+                    </span>
+                    <span className="text-2xl md:text-3xl">
+                      {subname}
+                    </span>
+                  </>
+                ) : (
+                  <span>{productName}</span>
+                )}
+              </a>
             </Link>
           </h3>
           <div className="mb-4 text-lg">
@@ -95,8 +111,8 @@ export default function HeroProduct({
             kr
           </div>
         </div>
-        <div className="hidden w-full md:block">
-          <p className="text-sm font-light leading-relaxed md:mr-48">
+        <div className="hidden w-full md:w-1/2 md:block">
+          <p className="px-4 py-2 text-sm font-light leading-relaxed bg-opacity-75 rounded-md bg-blueish-400">
             {descriptionShort || description}
           </p>
         </div>

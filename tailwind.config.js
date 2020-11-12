@@ -22,12 +22,12 @@ module.exports = {
         },
         smallbounce: {
           '0%, 100%': {
-            transform: 'translateY(-5%)',
-            animationTimingFunction: 'cubic-bezier(0.8,0,1,1)',
+            transform: 'none',
+            animationTimingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
           },
           '50%': {
-            transform: 'none',
-            animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
+            transform: 'translateY(-5%)',
+            animationTimingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
           },
         },
         float: {
@@ -41,7 +41,7 @@ module.exports = {
       },
       animation: {
         wiggle: 'wiggle 2s ease-in-out 1s 5',
-        smallbounce: 'smallbounce 1s ease-in-out 1s 10',
+        smallbounce: 'smallbounce 0.7s ease-in-out 2s 10',
         float: 'float 10s ease 0s infinite',
       },
       opacity: {

@@ -11,7 +11,7 @@ export default function CoverImage({
   if (rotate) {
     willRotate = {
       transform: 'rotateY(20deg) rotateX(10deg)',
-      filter: 'drop-shadow(-10px 10px 2px rgb(215 234 255 / 30%))',
+      filter: 'drop-shadow(-13px 15px 1px rgb(255 255 255 / 20%))',
     }
   } else {
     willRotate = { transform: 'rotateY(0deg) rotateX(0deg)' };
@@ -22,7 +22,7 @@ export default function CoverImage({
         ...responsiveImage,
         alt: `Cover Image for ${productName}`,
       }}
-      className={`${shadow && 'hover:shadow-4xl shadow-3xl'} transition-shadow duration-200 hover:-translate-y-1 transform`}
+      className={`${shadow && 'hover:shadow-2xl shadow-xl'} transition-shadow duration-200 hover:-translate-y-1 transform`}
       style={willRotate}
     />
   )

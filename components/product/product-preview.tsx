@@ -73,7 +73,7 @@ export default function ProductPreview({
   useEffect(() => {
     setTimeout(() => {
       setShowDragTooltip(false)
-    }, 10000);
+    }, 9000);
   }, [])
   const opacity = isDragging ? 0.4 : 1
   // const generatePreview = (type, item, style) => (
@@ -84,10 +84,10 @@ export default function ProductPreview({
     <>
       {/* <Preview generator={generatePreview} /> */}
       <div className="w-1/2 px-2 sm:w-1/3 lg:w-1/4 sm:px-4">
-        <div ref={drag} style={{ opacity }} className="cursor-move">
-          <div className={`mb-5 flex flex-col items-center ${animate && 'animate-smallbounce'}`}>
+        <div className="flex flex-col items-start mb-5">
+          <div ref={drag} style={{ opacity }} className={`${animate && 'animate-smallbounce'} self-center cursor-move`}>
             {animate && showDragTooltip && (
-              <div className="absolute flex items-center justify-around w-full px-1 py-px -mt-16 space-x-2 text-sm text-center bg-white border border-gray-300 rounded-lg shadow-md sm:-mt-8 sm:px-4">
+              <div className="absolute flex items-center justify-around w-auto px-1 py-px mx-auto -mt-16 space-x-2 text-xs text-center bg-white border border-gray-300 rounded-lg shadow-md sm:ml-1 sm:-mt-8 sm:px-4">
                 <span>
                   Try dragging me to the cart
                 </span>
@@ -102,7 +102,7 @@ export default function ProductPreview({
               />
               <button
                 type="button"
-                className="absolute px-2 py-1 ml-1 -mt-10 text-white transition-all duration-100 transform bg-gray-700 bg-opacity-75 rounded-md cursor-pointer focus:outline-none hover:-translate-y-1 hover:shadow-md"
+                className="absolute px-2 py-1 -mt-12 font-semibold transition-all duration-100 transform bg-white cursor-pointer bg-opacity-95 text-blueish-600 focus:outline-none hover:-translate-y-px hover:shadow-md"
                 onClick={handleAddToCart}
               >
                 Buy

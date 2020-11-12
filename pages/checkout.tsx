@@ -79,14 +79,14 @@ export default function Checkout() {
       <Layout showCartButton="false">
         <Container>
           <Header />
-          <div className="flex flex-col flex-wrap items-center w-full mb-20">
+          <div className="flex flex-col flex-wrap items-center w-full mb-20 text-blueish-800">
             <Link href="/">
-              <div className="flex self-start w-auto mb-4 text-left cursor-pointer ">
-                <Undo className="w-6 h-6" />
-                &nbsp;
-                <span className="border-b border-blue-700 border-opacity-0 border-dotted hover:border-opacity-100 ">
+              <div className="flex self-start w-auto pl-4 mb-4 text-left text-white cursor-pointer ">
+                <span className="border-b border-blue-200 border-opacity-0 border-dotted hover:border-opacity-100 ">
                   Continue shopping
                 </span>
+                &nbsp;
+                <Undo className="w-6 h-6" />
               </div>
             </Link>
             <div className="w-full py-8 bg-white rounded-md md:w-1/2">
