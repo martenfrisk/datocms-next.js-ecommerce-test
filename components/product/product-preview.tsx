@@ -3,9 +3,10 @@ import Link from 'next/link'
 import { useDispatchCart, useCart } from '@/cart/cart-context'
 import { ProductType, ItemTypes } from '@/lib/types'
 import CoverImage from '@/components/cover-image'
+import Touch1 from '@carbon/icons-react/lib/touch--1/16'
 // import { Preview } from 'react-dnd-multi-backend'
 import { useDrag } from 'react-dnd'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function ProductPreview({
   productName,
@@ -14,6 +15,7 @@ export default function ProductPreview({
   descriptionShort,
   retailPrice,
   cover,
+  animate,
 }: {
     productName: ProductType['productName'],
     slug: ProductType['slug'],
@@ -21,7 +23,9 @@ export default function ProductPreview({
     descriptionShort: ProductType['descriptionShort'],
     retailPrice: ProductType['retailPrice'],
     cover: ProductType['cover']
+    animate?: boolean
 }) {
+  const [showDragTooltip, setShowDragTooltip] = useState(true)
   const dispatch: any = useDispatchCart()
   const { state, showCart, dragging } = useCart()
   const [, setVisible] = showCart
@@ -64,6 +68,11 @@ export default function ProductPreview({
       setCurrentlyDragging(false)
     }
   }, [isDragging])
+  useEffect(() => {
+    setTimeout(() => {
+      setShowDragTooltip(false)
+    }, 10000);
+  }, [])
   const opacity = isDragging ? 0.4 : 1
   // const generatePreview = (type, item, style) => (
   //   <div style={style}><img src={cover.responsiveImage} alt="" /></div>
@@ -74,7 +83,15 @@ export default function ProductPreview({
       {/* <Preview generator={generatePreview} /> */}
       <div className="w-1/2 px-2 sm:w-1/3 lg:w-1/4 sm:px-4">
         <div ref={drag} style={{ opacity }} className="cursor-move">
-          <div className="mb-5">
+          <div className={`mb-5 ${animate && 'animate-smallbounce'}`}>
+            {animate && showDragTooltip && (
+              <div className="absolute flex items-center justify-around w-full px-1 py-px -mt-16 space-x-2 text-sm text-center bg-white border border-gray-300 rounded-lg shadow-md sm:-mt-10 sm:px-4">
+                <span>
+                  Try dragging me to the cart
+                </span>
+                <Touch1 />
+              </div>
+            )}
             <CoverImage
               slug={slug}
               productName={productName}
@@ -82,7 +99,7 @@ export default function ProductPreview({
             />
             <button
               type="button"
-              className="absolute px-2 py-1 ml-1 -mt-10 text-white bg-gray-700 cursor-pointer bg-opacity-75 rounded-md focus:outline-none transform hover:-translate-y-1 transition-all duration-100 hover:shadow-md"
+              className="absolute px-2 py-1 ml-1 -mt-10 text-white transition-all duration-100 transform bg-gray-700 bg-opacity-75 rounded-md cursor-pointer focus:outline-none hover:-translate-y-1 hover:shadow-md"
               onClick={handleAddToCart}
             >
               Buy
@@ -99,8 +116,25 @@ export default function ProductPreview({
             kr
           </div>
           <p className="hidden mb-8 text-sm font-light leading-snug md:block">{descriptionShort || description}</p>
+          {/* <style jsx>
+            {`
+              .speech::after {
+                content: '';
+                width: 2rem;
+                height: 1rem;
+                background: #000;
+                position: absolute;
+                bottom: 0;
+                clip-path: polygon(0 0, 100% 0, 50% 100%);
+              }
+            `}
+          </style> */}
         </div>
       </div>
     </>
   )
+}
+
+ProductPreview.defaultProps = {
+  animate: false,
 }

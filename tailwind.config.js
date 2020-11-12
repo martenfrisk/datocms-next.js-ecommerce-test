@@ -13,6 +13,28 @@ module.exports = {
   },
   theme: {
     extend: {
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '20%': { transform: 'rotate(-3deg)' },
+          '60%': { transform: 'rotate(3deg)' },
+          '90%': { transform: 'rotate(-1deg)' },
+        },
+        smallbounce: {
+          '0%, 100%': {
+            transform: 'translateY(-5%)',
+            animationTimingFunction: 'cubic-bezier(0.8,0,1,1)',
+          },
+          '50%': {
+            transform: 'none',
+            animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
+          },
+        },
+      },
+      animation: {
+        wiggle: 'wiggle 2s ease-in-out 1s 5',
+        smallbounce: 'smallbounce 1s ease-in-out 1s 10',
+      },
       opacity: {
         '80': '0.8',
         '90': '0.9',

@@ -1,7 +1,9 @@
-import Link from 'next/link';
-import CoverImage from '@/components/cover-image';
+import Link from 'next/link'
+import { useEffect } from 'react'
+import { useDrag } from 'react-dnd'
+import CoverImage from '@/components/cover-image'
 import { useCart, useDispatchCart } from '@/cart/cart-context'
-import { ProductType } from '@/lib/types'
+import { ProductType, ItemTypes } from '@/lib/types'
 
 export default function HeroProduct({
   productName,
@@ -12,8 +14,11 @@ export default function HeroProduct({
   cover,
 }: ProductType) {
   const dispatch: any = useDispatchCart()
-  const { showCart } = useCart()
+  const { showCart, dragging } = useCart()
   const [, setVisible] = showCart
+
+  const [, setCurrentlyDragging] = dragging
+
   const handleAddToCart = () => {
     dispatch({
       type: 'ADD_ITEM',
@@ -27,26 +32,53 @@ export default function HeroProduct({
     })
     setVisible(true)
   }
+
+  const [{ isDragging }, drag] = useDrag({
+    item: { cover: cover.responsiveImage, type: ItemTypes.PRODUCT },
+    options: { dropEffect: 'copy' },
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult()
+      if (item && dropResult) {
+        handleAddToCart()
+      }
+    },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  })
+  useEffect(() => {
+    if (isDragging) {
+      setVisible(true)
+      setCurrentlyDragging(true)
+    } else if (!isDragging) {
+      setCurrentlyDragging(false)
+    }
+  }, [isDragging])
+
+  const opacity = isDragging ? 0.4 : 1
+
   return (
     <section className="flex flex-wrap items-center mb-16">
       <div className="order-last w-full md:order-first md:w-1/3">
-        <div className="w-48 h-48 mx-auto mb-8">
-          <CoverImage
-            productName={productName}
-            responsiveImage={cover.responsiveImage}
-            slug={slug}
-            rotate
-          />
-          <button
-            type="button"
-            className="absolute px-2 py-1 ml-2 -mt-12 text-xl text-white bg-gray-700 cursor-pointer bg-opacity-75 rounded-md focus:outline-none transform hover:-translate-y-1 transition-all duration-100 hover:shadow-md"
-            onClick={handleAddToCart}
-            style={{
-              transform: 'rotateY(20deg) rotateX(10deg)',
-            }}
-          >
-            Buy
-          </button>
+        <div ref={drag} style={{ opacity }} className="cursor-move">
+          <div className="w-48 h-48 mx-auto mb-8">
+            <CoverImage
+              productName={productName}
+              responsiveImage={cover.responsiveImage}
+              slug={slug}
+              rotate
+            />
+            <button
+              type="button"
+              className="absolute px-2 py-1 ml-2 -mt-12 text-xl text-white transition-all duration-100 transform bg-gray-700 bg-opacity-75 rounded-md cursor-pointer focus:outline-none hover:-translate-y-1 hover:shadow-md"
+              onClick={handleAddToCart}
+              style={{
+                transform: 'rotateY(20deg) rotateX(10deg)',
+              }}
+            >
+              Buy
+            </button>
+          </div>
         </div>
       </div>
 
