@@ -11,7 +11,7 @@ export default function CoverImage({
   if (rotate) {
     willRotate = {
       transform: 'rotateY(20deg) rotateX(10deg)',
-      filter: 'drop-shadow(-15px 15px 0px rgb(0 112 243 / 50%))',
+      filter: 'drop-shadow(-10px 10px 2px rgb(215 234 255 / 30%))',
     }
   } else {
     willRotate = { transform: 'rotateY(0deg) rotateX(0deg)' };

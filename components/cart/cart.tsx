@@ -71,7 +71,7 @@ const Cart = () => {
   return (
     <>
       <div
-        className={`sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20  flex-col md:flex-row md:ml-10 transition-all duration-100 pointer-events-none right-0 max-h-screen transform ${isActive && 'scale-y-105'}`}
+        className={`sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 mb-20  flex-col md:flex-row md:ml-10 text-blueish-800 transition-all duration-100 pointer-events-none right-0 max-h-screen transform ${isActive && 'scale-y-105'}`}
         ref={drop}
       >
         {!visible && (
@@ -100,7 +100,7 @@ const Cart = () => {
           >
             {currentlyDragging && (
               <div
-                className="absolute top-0 z-30 flex flex-col items-center justify-start h-full pb-2 mb-20 space-y-2 text-xl bg-opacity-50 rounded-md to-transparent from-blue-200 bg-gradient-to-b w-84 md:pb-6"
+                className="absolute top-0 z-30 flex flex-col items-center justify-start h-full pb-2 mb-20 space-y-2 text-xl bg-opacity-50 rounded-md to-transparent from-blue-200 bg-gradient-to-b w-72 md:pb-6"
                 style={{ maxHeight: 'inherit' }}
               >
                 <p className="w-full mt-2 bg-white shadow-inner">
@@ -117,12 +117,12 @@ const Cart = () => {
             </div>
             <div className="max-h-screen overflow-y-scroll">
               {state && state.length === 0 ? (
-                <div className="px-4 py-4 text-sm select-none w-84">
+                <div className="px-4 py-4 text-sm select-none w-72">
                   Your cart is empty. Add an item and check back here later.
                 </div>
               ) : (
                 state && (
-                <div className="flex flex-wrap justify-end max-w-screen-sm w-84">
+                <div className="flex flex-wrap justify-end max-w-screen-sm w-72">
                   <div className="w-full h-1/2">
                     {state.map((myCartItem: ActionType['payload']) => (
                       <div

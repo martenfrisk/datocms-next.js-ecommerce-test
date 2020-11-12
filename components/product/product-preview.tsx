@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 
 export default function ProductPreview({
   productName,
+  subname,
   slug,
   description,
   descriptionShort,
@@ -18,6 +19,7 @@ export default function ProductPreview({
   animate,
 }: {
     productName: ProductType['productName'],
+    subname: ProductType['subname'],
     slug: ProductType['slug'],
     description: ProductType['description'],
     descriptionShort: ProductType['descriptionShort'],
@@ -109,7 +111,20 @@ export default function ProductPreview({
           </div>
           <h3 className="mb-1 text-xl leading-snug tracking-tight">
             <Link as={`/products/${slug}`} href="/products/[slug]">
-              <a className="hover:underline">{productName}</a>
+              <a className="flex flex-col hover:underline">
+                {subname ? (
+                  <>
+                    <span className="text-sm">
+                      {productName}
+                    </span>
+                    <span>
+                      {subname}
+                    </span>
+                  </>
+                ) : (
+                  <span>{productName}</span>
+                )}
+              </a>
             </Link>
           </h3>
           <div className="mb-4 text-sm">

@@ -4,10 +4,10 @@ import Link from 'next/link';
 export default function Nav() {
 //   const [burgerVisible, setBurgerVisible] = useState(false);
   return (
-    <ul className="flex justify-center w-full md:w-auto space-x-10 md:mr-4">
+    <ul className="flex justify-center w-full space-x-10 md:w-auto md:mr-4">
       <li>
         <Link href="/all-games">
-          <a className="hover:underline">All&nbsp;games</a>
+          <a className="hover:underline">Browse</a>
         </Link>
       </li>
       {/* <li>

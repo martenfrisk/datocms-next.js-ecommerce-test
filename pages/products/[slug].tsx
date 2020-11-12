@@ -5,7 +5,6 @@ import Container from '@/components/container';
 import ProductBody from '@/product/product-body';
 import MoreProducts from '@/product/more-products';
 import Header from '@/components/header';
-import SectionSeparator from '@/components/section-separator';
 import Layout from '@/components/layout';
 import CoverImage from '@/components/cover-image';
 import Rating from '@/components/rating'
@@ -55,7 +54,7 @@ export default function Product({
           <ProductTitle>Loading…</ProductTitle>
         ) : (
           <>
-            <article>
+            <article className="px-4 mb-6">
               <Head>
                 <title>
                   {product.productName}
@@ -65,7 +64,20 @@ export default function Product({
                   {CMS_NAME}
                 </title>
               </Head>
-              <ProductTitle>{product.productName}</ProductTitle>
+              <ProductTitle>
+                {product.subname ? (
+                  <>
+                    {product.productName}
+                    <span className="text-3xl tracking-tight md:text-5xl lg:text-6xl">
+                      :
+                      {' '}
+                      {product.subname}
+                    </span>
+                  </>
+                ) : (
+                  product.productName
+                )}
+              </ProductTitle>
               <div className="flex flex-col items-center md:flex-row md:items-start">
                 <div className="w-2/3 h-auto md:w-1/3">
                   <CoverImage
@@ -82,7 +94,7 @@ export default function Product({
                     <OutsideCloseCart>
                       <button
                         type="button"
-                        className="px-6 py-1 text-lg text-white bg-black border-2 border-black cursor-pointer rounded-md hover:bg-white hover:text-black transition-200"
+                        className="px-6 py-1 text-lg text-white bg-black border-2 border-black rounded-md cursor-pointer hover:bg-white hover:text-black transition-200"
                         onClick={handleAddToCart}
                         // ref={ref}
                       >
@@ -100,7 +112,6 @@ export default function Product({
                 </div>
               </div>
             </article>
-            <SectionSeparator />
             {moreProducts.length > 0 && (
               <MoreProducts products={moreProducts} />
             )}

@@ -123,6 +123,7 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                     <ProductPreview
                       key={product.slug}
                       productName={product.productName}
+                      subname={product.subname}
                       slug={product.slug}
                       description={product.description}
                       descriptionShort={product.descriptionShort}
@@ -150,6 +151,7 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                         <div className="flex flex-wrap justify-between w-full px-4">
                           <p className="w-full sm:w-auto">
                             {product.productName}
+                            {product.subname && `: ${product.subname}`}
                           </p>
                           <p className="w-full sm:w-auto">
                             <span className="mr-2 text-sm">

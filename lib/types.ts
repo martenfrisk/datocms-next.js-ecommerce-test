@@ -1,6 +1,7 @@
 export type ProductType = {
     productName: string,
     slug: string,
+    subname?: string,
     rating?: number,
     description: string,
     descriptionShort: string,
