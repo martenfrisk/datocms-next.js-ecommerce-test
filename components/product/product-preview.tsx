@@ -83,27 +83,29 @@ export default function ProductPreview({
       {/* <Preview generator={generatePreview} /> */}
       <div className="w-1/2 px-2 sm:w-1/3 lg:w-1/4 sm:px-4">
         <div ref={drag} style={{ opacity }} className="cursor-move">
-          <div className={`mb-5 ${animate && 'animate-smallbounce'}`}>
+          <div className={`mb-5 flex flex-col items-center ${animate && 'animate-smallbounce'}`}>
             {animate && showDragTooltip && (
-              <div className="absolute flex items-center justify-around w-full px-1 py-px -mt-16 space-x-2 text-sm text-center bg-white border border-gray-300 rounded-lg shadow-md sm:-mt-10 sm:px-4">
+              <div className="absolute flex items-center justify-around w-full px-1 py-px -mt-16 space-x-2 text-sm text-center bg-white border border-gray-300 rounded-lg shadow-md sm:-mt-8 sm:px-4">
                 <span>
                   Try dragging me to the cart
                 </span>
-                <Touch1 />
+                <Touch1 className="hidden sm:inline-block" />
               </div>
             )}
-            <CoverImage
-              slug={slug}
-              productName={productName}
-              responsiveImage={cover.responsiveImage}
-            />
-            <button
-              type="button"
-              className="absolute px-2 py-1 ml-1 -mt-10 text-white transition-all duration-100 transform bg-gray-700 bg-opacity-75 rounded-md cursor-pointer focus:outline-none hover:-translate-y-1 hover:shadow-md"
-              onClick={handleAddToCart}
-            >
-              Buy
-            </button>
+            <div>
+              <CoverImage
+                slug={slug}
+                productName={productName}
+                responsiveImage={cover.responsiveImage}
+              />
+              <button
+                type="button"
+                className="absolute px-2 py-1 ml-1 -mt-10 text-white transition-all duration-100 transform bg-gray-700 bg-opacity-75 rounded-md cursor-pointer focus:outline-none hover:-translate-y-1 hover:shadow-md"
+                onClick={handleAddToCart}
+              >
+                Buy
+              </button>
+            </div>
           </div>
           <h3 className="mb-1 text-xl leading-snug tracking-tight">
             <Link as={`/products/${slug}`} href="/products/[slug]">

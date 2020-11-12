@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/media-has-caption */
 import { useState, useEffect } from 'react'
 import Link from 'next/link';
 import Container from '@/components/container';
@@ -28,10 +29,6 @@ export default function Thanks() {
                 . A list of your items has been sent to Santa Claus and your items will
                 arrive in late December*.
               </p>
-              <div className="justify-center w-full my-6 text-center">
-
-                <img src="/images/santa.gif" className="mx-auto" alt="" />
-              </div>
               <p>
                 Return to the
                 {' '}

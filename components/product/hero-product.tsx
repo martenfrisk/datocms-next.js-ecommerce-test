@@ -61,7 +61,7 @@ export default function HeroProduct({
     <section className="flex flex-wrap items-center mb-16">
       <div className="order-last w-full md:order-first md:w-1/3">
         <div ref={drag} style={{ opacity }} className="cursor-move">
-          <div className="w-48 h-48 mx-auto mb-8">
+          <div className="w-48 h-48 mx-auto mb-8 animate-float">
             <CoverImage
               productName={productName}
               responsiveImage={cover.responsiveImage}

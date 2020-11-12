@@ -30,10 +30,19 @@ module.exports = {
             animationTimingFunction: 'cubic-bezier(0,0,0.2,1)',
           },
         },
+        float: {
+          '0%, 100%': {
+            transform: 'none',
+          },
+          '50%': {
+            transform: 'translateY(-5%)',
+          },
+        },
       },
       animation: {
         wiggle: 'wiggle 2s ease-in-out 1s 5',
         smallbounce: 'smallbounce 1s ease-in-out 1s 10',
+        float: 'float 10s ease 0s infinite',
       },
       opacity: {
         '80': '0.8',
