@@ -93,20 +93,20 @@ const Cart = () => {
 
         <OutsideCloseCart>
           <div
-            className={`text-center bg-white rounded-lg pt-8 flex flex-col items-center justify-start w-auto shadow-lg mx-1 pointer-events-auto mb-2 overflow-y-scroll  md:mb-6 bg-opacity-95 border border-blue-400  ${
+            className={`text-center bg-white rounded-lg pt-8 flex flex-col items-center justify-start w-auto shadow-lg pointer-events-auto mb-2 overflow-y-scroll  md:mb-6 bg-opacity-95 border border-blue-400  ${
               visible ? 'visible' : 'invisible'
             }`}
             style={{ maxHeight: '50vh' }}
           >
             {currentlyDragging && (
               <div
-                className="absolute top-0 z-30 flex flex-col items-center justify-center h-full pb-2 mb-20 space-y-2 text-xl bg-opacity-50 rounded-md to-transparent from-blue-200 bg-gradient-to-b w-84 md:pb-6"
+                className="absolute top-0 z-30 flex flex-col items-center justify-start h-full pb-2 mb-20 space-y-2 text-xl bg-opacity-50 rounded-md to-transparent from-blue-200 bg-gradient-to-b w-84 md:pb-6"
                 style={{ maxHeight: 'inherit' }}
               >
-                <Package className="w-16 h-16 text-white" style={{ filter: 'drop-shadow(-2px 2px 3px rgb(0 0 0 / 30%))' }} />
-                <p className="w-full bg-white" style={{ filter: 'drop-shadow(-2px 2px 3px rgb(0 0 0 / 30%))' }}>
+                <p className="w-full mt-2 bg-white shadow-inner">
                   Drop item here to add to cart.
                 </p>
+                <Package className="w-16 h-16 text-white" style={{ filter: 'drop-shadow(-2px 2px 3px rgb(0 0 0 / 30%))' }} />
               </div>
             )}
             <div
@@ -115,7 +115,7 @@ const Cart = () => {
             >
               Your Shopping Cart
             </div>
-            <div className="max-h-screen mx-1 overflow-y-scroll">
+            <div className="max-h-screen overflow-y-scroll">
               {state && state.length === 0 ? (
                 <div className="px-4 py-4 text-sm select-none w-84">
                   Your cart is empty. Add an item and check back here later.
