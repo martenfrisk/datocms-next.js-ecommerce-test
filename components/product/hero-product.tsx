@@ -97,22 +97,18 @@ export default function HeroProduct({
 
         <div className="z-10 flex flex-col flex-wrap justify-start w-full px-2 mt-4 mb-4 md:w-1/2 md:mb-20 md:flex-row">
           <div className="flex flex-col items-center w-full md:items-start">
-            <h3 className="text-3xl font-thin tracking-wide md:text-4xl">
+            <h3 className="text-3xl font-thin tracking-wide sm:text-5xl">
               <Link as={`/products/${slug}`} href="/products/[slug]">
-                <a className="hover:underline">
+                <a className=" hover:underline">
                   {subname ? (
-                    <>
-                      <span>
-                        {productName}
-                        :
-                        {' '}
-                      </span>
-                      <span>
-                        {subname}
-                      </span>
-                    </>
+                    <span className="text-5xl">
+                      {productName}
+                      :
+                      {' '}
+                      {subname}
+                    </span>
                   ) : (
-                    <span>{productName}</span>
+                    <span className="text-5xl">{productName}</span>
                   )}
                 </a>
               </Link>

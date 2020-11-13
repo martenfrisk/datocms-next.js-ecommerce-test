@@ -87,7 +87,7 @@ export default function ProductPreview({
       {/* <Preview generator={generatePreview} /> */}
       <div className="w-full my-2 rounded-lg sm:my-12 sm:mx-4 shadow-3xl bg-navy-400 sm:w-1/3 lg:w-1/4 ">
         <div className="flex flex-row flex-wrap items-start sm:mb-5 sm:flex-col">
-          <div ref={drag} style={{ opacity }} className={`${animate && 'animate-smallbounce'} self-center cursor-move w-1/3 mt-1 sm:w-full sm:-mt-12 sm:mb-2 sm:mx-5`}>
+          <div ref={drag} style={{ opacity }} className={`${animate && 'animate-smallbounce'} self-center flex justify-center cursor-move w-1/3 mt-1 sm:w-full sm:-mt-12 sm:mb-2`}>
             {animate && showDragTooltip && (
               <div className="absolute flex items-center justify-around w-auto px-1 py-px mx-auto -mt-6 space-x-2 text-xs text-center bg-white border border-gray-300 rounded-lg shadow-md sm:ml-2 sm:-mt-8 sm:px-4">
                 <span>
