@@ -16,7 +16,7 @@ export default function Layout({ children, showCartButton = 'true' }: { children
   return (
     <>
       <Meta />
-      <div className="min-h-screen text-white bg-navy-600">
+      <div className="min-h-screen text-white bg-gray-100">
         <main>{children}</main>
         {showCartButton === 'true' && <Cart />}
       </div>

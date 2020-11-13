@@ -80,6 +80,8 @@ module.exports = {
       },
       spacing: {
         28: '7rem',
+        60: '15rem',
+        68: '17rem',
         72: '18rem',
         84: '21rem',
         96: '24rem',

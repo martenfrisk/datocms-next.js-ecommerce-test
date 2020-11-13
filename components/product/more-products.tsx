@@ -9,7 +9,7 @@ export default function MoreProducts(
   { products, header = '' }: { products: MoreProductsProps['products'], header?: string},
 ): React.ReactElement<MoreProductsProps> {
   return (
-    <section className="px-4 py-4 bg-gray-100 text-blueish-800">
+    <section className="z-10 px-4 bg-gray-100 pt-28 sm:pt-12 mt-84 text-blueish-800">
       {header !== '' && (
         <h2 className="my-8 text-4xl font-bold leading-tight tracking-tighter md:text-5xl">
           {header}

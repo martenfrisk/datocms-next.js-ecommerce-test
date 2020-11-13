@@ -32,6 +32,7 @@ export default function Index({ allProducts }: { allProducts: ProductType[]}) {
               retailPrice={heroProduct.retailPrice}
               cover={heroProduct.cover}
               platform={heroProduct.platform}
+              heroimg={heroProduct.heroimg}
             />
           )}
           {moreProducts.length > 0 && <MoreProducts products={moreProducts} />}

@@ -5,5 +5,5 @@
 @tailwind utilities;
 
 body {
-  @apply bg-navy-600;
+  @apply bg-white;
 }

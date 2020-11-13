@@ -7,7 +7,8 @@ export type ProductType = {
     descriptionShort: string,
     retailPrice: string,
     platform: string,
-    cover: { responsiveImage: any }
+    cover: { responsiveImage: any },
+    heroimg?: { responsiveImage: any }
   }
 
 export const ItemTypes = {
