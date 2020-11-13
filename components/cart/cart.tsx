@@ -100,10 +100,10 @@ const Cart = () => {
           >
             {currentlyDragging && (
               <div
-                className="absolute top-0 z-30 flex flex-col items-center justify-start h-full pb-2 mb-20 space-y-2 text-xl bg-opacity-50 rounded-md to-transparent from-blue-200 bg-gradient-to-b w-72 md:pb-6"
+                className="absolute top-0 z-30 flex flex-col items-center justify-start h-full pb-2 mb-20 space-y-2 text-lg bg-opacity-50 rounded-md to-transparent from-blue-200 bg-gradient-to-b w-72 md:pb-6"
                 style={{ maxHeight: 'inherit' }}
               >
-                <p className="w-full mt-2 bg-white shadow-inner">
+                <p className="w-full mt-2 font-thin bg-white shadow-inner">
                   Drop item here to add to cart.
                 </p>
                 <Package className="w-16 h-16 text-white" style={{ filter: 'drop-shadow(-2px 2px 3px rgb(0 0 0 / 30%))' }} />
