@@ -70,7 +70,7 @@ export default function HeroProduct({
     <>
       <section
         style={withHeroImg}
-        className="absolute top-0 flex flex-wrap items-center w-screen pt-48 mt-0 overflow-hidden"
+        className="absolute top-0 flex flex-wrap items-center w-screen pt-48 mt-0 overflow-hidden text-white"
       >
         <div className="z-10 order-last w-full md:order-first md:w-1/3">
           <div ref={drag} style={{ opacity }} className="cursor-move">
@@ -120,7 +120,7 @@ export default function HeroProduct({
             </div>
           </div>
           <div className="hidden w-full md:w-2/3 md:block">
-            <p className="px-6 py-4 text-sm font-thin leading-relaxed bg-opacity-75 rounded-xl bg-navy-500">
+            <p className="px-6 py-4 text-base font-thin leading-relaxed bg-opacity-75 rounded-xl bg-navy-500">
               {descriptionShort || description}
             </p>
           </div>

@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import Link from 'next/link'
+import { Image } from 'react-datocms'
 import { useDispatchCart, useCart } from '@/cart/cart-context'
 import { ProductType, ItemTypes } from '@/lib/types'
-import CoverImage from '@/components/cover-image'
 import Touch1 from '@carbon/icons-react/lib/touch--1/16'
 // import { Preview } from 'react-dnd-multi-backend'
 import { useDrag } from 'react-dnd'
@@ -16,6 +16,7 @@ export default function ProductPreview({
   descriptionShort,
   retailPrice,
   cover,
+  // eslint-disable-next-line no-unused-vars
   platform,
   animate,
 }: {
@@ -25,7 +26,7 @@ export default function ProductPreview({
     description: ProductType['description'],
     descriptionShort: ProductType['descriptionShort'],
     retailPrice: ProductType['retailPrice'],
-    platform: ProductType['platform'],
+    platform?: ProductType['platform'],
     cover: ProductType['cover']
     animate?: boolean
 }) {
@@ -78,6 +79,10 @@ export default function ProductPreview({
     }, 9000);
   }, [])
   const opacity = isDragging ? 0.4 : 1
+  function shorten(str: string) {
+    if (str.length <= 80) return str;
+    return str.substr(0, str.lastIndexOf(' ', 80));
+  }
   // const generatePreview = (type, item, style) => (
   //   <div style={style}><img src={cover.responsiveImage} alt="" /></div>
   // )
@@ -85,58 +90,65 @@ export default function ProductPreview({
   return (
     <>
       {/* <Preview generator={generatePreview} /> */}
-      <div className="w-full my-2 rounded-lg sm:my-12 sm:mx-4 shadow-3xl bg-navy-400 sm:w-1/3 lg:w-1/4 ">
-        <div className="flex flex-row flex-wrap items-start sm:mb-5 sm:flex-col">
-          <div ref={drag} style={{ opacity }} className={`${animate && 'animate-smallbounce'} self-center flex justify-center cursor-move w-1/3 mt-1 sm:w-full sm:-mt-12 sm:mb-2`}>
-            {animate && showDragTooltip && (
-              <div className="absolute flex items-center justify-around w-auto px-1 py-px mx-auto -mt-6 space-x-2 text-xs text-center bg-white border border-gray-300 rounded-lg shadow-md sm:ml-2 sm:-mt-8 sm:px-4">
-                <span>
-                  Try dragging me
-                </span>
-                <Touch1 className="hidden sm:inline-block" />
-              </div>
-            )}
-            <div>
-              <CoverImage
-                slug={slug}
-                productName={productName}
-                responsiveImage={cover.responsiveImage}
+      <div className="w-1/2 px-2 my-2 sm:my-12 md:w-1/3 lg:w-1/4 ">
+        <div className="pb-2 bg-white shadow-2xl rounded-xl">
+          <div className="flex flex-col flex-wrap items-end justify-end mb-2">
+
+            <div ref={drag} style={{ opacity }} className={`${animate && 'animate-smallbounce'} self-center flex justify-center cursor-move w-full sm:-mt-12 sm:mb-2`}>
+              {animate && showDragTooltip && (
+                <div className="absolute flex items-center justify-around w-auto px-1 py-px mx-auto -mt-6 space-x-2 text-xs text-center bg-white border border-gray-300 rounded-lg shadow-md sm:ml-2 sm:-mt-8 sm:px-4">
+                  <span>
+                    Try dragging me
+                  </span>
+                  <Touch1 className="hidden sm:inline-block" />
+                </div>
+              )}
+
+              <Image
+                data={{
+                  ...cover.responsiveImage,
+                  alt: `Cover Image for ${productName}`,
+                }}
+                className="w-full rounded-t-xl"
               />
-              <button
-                type="button"
-                className="absolute px-2 py-1 -mt-12 font-normal tracking-wide transition-all duration-100 transform bg-white cursor-pointer bg-opacity-95 text-blueish-600 focus:outline-none hover:-translate-y-px hover:shadow-md"
-                onClick={handleAddToCart}
-              >
-                Buy
-              </button>
+
             </div>
-          </div>
-          <div className="flex flex-wrap justify-end w-2/3 sm:w-full">
-            <h3 className="w-full px-4 py-2 text-xl leading-snug tracking-tight from-gray-100 to-gray-200 bg-gradient-to-b">
+            <div className="z-10 px-2 py-1 mr-2 -mt-5 text-sm text-white rounded-lg shadow-lg md:text-base justify-self-start from-blue-600 to-blue-800 bg-gradient-to-br bg-opacity-95">
+              {retailPrice}
+              :-
+            </div>
+            <h3 className="w-full px-3 py-2 -mt-4 text-xl leading-snug tracking-tight">
               <Link as={`/products/${slug}`} href="/products/[slug]">
                 <a className="flex flex-col hover:underline">
                   {subname ? (
                     <>
-                      <span className="text-sm">
+                      <span className="text-sm font-bold uppercase">
                         {productName}
                       </span>
-                      <span className="text-base">
+                      <span className="text-lg font-light md:text-2xl">
                         {subname}
                       </span>
                     </>
                   ) : (
-                    <span>{productName}</span>
+                    <span className="md:text-2xl">{productName}</span>
                   )}
                 </a>
               </Link>
             </h3>
-            <div className="px-1 -mt-2 text-xs bg-white border border-opacity-75 rounded-lg border-navy-500 sm:-mt-3 sm:px-2 sm:text-sm sm:mr-2 bg-opacity-95 text-navy-500">
-              {retailPrice}
-              {' '}
-              kr
-            </div>
-            <p className="hidden px-4 my-0 text-sm font-thin leading-4 text-white sm:block">{descriptionShort || description}</p>
-            <p className="block w-full px-4 text-sm font-light leading-snug text-white sm:hidden">{platform}</p>
+            <p className="block w-full px-3 my-0 text-xs font-light leading-5 tracking-normal lg:hidden ">
+              {shorten(descriptionShort) || shorten(description)}
+              ...
+            </p>
+            <p className="hidden w-full px-3 my-0 text-base font-light leading-6 tracking-normal text-justify lg:block ">
+              {descriptionShort || description}
+            </p>
+            <button
+              type="button"
+              className="pt-2 pr-4 text-xs font-light tracking-wide lowercase transition-all duration-100 transform cursor-pointer justify-self-end text-blueish-600 focus:outline-none hover:-translate-y-px"
+              onClick={handleAddToCart}
+            >
+              Add to cart
+            </button>
           </div>
         </div>
       </div>
@@ -146,4 +158,5 @@ export default function ProductPreview({
 
 ProductPreview.defaultProps = {
   animate: false,
+  platform: '',
 }

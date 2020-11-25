@@ -26,6 +26,8 @@ export default function Product({
   const dispatch: any = useDispatchCart()
   const { state, showCart } = useCart()
   const [, setVisible] = showCart
+  const samePlatform = moreProducts.filter((item) => item.platform === product.platform)
+  const otherPlatforms = moreProducts.filter((item) => item.platform !== product.platform)
   // const ref = useRef(null)
   // useOutsideClick(ref)
   const handleAddToCart = () => {
@@ -54,7 +56,7 @@ export default function Product({
           <ProductTitle>Loading…</ProductTitle>
         ) : (
           <>
-            <article className="px-8 py-4 mb-6 bg-navy-600">
+            <article className="px-8 py-4 mb-6 text-white bg-navy-600">
               <Head>
                 <title>
                   {product.productName}
@@ -113,8 +115,13 @@ export default function Product({
               </div>
             </article>
             {moreProducts.length > 0 && (
-              <div className="-mt-72">
-                <MoreProducts products={moreProducts} />
+              <div>
+                <div className="-mt-72">
+                  <MoreProducts products={samePlatform} platform={product.platform} />
+                </div>
+                <div className="-mt-72">
+                  <MoreProducts products={otherPlatforms} />
+                </div>
               </div>
             )}
           </>

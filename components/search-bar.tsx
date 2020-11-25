@@ -15,7 +15,7 @@ export default function SearchBar() {
         && (
         <div className="flex flex-col">
           <input
-            className="w-full px-2 mb-2 text-blue-700 border-b border-blue-600 sm:mb-0 sm:w-auto sm:ml-2 sm:mr-3 focus:outline-none"
+            className="w-full px-2 mb-2 text-blue-700 bg-transparent border-b border-blue-600 sm:mb-0 sm:w-auto sm:ml-2 sm:mr-3 focus:outline-none"
             type="text"
             value={searchTerm}
             onChange={async (e) => {
@@ -41,7 +41,10 @@ export default function SearchBar() {
               {searchResults !== [] && searchResults.slice(0, 5).map((hit) => (
                 <div className="underline" key={hit.slug}>
                   <Link href={`/products/${hit.slug}`}>
-                    {hit.productName}
+                    <>
+                      {hit.productName}
+                      {hit.subname && `: ${hit.subname}`}
+                    </>
                   </Link>
                 </div>
               ))}
