@@ -61,20 +61,25 @@ export default function HeroProduct({
 
   const withHeroImg = {
     backgroundImage:
-      `linear-gradient(to right, rgba(29, 57, 92, 0.95), rgba(29, 57, 92, 0.8) 35%, transparent), url(${heroimg.responsiveImage.src})`,
+      `linear-gradient(to right, rgba(29, 57, 92, 0.95), rgba(29, 57, 92, 0.8) 35%, transparent), url(${heroimg && heroimg.responsiveImage.src})`,
     backgroundSize: 'cover',
     backgroundPosition: '70% 10%',
+    height: '70%',
+    maxHeight: '500px',
   }
 
   return (
     <>
       <section
-        style={withHeroImg}
-        className="absolute top-0 flex flex-wrap items-center w-screen pt-48 mt-0 overflow-hidden text-white"
+        className={`flex flex-wrap items-center w-screen pt-10 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}
       >
-        <div className="z-10 order-last w-full md:order-first md:w-1/3">
+        <div
+          style={heroimg && withHeroImg}
+          className="absolute top-0 w-screen pointer-events-none"
+        />
+        <div className="z-10 order-last w-full -mt-16 sm:mt-0 sm:order-first sm:w-1/3">
           <div ref={drag} style={{ opacity }} className="cursor-move">
-            <div className="w-48 h-48 mx-auto mb-8 animate-float">
+            <div className="w-48 h-auto mx-auto animate-float">
               <CoverImage
                 productName={productName}
                 responsiveImage={cover.responsiveImage}
@@ -95,44 +100,35 @@ export default function HeroProduct({
           </div>
         </div>
 
-        <div className="z-10 flex flex-col flex-wrap justify-start w-full px-2 mt-4 mb-4 md:w-1/2 md:mb-20 md:flex-row">
-          <div className="flex flex-col items-center w-full md:items-start">
-            <h3 className="text-3xl font-thin tracking-wide sm:text-5xl">
-              <Link as={`/products/${slug}`} href="/products/[slug]">
-                <a className=" hover:underline">
-                  {subname ? (
-                    <span className="text-5xl">
-                      {productName}
-                      :
-                      {' '}
-                      {subname}
-                    </span>
-                  ) : (
-                    <span className="text-5xl">{productName}</span>
-                  )}
-                </a>
-              </Link>
-            </h3>
+        <div className="z-10 flex flex-col flex-wrap justify-start w-full px-2 mt-4 mb-16 sm:w-1/2 sm:flex-row">
+          <div className="flex flex-col items-center w-full sm:items-start">
+            <Link as={`/products/${slug}`} href="/products/[slug]">
+              <a className="text-6xl font-normal hover:underline">
+                {subname ? (
+                  <span>
+                    {productName}
+                    :
+                    {' '}
+                    {subname}
+                  </span>
+                ) : (
+                  <span>{productName}</span>
+                )}
+              </a>
+            </Link>
             <div className="mb-4 text-lg font-light ">
               {retailPrice}
               {' '}
               kr
             </div>
           </div>
-          <div className="hidden w-full md:w-2/3 md:block">
-            <p className="px-6 py-4 text-base font-thin leading-relaxed bg-opacity-75 rounded-xl bg-navy-500">
+          <div className="flex justify-center w-full sm:w-2/3">
+            <p className="px-6 py-4 text-base font-thin leading-relaxed text-center bg-opacity-75 sm:text-left rounded-xl bg-navy-500" style={{ width: 'fit-content' }}>
               {descriptionShort || description}
             </p>
           </div>
         </div>
       </section>
-      <style jsx>
-        {`
-            .heroimage {
-              height: 30.4rem;
-        }
-      `}
-      </style>
     </>
   );
 }

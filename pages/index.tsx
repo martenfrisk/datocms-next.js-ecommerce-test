@@ -9,8 +9,8 @@ import { getAllProductsForHome } from '@/lib/api'
 import { CMS_NAME } from '@/lib/constants'
 
 export default function Index({ allProducts }: { allProducts: ProductType[]}) {
-  const heroProduct = allProducts[0]
-  const moreProducts = allProducts.slice(1)
+  const heroProduct = allProducts.find((element) => element.heroimg)
+  const moreProducts = allProducts.filter((element) => element.slug !== heroProduct.slug)
   return (
     <>
       <Layout showCartButton="true">
@@ -36,14 +36,10 @@ export default function Index({ allProducts }: { allProducts: ProductType[]}) {
             />
           )}
           {moreProducts.length > 0 && (
-            <div>
-              <MoreProducts products={moreProducts} platform="Playstation" />
-              <div className="-mt-84">
-                <MoreProducts products={moreProducts} platform="Nintendo 64" />
-              </div>
-              <div className="-mt-84">
-                <MoreProducts products={moreProducts} platform="Game Boy" />
-              </div>
+            <div className="mt-16 sm:mt-20">
+              <MoreProducts products={moreProducts} platform="Nintendo 64" header="N64" />
+              <MoreProducts products={moreProducts} platform="Game Boy" header="Game Boy" />
+              <MoreProducts products={moreProducts} platform="Playstation" header="PlayStation" />
             </div>
           )}
         </Container>

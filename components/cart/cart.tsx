@@ -71,7 +71,7 @@ const Cart = () => {
   return (
     <>
       <div
-        className={`sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0   flex-col md:flex-row md:ml-10 text-blueish-800 transition-all duration-100 pointer-events-none right-0 max-h-screen transform ${isActive && 'scale-y-105'}`}
+        className={`sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0   flex-col md:flex-row md:ml-10 text-blueish-800 transition-all duration-100 pointer-events-none z-20 right-0 max-h-screen transform ${isActive && 'scale-y-105'}`}
         ref={drop}
       >
         {!visible && (
@@ -93,20 +93,20 @@ const Cart = () => {
 
         <OutsideCloseCart>
           <div
-            className={`text-center bg-white rounded-lg pt-8 flex flex-col items-center justify-start w-auto shadow-lg pointer-events-auto mb-2 overflow-y-scroll  md:mb-6 bg-opacity-95 border border-blue-400  ${
+            className={`text-center bg-white rounded-lg pt-8 flex flex-col items-center justify-start w-auto shadow-lg pointer-events-auto mb-2 overflow-y-scroll  md:mb-6 border border-blue-400  ${
               visible ? 'visible' : 'invisible'
             }`}
             style={{ maxHeight: '50vh' }}
           >
             {currentlyDragging && (
               <div
-                className="absolute top-0 z-30 flex flex-col items-center justify-start h-full pb-2 mb-20 space-y-2 text-lg bg-opacity-50 rounded-md to-transparent from-blue-200 bg-gradient-to-b w-72 md:pb-6"
+                className="absolute top-0 z-30 flex flex-col items-center justify-start h-full pb-2 mt-px mb-20 space-y-2 text-lg rounded-lg bg-gradient-to-b from-white to-transparent w-72 md:pb-6"
                 style={{ maxHeight: 'inherit' }}
               >
-                <p className="w-full mt-2 font-thin bg-white shadow-inner">
+                <p className="w-full pt-4 text-gray-800 bg-white rounded-lg ">
                   Drop item here to add to cart.
                 </p>
-                <Package className="w-16 h-16 text-white" style={{ filter: 'drop-shadow(-2px 2px 3px rgb(0 0 0 / 30%))' }} />
+                <Package className="w-16 h-16 text-gray-800" style={{ filter: 'drop-shadow(-2px 2px 3px rgb(0 0 0 / 30%))' }} />
               </div>
             )}
             <div
@@ -127,7 +127,7 @@ const Cart = () => {
                     {state.map((myCartItem: ActionType['payload']) => (
                       <div
                         key={myCartItem.id}
-                        className="flex flex-wrap items-center justify-between w-full px-4 py-1 pb-2 bg-white bg-opacity-100 border-b border-blue-400 border-opacity-50 md:p-2"
+                        className="flex flex-wrap items-center justify-between w-full px-4 py-1 pb-2 bg-white border-b border-blue-400 border-opacity-50 md:p-2"
                       >
                         <div
                           className="flex items-start justify-between w-full"

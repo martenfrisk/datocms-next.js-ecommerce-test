@@ -6,12 +6,12 @@ export default function UserButtons() {
   return (
     <section className="flex items-center justify-between space-x-4">
       <Link href="/user/profile">
-        <a>
+        <a aria-label="Link to user profile">
           <User className="transition-colors duration-200 cursor-pointer hover:text-blue-700" />
         </a>
       </Link>
       <Link href="/user/profile">
-        <a>
+        <a aria-label="Link to user favorites">
           <Favorite className="transition-colors duration-200 cursor-pointer hover:text-blue-700" />
         </a>
       </Link>

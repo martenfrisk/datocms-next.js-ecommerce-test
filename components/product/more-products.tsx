@@ -9,13 +9,13 @@ export default function MoreProducts(
   { products, header = '', platform = '' }: { products: MoreProductsProps['products'], header?: string, platform?: string},
 ): React.ReactElement<MoreProductsProps> {
   return (
-    <section className="z-10 px-1 bg-white pt-28 sm:pt-12 mt-84 text-blueish-800">
+    <section className="z-10 px-1 bg-white text-blueish-800">
       {header !== '' && (
-        <h2 className="my-8 text-4xl font-bold leading-tight tracking-tighter md:text-5xl">
+        <h2 className="my-4 text-4xl font-bold leading-tight tracking-tighter md:text-5xl">
           {header}
         </h2>
       )}
-      <div className="flex flex-wrap justify-start mb-0 md:mx-20 sm:mb-20">
+      <div className="flex flex-wrap justify-start mb-0 md:mx-20">
         {platform === '' && (
           products.map((product, index) => (
             <ProductPreview
@@ -34,7 +34,6 @@ export default function MoreProducts(
         )}
         {platform !== '' && (
           <>
-            <p className="w-full mb-10 text-3xl">{platform}</p>
             {products.filter((product) => product.platform === platform).map((product, index) => (
               <ProductPreview
                 key={product.slug}
@@ -51,38 +50,6 @@ export default function MoreProducts(
             ))}
           </>
         )}
-        {/* {platform === 'Nintendo 64' && (
-          n64Games.map((product, index) => (
-            <ProductPreview
-              key={product.slug}
-              productName={product.productName}
-              subname={product.subname}
-              slug={product.slug}
-              description={product.description}
-              descriptionShort={product.descriptionShort}
-              retailPrice={product.retailPrice}
-              platform={product.platform}
-              cover={product.cover}
-              animate={index === 0}
-            />
-          ))
-        )}
-        {platform === 'Game Boy' && (
-          gbGames.map((product, index) => (
-            <ProductPreview
-              key={product.slug}
-              productName={product.productName}
-              subname={product.subname}
-              slug={product.slug}
-              description={product.description}
-              descriptionShort={product.descriptionShort}
-              retailPrice={product.retailPrice}
-              platform={product.platform}
-              cover={product.cover}
-              animate={index === 0}
-            />
-          ))
-        )} */}
       </div>
     </section>
   );
