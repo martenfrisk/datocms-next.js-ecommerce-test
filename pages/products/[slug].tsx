@@ -54,7 +54,7 @@ export default function Product({
           <ProductTitle>Loading…</ProductTitle>
         ) : (
           <>
-            <article className="px-4 mb-6">
+            <article className="px-8 py-4 mb-6 bg-navy-600">
               <Head>
                 <title>
                   {product.productName}
@@ -68,8 +68,8 @@ export default function Product({
                 {product.subname ? (
                   <>
                     {product.productName}
+                    :
                     <span className="text-3xl tracking-tight md:text-5xl lg:text-6xl">
-                      :
                       {' '}
                       {product.subname}
                     </span>
@@ -113,7 +113,9 @@ export default function Product({
               </div>
             </article>
             {moreProducts.length > 0 && (
-              <MoreProducts products={moreProducts} />
+              <div className="-mt-72">
+                <MoreProducts products={moreProducts} />
+              </div>
             )}
           </>
         )}

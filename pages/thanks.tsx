@@ -20,7 +20,7 @@ export default function Thanks() {
       <Layout showCartButton="false">
         <Container>
           <Header />
-          <div className="flex flex-col flex-wrap items-center w-full px-4 pt-8">
+          <div className="flex flex-col flex-wrap items-center w-full px-4 pt-8 text-navy-600">
             <div className="flex flex-col items-center w-full md:w-1/2">
               <p className="mb-4">
                 Thank you purchasing

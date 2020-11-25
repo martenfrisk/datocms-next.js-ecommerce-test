@@ -34,7 +34,7 @@ export default function Profile() {
     <Container>
       <Layout showCartButton="false">
         <Header />
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center w-full pb-20 text-navy-600">
           <div className="flex flex-col items-center w-full space-y-4">
             <h2>
               Welcome to your profile page

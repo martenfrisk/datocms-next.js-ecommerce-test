@@ -16,7 +16,7 @@ export default function Index({ allProducts }: { allProducts: ProductType[]}) {
       <Layout showCartButton="true">
         <Head>
           <title>
-            Next.js Blog Example with
+            Next.js E-commerce Example with
             {CMS_NAME}
           </title>
         </Head>
@@ -35,7 +35,17 @@ export default function Index({ allProducts }: { allProducts: ProductType[]}) {
               heroimg={heroProduct.heroimg}
             />
           )}
-          {moreProducts.length > 0 && <MoreProducts products={moreProducts} />}
+          {moreProducts.length > 0 && (
+            <div>
+              <MoreProducts products={moreProducts} platform="Playstation" />
+              <div className="-mt-84">
+                <MoreProducts products={moreProducts} platform="Nintendo 64" />
+              </div>
+              <div className="-mt-84">
+                <MoreProducts products={moreProducts} platform="Game Boy" />
+              </div>
+            </div>
+          )}
         </Container>
       </Layout>
     </>
