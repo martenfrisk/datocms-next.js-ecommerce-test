@@ -79,10 +79,10 @@ export default function ProductPreview({
     }, 9000);
   }, [])
   const opacity = isDragging ? 0.4 : 1
-  function shorten(str: string) {
-    if (str.length <= 80) return str;
-    return str.substr(0, str.lastIndexOf(' ', 80));
-  }
+  // function shorten(str: string) {
+  //   if (str.length <= 80) return str;
+  //   return `${str.substr(0, str.lastIndexOf(' ', 80))} ...`;
+  // }
   // const generatePreview = (type, item, style) => (
   //   <div style={style}><img src={cover.responsiveImage} alt="" /></div>
   // )
@@ -90,7 +90,7 @@ export default function ProductPreview({
   return (
     <>
       {/* <Preview generator={generatePreview} /> */}
-      <div className="w-1/2 max-w-md px-2 mt-2 mb-4 sm:mt-12 md:w-1/3 lg:w-1/4">
+      <div className="w-1/2 max-w-md px-2 mt-2 mb-10 sm:px-4 sm:mt-12 md:w-1/3 lg:w-1/4">
         <div className="pb-2 bg-white shadow-xl rounded-xl">
           <div className="flex flex-col flex-wrap items-end mb-2 justify-evenly">
 
@@ -113,29 +113,53 @@ export default function ProductPreview({
               />
 
             </div>
-            <div className="z-10 px-2 py-1 mr-2 -mt-4 text-base font-light text-white rounded-lg shadow-lg sm:-mt-8 sm:px-3 sm:py-2 justify-self-start from-blue-400 to-blue-600 bg-gradient-to-br bg-opacity-95">
+            <div className="z-10 px-2 py-px mr-2 -mt-6 text-base font-light text-white rounded-lg shadow-lg pointer-events-none sm:-mt-6 sm:px-2 sm:py-1 justify-self-start from-blue-400 to-blue-600 bg-gradient-to-br bg-opacity-95">
               {retailPrice}
               :-
             </div>
-            <h3 className="w-full px-3 py-2 text-xl leading-snug tracking-tight ">
+            <h3 className="w-full px-3 py-px text-xl leading-snug tracking-tight ">
               <Link as={`/products/${slug}`} href="/products/[slug]">
                 <a className="flex flex-col hover:underline">
                   <>
-                    <span className="text-sm font-bold text-gray-800 uppercase">
-                      {subname && productName}
-                    </span>
-                    <span className="text-lg font-light leading-none md:text-2xl">
-                      {subname || productName}
-                    </span>
+                    {subname && (
+                      <>
+                        <span
+                          className="-mt-2 -mb-2 text-xs font-semibold text-gray-600 uppercase"
+                          style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}
+                        >
+                          {productName}
+                        </span>
+                        <span
+                          className="py-px mt-1 text-base font-light leading-none tracking-tighter md:text-xl"
+                          style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflowX: 'hidden' }}
+                        >
+                          {subname}
+                        </span>
+                      </>
+                    )}
+                    {!subname && (
+                      <span
+                        className="py-px mb-1 text-base font-light leading-none tracking-tighter md:text-xl"
+                        style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflowX: 'hidden' }}
+                      >
+                        {productName}
+                      </span>
+                    )}
                   </>
                 </a>
               </Link>
             </h3>
-            <p className="block w-full px-3 my-0 text-xs font-light leading-5 tracking-normal text-justify text-gray-700 lg:hidden " style={{ hyphens: 'auto' }}>
-              {shorten(descriptionShort) || shorten(description)}
-              ...
-            </p>
-            <p className="hidden w-full px-3 my-0 text-sm leading-4 tracking-wide text-gray-600 lg:block ">
+            <p
+              className="hidden w-full px-3 py-0 my-0 text-xs leading-4 tracking-wide text-gray-600 lg:block "
+              style={{
+                WebkitLineClamp: 3,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+                minHeight: '3.1rem',
+              }}
+            >
               {descriptionShort || description}
             </p>
             <button

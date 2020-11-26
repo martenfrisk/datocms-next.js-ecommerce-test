@@ -77,10 +77,10 @@ const Cart = () => {
         {!visible && (
           <div
             onClick={() => setVisible(true)}
-            className="flex flex-col items-center justify-center order-last w-12 h-12 p-2 mb-20 text-white bg-blue-600 border-2 border-white rounded-full cursor-pointer pointer-events-auto shadow-3xl md:order-first"
+            className="flex flex-col items-center justify-center order-last w-12 h-12 p-2 mb-4 text-white bg-blue-600 border-2 border-white rounded-full cursor-pointer pointer-events-auto sm:mb-20 shadow-3xl md:order-first"
           >
             {state && state.length > 0 && (
-              <div className="absolute bottom-0 w-5 h-5 mb-20 ml-10 text-xs text-center text-blue-600 bg-white border-2 border-blue-600 rounded-full pointer-events-auto">
+              <div className="absolute bottom-0 w-5 h-5 mb-4 ml-10 text-xs text-center text-blue-600 bg-white border-2 border-blue-600 rounded-full pointer-events-auto sm:mb-20">
                 {state.reduce(
                   (acc: number, curr: { quantity: number }) => acc + curr.quantity,
                   0,

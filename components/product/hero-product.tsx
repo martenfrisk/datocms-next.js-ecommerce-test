@@ -64,20 +64,20 @@ export default function HeroProduct({
       `linear-gradient(to right, rgba(29, 57, 92, 0.95), rgba(29, 57, 92, 0.8) 35%, transparent), url(${heroimg && heroimg.responsiveImage.src})`,
     backgroundSize: 'cover',
     backgroundPosition: '70% 10%',
-    height: '70%',
-    maxHeight: '500px',
+    height: '90%',
+    maxHeight: '420px',
   }
 
   return (
     <>
       <section
-        className={`flex flex-wrap items-center w-screen pt-10 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}
+        className={`flex flex-wrap items-center w-screen pt-2 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}
       >
         <div
           style={heroimg && withHeroImg}
           className="absolute top-0 w-screen pointer-events-none"
         />
-        <div className="z-10 order-last w-full -mt-16 sm:mt-0 sm:order-first sm:w-1/3">
+        <div className="z-10 order-last w-full pb-12 -mt-12 sm:mt-0 sm:order-first sm:w-1/3">
           <div ref={drag} style={{ opacity }} className="cursor-move">
             <div className="w-48 h-auto mx-auto animate-float">
               <CoverImage
@@ -86,47 +86,46 @@ export default function HeroProduct({
                 slug={slug}
                 rotate
               />
-              <button
-                type="button"
-                className="absolute px-2 py-1 ml-2 -mt-12 text-xl text-white transition-all duration-100 transform bg-gray-700 bg-opacity-75 rounded-md cursor-pointer focus:outline-none hover:-translate-y-1 hover:shadow-md"
-                onClick={handleAddToCart}
-                style={{
-                  transform: 'rotateY(20deg) rotateX(10deg)',
-                }}
-              >
-                Buy
-              </button>
             </div>
           </div>
         </div>
 
-        <div className="z-10 flex flex-col flex-wrap justify-start w-full px-2 mt-4 mb-16 sm:w-1/2 sm:flex-row">
-          <div className="flex flex-col items-center w-full sm:items-start">
-            <Link as={`/products/${slug}`} href="/products/[slug]">
-              <a className="text-6xl font-normal hover:underline">
-                {subname ? (
-                  <span>
-                    {productName}
-                    :
-                    {' '}
-                    {subname}
-                  </span>
-                ) : (
-                  <span>{productName}</span>
-                )}
-              </a>
-            </Link>
-            <div className="mb-4 text-lg font-light ">
-              {retailPrice}
-              {' '}
-              kr
-            </div>
-          </div>
-          <div className="flex justify-center w-full sm:w-2/3">
-            <p className="px-6 py-4 text-base font-thin leading-relaxed text-center bg-opacity-75 sm:text-left rounded-xl bg-navy-500" style={{ width: 'fit-content' }}>
-              {descriptionShort || description}
-            </p>
-          </div>
+        <div className="z-0 flex flex-col flex-wrap justify-center w-full px-2 mt-4 mb-16 sm:w-1/2 sm:flex-row">
+          <Link as={`/products/${slug}`} href="/products/[slug]">
+            <a
+              className="text-6xl font-normal leading-none text-center hover:underline"
+              style={{
+                filter: 'drop-shadow(-4px 4px 5px rgb(0 0 0 / 60%))',
+              }}
+            >
+              {subname ? (
+                <span>
+                  {productName}
+                  :
+                  {' '}
+                  {subname}
+                </span>
+              ) : (
+                <span>{productName}</span>
+              )}
+            </a>
+          </Link>
+          <p
+            className="flex flex-wrap justify-center px-2 py-2 m-2 text-base font-light leading-normal text-center text-white bg-blue-300 bg-opacity-25 shadow-xl"
+            style={{
+              width: 'fit-content',
+              backdropFilter: 'blur(6px)',
+            }}
+          >
+            {descriptionShort || description}
+            <button
+              type="button"
+              className="block mr-2 text-sm font-thin text-blue-100 uppercase border-b border-opacity-25 border-dashed cursor-pointer focus:outline-none border-b-blue-100"
+              onClick={handleAddToCart}
+            >
+              Buy
+            </button>
+          </p>
         </div>
       </section>
     </>

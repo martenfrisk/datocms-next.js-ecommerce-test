@@ -36,7 +36,7 @@ export default function Index({ allProducts }: { allProducts: ProductType[]}) {
             />
           )}
           {moreProducts.length > 0 && (
-            <div className="mt-16 sm:mt-20">
+            <div className="-mt-4 sm:mt-20">
               <MoreProducts products={moreProducts} platform="Nintendo 64" header="N64" />
               <MoreProducts products={moreProducts} platform="Game Boy" header="Game Boy" />
               <MoreProducts products={moreProducts} platform="Playstation" header="PlayStation" />
