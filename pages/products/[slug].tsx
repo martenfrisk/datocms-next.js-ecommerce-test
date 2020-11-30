@@ -27,6 +27,26 @@ export default function Product({
   const [, setVisible] = showCart
   const samePlatform = moreProducts.filter((item) => item.platform === product.platform)
   const otherPlatforms = moreProducts.filter((item) => item.platform !== product.platform)
+  const plat1 = []; const plat2 = []
+  otherPlatforms.map((prod: ProductType, index: number) => {
+    if (index === 0) {
+      plat1.push(prod)
+    } else if (plat1[0].platform === prod.platform) {
+      plat1.push(prod)
+    } else {
+      plat2.push(prod)
+    }
+    return null
+  })
+  otherPlatforms.sort((a: any, b: any) => {
+    if (a.platform < b.platform) {
+      return -1
+    }
+    if (a.platform > b.platform) {
+      return 1
+    }
+    return 0
+  })
   // const ref = useRef(null)
   // useOutsideClick(ref)
   const handleAddToCart = () => {
@@ -113,11 +133,14 @@ export default function Product({
           </article>
           {moreProducts.length > 0 && (
           <div>
+            {samePlatform.length > 0 && (
+              <div>
+                <MoreProducts products={samePlatform} platform={product.platform} header={`More ${product.platform} Games`} />
+              </div>
+            )}
             <div>
-              <MoreProducts products={samePlatform} platform={product.platform} header={`More ${product.platform} Games`} />
-            </div>
-            <div>
-              <MoreProducts products={otherPlatforms} />
+              <MoreProducts products={plat1} header="Other games" />
+              {plat2 && <MoreProducts products={plat2} />}
             </div>
           </div>
           )}

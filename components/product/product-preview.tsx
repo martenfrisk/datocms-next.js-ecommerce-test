@@ -103,14 +103,17 @@ export default function ProductPreview({
                   <Touch1 className="hidden sm:inline-block" />
                 </div>
               )}
-
-              <Image
-                data={{
-                  ...cover.responsiveImage,
-                  alt: `Cover Image for ${productName}`,
-                }}
-                className="w-full rounded-t-xl"
-              />
+              <Link as={`/products/${slug}`} href="/products/[slug]">
+                <a className="cursor-pointer">
+                  <Image
+                    data={{
+                      ...cover.responsiveImage,
+                      alt: `Cover Image for ${productName}`,
+                    }}
+                    className="w-full rounded-t-xl"
+                  />
+                </a>
+              </Link>
 
             </div>
             <div className="z-10 px-2 py-1 mr-2 -mt-4 text-base font-light text-white rounded-lg shadow-lg pointer-events-none sm:-mt-6 sm:px-2 sm:py-1 justify-self-start from-blue-400 to-blue-600 bg-gradient-to-br bg-opacity-95">
