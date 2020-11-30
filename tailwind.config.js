@@ -13,6 +13,10 @@ module.exports = {
   },
   theme: {
     extend: {
+      transitionProperty: {
+        'backgroundImage': 'background-image',
+      },
+      backgroundImage: ['hover', 'focus'],
       keyframes: {
         wiggle: {
           '0%, 100%': { transform: 'rotate(0deg)' },

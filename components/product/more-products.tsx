@@ -12,7 +12,7 @@ export default function MoreProducts(
     <section className="z-10 bg-white text-blueish-800">
       {header !== '' && (
         <h2
-          className="py-1 pl-6 pr-16 mb-2 text-4xl tracking-tighter text-white bg-blue-600 md:text-5xl"
+          className="py-1 pl-4 pr-16 mb-2 text-2xl text-white sm:mb-6 bg-gradient-to-tr from-blue-800 to-blue-600 sm:text-3xl"
           style={{ clipPath: 'polygon(0 0, 100% 0%, 90% 100%, 0% 100%)', width: 'fit-content' }}
         >
           {header}

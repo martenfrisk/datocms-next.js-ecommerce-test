@@ -120,7 +120,7 @@ export default function HeroProduct({
             {descriptionShort || description}
             <button
               type="button"
-              className="block mr-2 text-sm font-thin text-blue-100 uppercase border-b border-opacity-25 border-dashed cursor-pointer focus:outline-none border-b-blue-100"
+              className="block mt-1 mr-2 text-sm font-thin text-blue-100 uppercase border-b border-opacity-25 border-dashed cursor-pointer focus:outline-none border-b-blue-100"
               onClick={handleAddToCart}
             >
               Buy

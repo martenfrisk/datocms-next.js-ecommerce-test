@@ -74,7 +74,7 @@ export default function Product({
         <ProductTitle>Loading…</ProductTitle>
       ) : (
         <>
-          <article className="px-8 pt-32 pb-6 mb-6 -mt-32 text-white bg-navy-600">
+          <article className="px-8 pt-32 pb-6 mb-6 -mt-32 text-white bg-gradient-to-r from-blue-800 to-blue-600">
             <Head>
               <title>
                 {product.productName}
@@ -88,8 +88,9 @@ export default function Product({
               {product.subname ? (
                 <>
                   {product.productName}
-                  :
-                  <span className="text-3xl tracking-tight md:text-5xl lg:text-6xl">
+                  <span className="block text-2xl font-light tracking-tight sm:inline sm:text-3xl lg:text-4xl">
+                    {' '}
+                    -
                     {' '}
                     {product.subname}
                   </span>
@@ -98,23 +99,26 @@ export default function Product({
                 product.productName
               )}
             </ProductTitle>
-            <div className="flex flex-col items-center md:flex-row md:items-start">
-              <div className="w-2/3 h-auto md:w-1/3">
+            <div className="flex flex-col items-center md:flex-row ">
+              <div className="flex items-center w-2/3 h-full sm:w-1/4">
                 <CoverImage
                   productName={product.productName}
                   responsiveImage={product.cover.responsiveImage}
                 />
               </div>
               <div className="flex flex-col flex-wrap w-full sm:flex-row md:w-2/3 md:pl-8">
-                <div className="flex justify-between w-full px-10 mt-4 md:mt-0 md:px-0 md:w-2/3">
-                  <p className="text-3xl font-bold">
+                <div className="flex flex-wrap justify-center w-full px-4 mt-4 sm:px-10 sm:justify-start md:mt-0 md:px-0 md:w-2/3">
+                  {product.descriptionShort && (
+                  <p className="mb-2 text-base italic font-light leading-snug text-center sm:mb-4 sm:text-xl">{product.descriptionShort}</p>
+                  )}
+                  <p className="mr-4 text-2xl font-light">
                     {product.retailPrice}
                     :-
                   </p>
                   <OutsideCloseCart>
                     <button
                       type="button"
-                      className="px-6 py-1 text-lg text-white bg-black border-2 border-black rounded-md cursor-pointer hover:bg-white hover:text-black transition-200"
+                      className="px-6 py-1 text-lg text-white uppercase transition-all duration-300 bg-blue-500 rounded-md cursor-pointer bg-opacity-95 hover:bg-blue-600"
                       onClick={handleAddToCart}
                     >
                       Buy
@@ -123,10 +127,7 @@ export default function Product({
                 </div>
                 <Rating rating={product.rating} />
                 <div className="w-full px-4 pt-6 md:px-0 md:w-2/3">
-                  <ProductBody content={
-                      product.description ? product.description : product.descriptionShort
-                      }
-                  />
+                  <ProductBody content={product.description} />
                 </div>
               </div>
             </div>
