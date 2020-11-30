@@ -1,5 +1,7 @@
-import ProductPreview from '@/product/product-preview';
+import dynamic from 'next/dynamic'
 import { ProductType } from '@/lib/types'
+
+const ProductPreview = dynamic(import('@/product/product-preview'))
 
 type MoreProductsProps = {
   products: ProductType[]
@@ -33,7 +35,6 @@ export default function MoreProducts(
               description={product.description}
               descriptionShort={product.descriptionShort}
               retailPrice={product.retailPrice}
-              platform={product.platform}
               cover={product.cover}
               animate={animateFirst && index === 0}
             />
@@ -50,7 +51,6 @@ export default function MoreProducts(
                 description={product.description}
                 descriptionShort={product.descriptionShort}
                 retailPrice={product.retailPrice}
-                platform={product.platform}
                 cover={product.cover}
                 animate={animateFirst && index === 0}
               />

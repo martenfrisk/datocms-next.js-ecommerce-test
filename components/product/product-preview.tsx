@@ -16,8 +16,6 @@ export default function ProductPreview({
   descriptionShort,
   retailPrice,
   cover,
-  // eslint-disable-next-line no-unused-vars
-  platform,
   animate,
 }: {
     productName: ProductType['productName'],
@@ -26,17 +24,14 @@ export default function ProductPreview({
     description: ProductType['description'],
     descriptionShort: ProductType['descriptionShort'],
     retailPrice: ProductType['retailPrice'],
-    platform?: ProductType['platform'],
     cover: ProductType['cover']
     animate?: boolean
 }) {
   const [showDragTooltip, setShowDragTooltip] = useState(true)
   const dispatch: any = useDispatchCart()
-  const { state, showCart, dragging } = useCart()
+  const { showCart, dragging } = useCart()
   const [, setVisible] = showCart
   const [, setCurrentlyDragging] = dragging
-  // const ref = useRef(null)
-  // useOutsideClick(ref)
   const handleAddToCart = () => {
     dispatch({
       type: 'ADD_ITEM',
@@ -49,8 +44,6 @@ export default function ProductPreview({
       },
     })
     setVisible(true)
-    // eslint-disable-next-line no-console
-    console.log(state)
   }
   const [{ isDragging }, drag] = useDrag({
     item: { cover: cover.responsiveImage, type: ItemTypes.PRODUCT },
@@ -79,17 +72,9 @@ export default function ProductPreview({
     }, 9000);
   }, [])
   const opacity = isDragging ? 0.4 : 1
-  // function shorten(str: string) {
-  //   if (str.length <= 80) return str;
-  //   return `${str.substr(0, str.lastIndexOf(' ', 80))} ...`;
-  // }
-  // const generatePreview = (type, item, style) => (
-  //   <div style={style}><img src={cover.responsiveImage} alt="" /></div>
-  // )
 
   return (
     <>
-      {/* <Preview generator={generatePreview} /> */}
       <div className="w-1/2 max-w-md px-2 mt-2 mb-10 sm:px-4 sm:mt-12 sm:w-1/3 lg:w-1/4">
         <div className="pb-2 bg-white shadow-xl rounded-xl">
           <div className="flex flex-col flex-wrap items-end mb-2 justify-evenly">
@@ -181,5 +166,4 @@ export default function ProductPreview({
 
 ProductPreview.defaultProps = {
   animate: false,
-  platform: '',
 }

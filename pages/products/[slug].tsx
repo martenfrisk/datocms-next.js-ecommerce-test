@@ -15,7 +15,6 @@ import { useDispatchCart, useCart } from '@/cart/cart-context'
 import { ProductType } from '@/lib/types'
 import OutsideCloseCart from '@/lib/click-outside'
 import ProductTitle from '@/product/product-title';
-import { CMS_NAME } from '@/lib/constants';
 import markdownToHtml from '@/lib/markdownToHtml';
 
 const MoreProducts = dynamic(import('@/product/more-products'))
@@ -25,7 +24,7 @@ export default function Product({
 }: { product: ProductType, moreProducts: any[] }) {
   const router = useRouter();
   const dispatch: any = useDispatchCart()
-  const { state, showCart } = useCart()
+  const { showCart } = useCart()
   const [, setVisible] = showCart
   const samePlatform = moreProducts.filter((item) => item.platform === product.platform)
   const otherPlatforms = moreProducts.filter((item) => item.platform !== product.platform)
@@ -49,8 +48,6 @@ export default function Product({
     }
     return 0
   })
-  // const ref = useRef(null)
-  // useOutsideClick(ref)
   const handleAddToCart = () => {
     dispatch({
       type: 'ADD_ITEM',
@@ -63,8 +60,6 @@ export default function Product({
       },
     })
     setVisible(true)
-    // eslint-disable-next-line no-console
-    console.log(state)
   }
   if (!router.isFallback && !product?.slug) {
     return <ErrorPage statusCode={404} />;
@@ -72,82 +67,74 @@ export default function Product({
   return (
     <Layout showCartButton="true">
       <Header />
-      {router.isFallback ? (
-        <ProductTitle>Loading…</ProductTitle>
-      ) : (
-        <>
-          <article className="px-8 pt-32 pb-6 mb-6 -mt-32 text-white bg-gradient-to-r from-blue-800 to-blue-600">
-            <Head>
-              <title>
-                {product.productName}
+      <article className="px-8 pt-32 pb-6 mb-6 -mt-32 text-white bg-gradient-to-r from-blue-800 to-blue-600">
+        <Head>
+          <title>
+            {product.productName}
+            {' '}
+            | Next.js Ecommerce Example with
+          </title>
+        </Head>
+        <ProductTitle>
+          {product.subname ? (
+            <>
+              {product.productName}
+              <span className="block text-2xl font-light tracking-tight sm:inline sm:text-3xl lg:text-4xl">
                 {' '}
-                | Next.js Ecommerce Example with
+                -
                 {' '}
-                {CMS_NAME}
-              </title>
-            </Head>
-            <ProductTitle>
-              {product.subname ? (
-                <>
-                  {product.productName}
-                  <span className="block text-2xl font-light tracking-tight sm:inline sm:text-3xl lg:text-4xl">
-                    {' '}
-                    -
-                    {' '}
-                    {product.subname}
-                  </span>
-                </>
-              ) : (
-                product.productName
+                {product.subname}
+              </span>
+            </>
+          ) : (
+            product.productName
+          )}
+        </ProductTitle>
+        <div className="flex flex-col items-center md:flex-row ">
+          <div className="flex items-center w-2/3 h-full sm:w-1/4">
+            <CoverImage
+              productName={product.productName}
+              responsiveImage={product.cover.responsiveImage}
+            />
+          </div>
+          <div className="flex flex-col flex-wrap w-full sm:flex-row md:w-2/3 md:pl-8">
+            <div className="flex flex-wrap justify-center w-full px-4 mt-4 sm:px-10 sm:justify-start md:mt-0 md:px-0 md:w-2/3">
+              {product.descriptionShort && (
+                <p className="mb-2 text-base italic font-light leading-snug text-center sm:mb-4 sm:text-xl">{product.descriptionShort}</p>
               )}
-            </ProductTitle>
-            <div className="flex flex-col items-center md:flex-row ">
-              <div className="flex items-center w-2/3 h-full sm:w-1/4">
-                <CoverImage
-                  productName={product.productName}
-                  responsiveImage={product.cover.responsiveImage}
-                />
-              </div>
-              <div className="flex flex-col flex-wrap w-full sm:flex-row md:w-2/3 md:pl-8">
-                <div className="flex flex-wrap justify-center w-full px-4 mt-4 sm:px-10 sm:justify-start md:mt-0 md:px-0 md:w-2/3">
-                  {product.descriptionShort && (
-                  <p className="mb-2 text-base italic font-light leading-snug text-center sm:mb-4 sm:text-xl">{product.descriptionShort}</p>
-                  )}
-                  <p className="mr-4 text-2xl font-light">
-                    {product.retailPrice}
-                    :-
-                  </p>
-                  <OutsideCloseCart>
-                    <button
-                      type="button"
-                      className="px-6 py-1 text-lg text-white uppercase transition-all duration-300 bg-blue-500 rounded-md cursor-pointer bg-opacity-95 hover:bg-blue-600"
-                      onClick={handleAddToCart}
-                    >
-                      Buy
-                    </button>
-                  </OutsideCloseCart>
-                </div>
-                <Rating rating={product.rating} />
-                <div className="w-full px-4 pt-6 md:px-0 md:w-2/3">
-                  <ProductBody content={product.description} />
-                </div>
-              </div>
+              <p className="mr-4 text-2xl font-light">
+                {product.retailPrice}
+                :-
+              </p>
+              <OutsideCloseCart>
+                <button
+                  type="button"
+                  className="px-6 py-1 text-lg text-white uppercase transition-all duration-300 bg-blue-500 rounded-md cursor-pointer bg-opacity-95 hover:bg-blue-600"
+                  onClick={handleAddToCart}
+                >
+                  Buy
+                </button>
+              </OutsideCloseCart>
             </div>
-          </article>
-          {moreProducts.length > 0 && (
-          <div>
-            {samePlatform.length > 0 && (
-              <div>
-                <MoreProducts products={samePlatform} platform={product.platform} header={`More ${product.platform} Games`} />
-              </div>
-            )}
-            <div>
-              <MoreProducts products={plat1} header="Other games" />
-              {plat2 && <MoreProducts products={plat2} />}
+            <Rating rating={product.rating} />
+            <div className="w-full px-4 pt-6 md:px-0 md:w-2/3">
+              <ProductBody content={product.description} />
             </div>
           </div>
+        </div>
+      </article>
+      {moreProducts.length > 0 && (
+        <div>
+          {samePlatform.length > 0 && (
+            <div>
+              <MoreProducts products={samePlatform} platform={product.platform} header={`More ${product.platform} Games`} />
+            </div>
           )}
-        </>
+          <div>
+            <MoreProducts products={plat1} header="Other games" />
+            {plat2 && <MoreProducts products={plat2} />}
+          </div>
+        </div>
       )}
     </Layout>
   );
