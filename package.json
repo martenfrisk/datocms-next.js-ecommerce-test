@@ -16,8 +16,6 @@
     "@carbon/icons-react": "^10.20.0",
     "@next/bundle-analyzer": "^10.0.1",
     "@types/carbon__icons-react": "^10.19.0",
-    "classnames": "2.2.6",
-    "date-fns": "2.11.1",
     "datocms-client": "^3.2.0",
     "dotenv": "^8.2.0",
     "fuzzy-search": "^3.2.1",
