@@ -150,7 +150,6 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                   descriptionShort={product.descriptionShort}
                   retailPrice={product.retailPrice}
                   cover={product.cover}
-                  platform={product.platform}
                 />
               ))}
           </div>
