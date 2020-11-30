@@ -113,7 +113,7 @@ export default function ProductPreview({
               />
 
             </div>
-            <div className="z-10 px-2 py-px mr-2 -mt-6 text-base font-light text-white rounded-lg shadow-lg pointer-events-none sm:-mt-6 sm:px-2 sm:py-1 justify-self-start from-blue-400 to-blue-600 bg-gradient-to-br bg-opacity-95">
+            <div className="z-10 px-2 py-1 mr-2 -mt-4 text-base font-light text-white rounded-lg shadow-lg pointer-events-none sm:-mt-6 sm:px-2 sm:py-1 justify-self-start from-blue-400 to-blue-600 bg-gradient-to-br bg-opacity-95">
               {retailPrice}
               :-
             </div>
@@ -124,13 +124,13 @@ export default function ProductPreview({
                     {subname && (
                       <>
                         <span
-                          className="-mt-2 -mb-2 text-xs font-semibold text-gray-600 uppercase"
+                          className="-mb-2 text-xs font-semibold text-gray-600 uppercase"
                           style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}
                         >
                           {productName}
                         </span>
                         <span
-                          className="py-px mt-1 text-base font-light leading-none tracking-tighter md:text-xl"
+                          className="py-px mt-1 text-lg font-light leading-none tracking-tighter md:text-xl"
                           style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflowX: 'hidden' }}
                         >
                           {subname}
@@ -139,7 +139,7 @@ export default function ProductPreview({
                     )}
                     {!subname && (
                       <span
-                        className="py-px mb-1 text-base font-light leading-none tracking-tighter md:text-xl"
+                        className="py-px mt-1 mb-2 text-lg font-light leading-none tracking-tighter md:text-xl"
                         style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflowX: 'hidden' }}
                       >
                         {productName}

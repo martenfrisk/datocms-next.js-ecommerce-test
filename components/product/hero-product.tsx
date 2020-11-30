@@ -77,7 +77,7 @@ export default function HeroProduct({
           style={heroimg && withHeroImg}
           className="absolute top-0 w-screen pointer-events-none"
         />
-        <div className="z-10 order-last w-full pb-12 -mt-12 sm:mt-0 sm:order-first sm:w-1/3">
+        <div className="z-10 order-last w-full pb-12 -mt-16 sm:mt-8 sm:order-first sm:w-1/3">
           <div ref={drag} style={{ opacity }} className="cursor-move">
             <div className="w-48 h-auto mx-auto animate-float">
               <CoverImage
