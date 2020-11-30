@@ -70,11 +70,12 @@ export default function HeroProduct({
   //   height: '90%',
   //   maxHeight: '420px',
   // }
+  const resHero = heroimg.responsiveImage
 
   return (
     <>
       <div className="absolute top-0 overflow-hidden" style={{ maxHeight: '420px', backgroundImage: 'linear-gradient(to right, rgba(29, 57, 92, 0.95), rgba(29, 57, 92, 0.8) 35%)' }}>
-        <Image data={heroimg.responsiveImage} className="absolute top-0 z-0 w-screen opacity-50" />
+        <Image data={{ ...resHero, alt: 'Hero image' }} className="absolute top-0 z-0 w-screen opacity-50" />
       </div>
       <section
         className={`flex flex-wrap items-center w-screen pt-2 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}

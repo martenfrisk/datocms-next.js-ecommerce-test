@@ -1,12 +1,14 @@
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 import Container from '@/components/container'
-import MoreProducts from '@/components/product/more-products'
-import HeroProduct from '@/components/product/hero-product'
 import Header from '@/components/header'
 import Layout from '@/components/layout'
 import { ProductType } from '@/lib/types'
 import { getAllProductsForHome } from '@/lib/api'
 import { CMS_NAME } from '@/lib/constants'
+
+const HeroProduct = dynamic(import('@/components/product/hero-product'))
+const MoreProducts = dynamic(import('@/components/product/more-products'))
 
 export default function Index({ allProducts }: { allProducts: ProductType[]}) {
   const heroProduct = allProducts.find((element) => element.heroimg)

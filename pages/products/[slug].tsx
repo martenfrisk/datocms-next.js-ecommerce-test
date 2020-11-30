@@ -1,22 +1,24 @@
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic'
 import ErrorPage from 'next/error';
 import Head from 'next/head';
 import ProductBody from '@/product/product-body';
-import MoreProducts from '@/product/more-products';
 import Header from '@/components/header';
 import Layout from '@/components/layout';
 import CoverImage from '@/components/cover-image';
 import Rating from '@/components/rating'
-import { useDispatchCart, useCart } from '@/cart/cart-context'
 import {
   getAllProductsWithSlug,
   getProductAndMoreProducts,
 } from '@/lib/api';
+import { useDispatchCart, useCart } from '@/cart/cart-context'
 import { ProductType } from '@/lib/types'
 import OutsideCloseCart from '@/lib/click-outside'
 import ProductTitle from '@/product/product-title';
 import { CMS_NAME } from '@/lib/constants';
 import markdownToHtml from '@/lib/markdownToHtml';
+
+const MoreProducts = dynamic(import('@/product/more-products'))
 
 export default function Product({
   product, moreProducts,
@@ -170,7 +172,7 @@ export async function getStaticProps({ params, preview = false }) {
 export async function getStaticPaths() {
   const allProducts = await getAllProductsWithSlug();
   return {
-    paths: allProducts?.map((product) => `/products/${product.slug}`) || [],
+    paths: allProducts?.map((product: any) => `/products/${product.slug}`) || [],
     fallback: false,
   };
 }
