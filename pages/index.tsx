@@ -10,9 +10,11 @@ import { CMS_NAME } from '@/lib/constants'
 const HeroProduct = dynamic(import('@/components/product/hero-product'))
 const MoreProducts = dynamic(import('@/components/product/more-products'))
 
-export default function Index({ allProducts }: { allProducts: ProductType[]}) {
-  const heroProduct = allProducts.find((element) => element.heroimg)
-  const moreProducts = allProducts.filter((element) => element.slug !== heroProduct.slug)
+export default function Index(
+  { product, allProducts }: { product: ProductType, allProducts: ProductType[]},
+) {
+  const heroProduct = product
+  const moreProducts = allProducts
   return (
     <>
       <Layout showCartButton="true">
@@ -37,7 +39,7 @@ export default function Index({ allProducts }: { allProducts: ProductType[]}) {
               heroimg={heroProduct.heroimg}
             />
           )}
-          {moreProducts.length > 0 && (
+          {moreProducts && (
             <div className="-mt-4 sm:mt-20">
               <MoreProducts products={moreProducts} platform="Nintendo 64" header="N64" animateFirst />
               <MoreProducts products={moreProducts} platform="Game Boy" header="Game Boy" />
@@ -50,9 +52,12 @@ export default function Index({ allProducts }: { allProducts: ProductType[]}) {
   )
 }
 
-export async function getStaticProps({ preview }) {
-  const allProducts = await getAllProductsForHome(preview)
+export async function getStaticProps() {
+  const data = await getAllProductsForHome()
   return {
-    props: { allProducts },
-  }
+    props: {
+      product: data?.product,
+      allProducts: data?.allProducts,
+    },
+  };
 }

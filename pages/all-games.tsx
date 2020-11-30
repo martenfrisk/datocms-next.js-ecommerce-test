@@ -84,14 +84,37 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
                     </div>
                   </div>
                 </button>
+                <button
+                  type="button"
+                  className="focus:outline-none"
+                  onClick={() => requestSort('platform')}
+                >
+                  <div className="flex items-center focus:outline-none">
+                    Platform
+                    {' '}
+                    <div className="w-4">
+                      {sortConfig
+                        && sortConfig.key === 'platform'
+                        && sortConfig.direction === 'ascending' && (
+                          <ChevronDown className="ml-1" />
+                      )}
+                      {sortConfig
+                        && sortConfig.key === 'platform'
+                        && sortConfig.direction === 'descending' && (
+                          <ChevronUp className="ml-1" />
+                      )}
+                    </div>
+                  </div>
+                </button>
                 <div className="flex items-center">
-                  Platform:
-                  {' '}
                   <button type="button" className={`${filter === 'Playstation' && 'underline'} text-sm  focus:outline-none ml-2`} onClick={() => handleFilter('Playstation')}>
                     Playstation
                   </button>
                   <button type="button" className={`${filter === 'Nintendo 64' && 'underline'} text-sm focus:outline-none ml-2`} onClick={() => handleFilter('Nintendo 64')}>
                     Nintendo 64
+                  </button>
+                  <button type="button" className={`${filter === 'Game Boy' && 'underline'} text-sm focus:outline-none ml-2`} onClick={() => handleFilter('Game Boy')}>
+                    Game Boy
                   </button>
                   <button type="button" className={`${filter === '' && 'underline'} text-sm focus:outline-none ml-2`} onClick={() => setFilter('')}>
                     All
@@ -175,8 +198,10 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
 }
 
 export async function getStaticProps() {
-  const allProducts = await getAllProductsForHome();
+  const data = await getAllProductsForHome();
   return {
-    props: { allProducts },
+    props: {
+      allProducts: data?.allProducts,
+    },
   };
 }
