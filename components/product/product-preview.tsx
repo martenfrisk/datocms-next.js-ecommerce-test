@@ -127,7 +127,7 @@ export default function ProductPreview({
                     {subname && (
                       <>
                         <span
-                          className="-mb-2 text-xs font-semibold text-gray-600 uppercase"
+                          className="-mb-2 text-xs text-gray-800 uppercase"
                           style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden' }}
                         >
                           {productName}
@@ -153,7 +153,7 @@ export default function ProductPreview({
               </Link>
             </h3>
             <p
-              className="hidden w-full px-3 py-0 my-0 text-xs leading-4 tracking-wide text-gray-600 lg:block "
+              className="hidden w-full px-3 py-0 my-0 text-xs leading-4 tracking-wide text-gray-800 lg:block "
               style={{
                 WebkitLineClamp: 3,
                 overflow: 'hidden',
@@ -167,7 +167,7 @@ export default function ProductPreview({
             </p>
             <button
               type="button"
-              className="pt-2 pr-4 text-xs font-light tracking-wide text-blue-500 transition-all duration-100 transform cursor-pointer justify-self-end focus:outline-none hover:-translate-y-px"
+              className="pt-2 pr-4 text-xs font-light tracking-wide text-blue-700 transition-all duration-100 transform cursor-pointer justify-self-end focus:outline-none hover:-translate-y-px"
               onClick={handleAddToCart}
             >
               Add to cart
