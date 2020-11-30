@@ -15,7 +15,7 @@ const MyPreview = () => {
   if (!display) {
     return null
   }
-  return <img src={item.cover.src} style={style} className="w-1/2 h-auto opacity-25 sm:hidden" ref={ref} alt="" />
+  return <img src={item.cover.src} style={style} className="z-20 w-1/2 h-auto opacity-25 sm:hidden" ref={ref} alt="" />
 }
 function MyApp({ Component, pageProps }) {
   const HTML5toTouch = {

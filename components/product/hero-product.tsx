@@ -77,8 +77,8 @@ export default function HeroProduct({
       <div
         className="absolute top-0 object-cover mt-20 overflow-hidden sm:mt-0"
         style={{
-          height: '100%',
-          maxHeight: '40vh',
+          height: '50vh',
+          maxHeight: '420px',
           backgroundImage: 'linear-gradient(to right, rgba(29, 57, 92, 0.95), rgba(29, 57, 92, 0.8) 35%)',
         }}
       >
