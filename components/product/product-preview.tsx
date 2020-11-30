@@ -104,7 +104,7 @@ export default function ProductPreview({
                 </div>
               )}
               <Link as={`/products/${slug}`} href="/products/[slug]">
-                <a className="cursor-pointer">
+                <a className="w-full cursor-pointer" aria-label={`Link to ${productName}`}>
                   <Image
                     data={{
                       ...cover.responsiveImage,

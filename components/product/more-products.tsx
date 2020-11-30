@@ -18,7 +18,7 @@ export default function MoreProducts(
           {header}
         </h2>
       )}
-      <div className="flex flex-wrap justify-start mb-0 md:mx-20">
+      <div className="flex flex-wrap max-w-5xl mx-auto mb-0">
         {platform === '' && (
           products.map((product, index) => (
             <ProductPreview
