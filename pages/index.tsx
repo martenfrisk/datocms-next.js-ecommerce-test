@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
-import Container from '@/components/container'
 import Header from '@/components/header'
 import Layout from '@/components/layout'
 import { ProductType } from '@/lib/types'
@@ -24,29 +23,27 @@ export default function Index(
             {CMS_NAME}
           </title>
         </Head>
-        <Container>
-          <Header frontPage />
-          {heroProduct && (
-            <HeroProduct
-              productName={heroProduct.productName}
-              subname={heroProduct.subname}
-              slug={heroProduct.slug}
-              description={heroProduct.description}
-              descriptionShort={heroProduct.descriptionShort}
-              retailPrice={heroProduct.retailPrice}
-              cover={heroProduct.cover}
-              platform={heroProduct.platform}
-              heroimg={heroProduct.heroimg}
-            />
-          )}
-          {moreProducts && (
-            <div className="-mt-4 sm:mt-20">
-              <MoreProducts products={moreProducts} platform="Nintendo 64" header="N64" animateFirst />
-              <MoreProducts products={moreProducts} platform="Game Boy" header="Game Boy" />
-              <MoreProducts products={moreProducts} platform="Playstation" header="PlayStation" />
-            </div>
-          )}
-        </Container>
+        <Header frontPage />
+        {heroProduct && (
+        <HeroProduct
+          productName={heroProduct.productName}
+          subname={heroProduct.subname}
+          slug={heroProduct.slug}
+          description={heroProduct.description}
+          descriptionShort={heroProduct.descriptionShort}
+          retailPrice={heroProduct.retailPrice}
+          cover={heroProduct.cover}
+          platform={heroProduct.platform}
+          heroimg={heroProduct.heroimg}
+        />
+        )}
+        {moreProducts && (
+        <div className="sm:mt-10">
+          <MoreProducts products={moreProducts} platform="Nintendo 64" header="N64" animateFirst />
+          <MoreProducts products={moreProducts} platform="Game Boy" header="Game Boy" />
+          <MoreProducts products={moreProducts} platform="Playstation" header="PlayStation" />
+        </div>
+        )}
       </Layout>
     </>
   )

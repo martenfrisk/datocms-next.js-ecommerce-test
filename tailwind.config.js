@@ -26,7 +26,7 @@ module.exports = {
         },
         smallbounce: {
           '0%, 100%': {
-            transform: 'none',
+            transform: 'translateY(0)',
             animationTimingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
           },
           '50%': {
@@ -36,7 +36,7 @@ module.exports = {
         },
         float: {
           '0%, 100%': {
-            transform: 'none',
+            transform: 'translateY(0)',
           },
           '50%': {
             transform: 'translateY(-5%)',

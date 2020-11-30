@@ -77,8 +77,8 @@ export default function HeroProduct({
       <div
         className="absolute top-0 object-cover mt-20 overflow-hidden sm:mt-0"
         style={{
-          height: '90%',
-          maxHeight: '420px',
+          height: '100%',
+          maxHeight: '40vh',
           backgroundImage: 'linear-gradient(to right, rgba(29, 57, 92, 0.95), rgba(29, 57, 92, 0.8) 35%)',
         }}
       >
@@ -88,7 +88,7 @@ export default function HeroProduct({
         className={`flex  flex-wrap justify-center items-center w-full pt-2 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}
       >
         <div className="flex flex-wrap items-center ">
-          <div className="z-10 order-last w-full pb-12 -mt-16 sm:mt-8 sm:order-first sm:w-1/3">
+          <div className="z-10 hidden w-full pb-12 -mt-16 sm:block sm:mt-8 sm:w-1/3">
             <div ref={drag} style={{ opacity }} className="cursor-move">
               <div className="w-48 h-auto mx-auto animate-float">
                 <CoverImage
