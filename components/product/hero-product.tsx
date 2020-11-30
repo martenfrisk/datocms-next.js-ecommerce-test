@@ -4,6 +4,7 @@ import { useDrag } from 'react-dnd'
 import CoverImage from '@/components/cover-image'
 import { useCart, useDispatchCart } from '@/cart/cart-context'
 import { ProductType, ItemTypes } from '@/lib/types'
+import { Image } from 'react-datocms'
 
 export default function HeroProduct({
   productName,
@@ -59,24 +60,29 @@ export default function HeroProduct({
 
   const opacity = isDragging ? 0.4 : 1
 
-  const withHeroImg = {
-    backgroundImage:
-      `linear-gradient(to right, rgba(29, 57, 92, 0.95), rgba(29, 57, 92, 0.8) 35%, transparent), url(${heroimg && heroimg.responsiveImage.src})`,
-    backgroundSize: 'cover',
-    backgroundPosition: '70% 10%',
-    height: '90%',
-    maxHeight: '420px',
-  }
+  // const withHeroImg = {
+  //   backgroundImage:
+  //     `linear-gradient(to right,
+  // rgba(29, 57, 92, 0.95),
+  // rgba(29, 57, 92, 0.8) 35%, transparent), url(${heroimg && heroimg.responsiveImage.src})`,
+  //   backgroundSize: 'cover',
+  //   backgroundPosition: '70% 10%',
+  //   height: '90%',
+  //   maxHeight: '420px',
+  // }
 
   return (
     <>
+      <div className="absolute top-0 overflow-hidden" style={{ maxHeight: '420px', backgroundImage: 'linear-gradient(to right, rgba(29, 57, 92, 0.95), rgba(29, 57, 92, 0.8) 35%)' }}>
+        <Image data={heroimg.responsiveImage} className="absolute top-0 z-0 w-screen opacity-50" />
+      </div>
       <section
         className={`flex flex-wrap items-center w-screen pt-2 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}
       >
-        <div
-          style={heroimg && withHeroImg}
+        {/* <div
+          // style={heroimg && withHeroImg}
           className="absolute top-0 w-screen pointer-events-none"
-        />
+        /> */}
         <div className="z-10 order-last w-full pb-12 -mt-16 sm:mt-8 sm:order-first sm:w-1/3">
           <div ref={drag} style={{ opacity }} className="cursor-move">
             <div className="w-48 h-auto mx-auto animate-float">
@@ -130,4 +136,13 @@ export default function HeroProduct({
       </section>
     </>
   );
+}
+
+export async function getStaticProps({
+  heroimg,
+}: ProductType) {
+  const heroBg = heroimg.responsiveImage.src
+  return {
+    props: { heroBg },
+  }
 }
