@@ -90,7 +90,7 @@ export default function ProductPreview({
   return (
     <>
       {/* <Preview generator={generatePreview} /> */}
-      <div className="w-1/2 max-w-md px-2 mt-2 mb-10 sm:px-4 sm:mt-12 md:w-1/3 lg:w-1/4">
+      <div className="w-1/2 max-w-md px-2 mt-2 mb-10 sm:px-4 sm:mt-12 sm:w-1/3 lg:w-1/4">
         <div className="pb-2 bg-white shadow-xl rounded-xl">
           <div className="flex flex-col flex-wrap items-end mb-2 justify-evenly">
 

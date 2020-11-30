@@ -6,7 +6,11 @@ type MoreProductsProps = {
 }
 
 export default function MoreProducts(
-  { products, header = '', platform = '' }: { products: MoreProductsProps['products'], header?: string, platform?: string},
+  {
+    products, header = '', platform = '', animateFirst = false,
+  }: {
+    products: MoreProductsProps['products'], header?: string, platform?: string, animateFirst?: boolean
+  },
 ): React.ReactElement<MoreProductsProps> {
   return (
     <section className="z-10 bg-white text-blueish-800">
@@ -31,7 +35,7 @@ export default function MoreProducts(
               retailPrice={product.retailPrice}
               platform={product.platform}
               cover={product.cover}
-              animate={index === 0}
+              animate={animateFirst && index === 0}
             />
           ))
         )}
@@ -48,7 +52,7 @@ export default function MoreProducts(
                 retailPrice={product.retailPrice}
                 platform={product.platform}
                 cover={product.cover}
-                animate={index === 0}
+                animate={animateFirst && index === 0}
               />
             ))}
           </>
@@ -61,4 +65,5 @@ export default function MoreProducts(
 MoreProducts.defaultProps = {
   header: '',
   platform: '',
+  animateFirst: false,
 }
