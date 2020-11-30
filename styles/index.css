@@ -7,3 +7,9 @@
 body {
   @apply bg-white;
 }
+
+.hero img {
+  object-fit: cover;
+  object-position: 70% 10%;
+  height: 100%;
+}
