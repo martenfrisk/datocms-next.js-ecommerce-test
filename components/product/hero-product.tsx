@@ -75,11 +75,10 @@ export default function HeroProduct({
   return (
     <>
       <div
-        className="absolute top-0 object-cover mt-20 overflow-hidden sm:mt-0"
+        className="absolute top-0 object-cover mt-20 overflow-hidden sm:mt-0 bg-gradient-to-r from-blue-700 to-blue-800"
         style={{
           height: '50vh',
           maxHeight: '420px',
-          backgroundImage: 'linear-gradient(to right, rgba(29, 57, 92, 0.95), rgba(29, 57, 92, 0.8) 35%)',
         }}
       >
         <Image data={{ ...resHero, alt: 'Hero image' }} className="absolute top-0 z-0 object-cover w-screen h-full opacity-50 hero" />
@@ -104,10 +103,7 @@ export default function HeroProduct({
           <div className="z-0 flex flex-col flex-wrap justify-center w-full px-2 mt-4 mb-16 sm:w-1/2 sm:flex-row">
             <Link as={`/products/${slug}`} href="/products/[slug]">
               <a
-                className="text-6xl font-normal leading-none text-center hover:underline"
-                style={{
-                  filter: 'drop-shadow(-4px 4px 5px rgb(0 0 0 / 60%))',
-                }}
+                className="text-6xl font-normal leading-none text-center filter-drop hover:underline"
               >
                 {subname ? (
                   <span>
@@ -122,11 +118,7 @@ export default function HeroProduct({
               </a>
             </Link>
             <p
-              className="flex flex-col items-center px-2 py-2 m-2 text-base font-light leading-normal text-center text-white bg-blue-300 bg-opacity-25 shadow-xl"
-              style={{
-                width: 'fit-content',
-                backdropFilter: 'blur(6px)',
-              }}
+              className="flex flex-col items-center px-2 py-2 m-2 text-base font-light leading-normal text-center text-white bg-blue-300 bg-opacity-25 shadow-xl backdrop-blur"
             >
               <p>
                 {descriptionShort || description}

@@ -4,7 +4,7 @@ module.exports = {
     purgeLayersByDefault: true,
   },
   purge: {
-    enabled: process.env.NODE_ENV === 'production',
+    enabled: process.env.NODE_ENV !== 'development',
     // mode: 'all',
     content: [
       './pages/**/*.{js,jsx,ts,tsx}',
@@ -12,6 +12,13 @@ module.exports = {
     ],
   },
   theme: {
+    filter: {
+      'drop': 'drop-shadow(-4px 4px 5px rgb(0 0 0 / 60%))',
+    },
+    backdropFilter: {
+      'none': 'none',
+      'blur': 'blur(6px)',
+    },
     extend: {
       transitionProperty: {
         'backgroundImage': 'background-image',
@@ -110,4 +117,8 @@ module.exports = {
       },
     },
   },
+  plugins: [
+    // eslint-disable-next-line global-require
+    require('tailwindcss-filters'),
+  ],
 }

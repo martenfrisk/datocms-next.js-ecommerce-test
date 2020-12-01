@@ -27,19 +27,19 @@ export default function Checkout() {
   }
   // console.log(state)
   const dispatch: any = useDispatchCart();
-  const handleRemoveItem = (id: any) => {
+  const handleRemoveItem = (slug: any) => {
     dispatch({
       type: 'REMOVE',
       payload: {
-        id,
+        slug,
       },
     });
   };
-  const handleAdjustQuantity = (id: any, action: ActionType['type']) => {
+  const handleAdjustQuantity = (slug: any, action: ActionType['type']) => {
     dispatch({
       type: action,
       payload: {
-        id,
+        slug,
       },
     });
   };
@@ -122,7 +122,7 @@ export default function Checkout() {
                         <div className="flex items-center justify-end w-1/4 text-sm">
                           <button
                             type="button"
-                            onClick={() => handleAdjustQuantity(cartItem.id, 'DECREASE')}
+                            onClick={() => handleAdjustQuantity(cartItem.slug, 'DECREASE')}
                             className={`focus:outline-none  ${
                               cartItem.quantity === 1 && 'text-gray-300'
                             }`}
@@ -133,14 +133,14 @@ export default function Checkout() {
                           <span className="w-6 mx-1 text-center">{cartItem.quantity}</span>
                           <button
                             type="button"
-                            onClick={() => handleAdjustQuantity(cartItem.id, 'INCREASE')}
+                            onClick={() => handleAdjustQuantity(cartItem.slug, 'INCREASE')}
                             className="focus:outline-none "
                           >
                             <AddAlt className="w-4 h-4" />
                           </button>
                           <span
                             className="pl-2 text-xs text-gray-700 cursor-pointer hover:underline"
-                            onClick={() => handleRemoveItem(cartItem.id)}
+                            onClick={() => handleRemoveItem(cartItem.slug)}
                           >
                             <TrashCan />
                           </span>
