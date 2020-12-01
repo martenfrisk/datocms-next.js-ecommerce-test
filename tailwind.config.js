@@ -25,19 +25,13 @@ module.exports = {
       },
       backgroundImage: ['hover', 'focus'],
       keyframes: {
-        wiggle: {
-          '0%, 100%': { transform: 'rotate(0deg)' },
-          '20%': { transform: 'rotate(-3deg)' },
-          '60%': { transform: 'rotate(3deg)' },
-          '90%': { transform: 'rotate(-1deg)' },
-        },
         smallbounce: {
           '0%, 100%': {
             transform: 'translateY(0)',
             animationTimingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
           },
           '50%': {
-            transform: 'translateY(-5%)',
+            transform: 'translateY(-15%)',
             animationTimingFunction: 'cubic-bezier(0.37, 0, 0.63, 1)',
           },
         },
@@ -51,8 +45,7 @@ module.exports = {
         },
       },
       animation: {
-        wiggle: 'wiggle 2s ease-in-out 1s 5',
-        smallbounce: 'smallbounce 0.7s ease-in-out 2s 10',
+        smallbounce: 'smallbounce 0.5s 2s 8',
         float: 'float 10s ease 0s infinite',
       },
       opacity: {

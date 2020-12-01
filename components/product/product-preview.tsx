@@ -79,9 +79,9 @@ export default function ProductPreview({
         <div className="pb-2 bg-white shadow-xl rounded-xl">
           <div className="flex flex-col flex-wrap items-end mb-2 justify-evenly">
 
-            <div ref={drag} style={{ opacity }} className={`${animate && 'animate-smallbounce'} self-center flex justify-center cursor-move w-full sm:-mt-12 sm:mb-2`}>
+            <div ref={drag} style={{ opacity }} className="flex self-center justify-center w-full cursor-move sm:-mt-12 sm:mb-2">
               {animate && showDragTooltip && (
-                <div className="absolute flex items-center justify-around w-auto px-1 py-px mx-auto -mt-6 space-x-2 text-xs text-center bg-white border border-gray-300 rounded-lg shadow-md sm:ml-2 sm:-mt-8 sm:px-4">
+                <div className="absolute z-10 flex items-center justify-around w-auto px-1 py-px mx-auto -mt-6 space-x-2 text-xs text-center bg-white border border-gray-300 rounded-lg shadow-md sm:ml-2 sm:-mt-4 sm:px-4 animate-smallbounce">
                   <span>
                     Try dragging me
                   </span>
