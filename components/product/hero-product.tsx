@@ -85,7 +85,7 @@ export default function HeroProduct({
       <section
         className={`flex  flex-wrap justify-start items-center w-full pt-2 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}
       >
-        <div ref={drag} style={{ opacity }} className="z-10 w-1/3 pb-12 pl-20 mt-8 cursor-move animate-float">
+        <div ref={drag} style={{ opacity }} className="z-10 hidden w-1/3 pb-12 pl-20 mt-8 cursor-move sm:block animate-float">
           <CoverImage
             productName={productName}
             responsiveImage={cover.responsiveImage}
