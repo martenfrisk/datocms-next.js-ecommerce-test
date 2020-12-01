@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 import Meta from './meta'
-import Cart from './cart/cart'
 import { useCart } from './cart/cart-context'
+
+const Cart = dynamic(import('./cart/cart'))
 
 export default function Layout({ children, showCartButton = 'true' }: { children: object, showCartButton: string }) {
   const router = useRouter()
