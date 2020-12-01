@@ -22,7 +22,7 @@ export default function CoverImage({
         ...responsiveImage,
         alt: `Cover Image for ${productName}`,
       }}
-      className={`${shadow && 'hover:shadow-4xl shadow-3xl'} transition-shadow duration-200 hover:-translate-y-1 transform`}
+      className={`${shadow && 'hover:shadow-4xl shadow-3xl transition-shadow duration-200'}  hover:-translate-y-1 transform`}
       style={willRotate}
     />
   )

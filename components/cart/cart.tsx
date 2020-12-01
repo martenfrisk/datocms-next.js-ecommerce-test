@@ -94,7 +94,7 @@ const Cart = () => {
         <OutsideCloseCart>
           <div
             className={`text-center bg-white rounded-lg pt-8 flex flex-col items-center justify-start w-auto shadow-lg pointer-events-auto mb-2 overflow-y-scroll  md:mb-6 border border-blue-400  ${
-              visible ? 'visible' : 'invisible'
+              visible ? 'block' : 'hidden'
             }`}
             style={{ maxHeight: '50vh' }}
           >
@@ -115,14 +115,14 @@ const Cart = () => {
             >
               Your Shopping Cart
             </div>
-            <div className="max-h-screen overflow-y-scroll">
+            <div className="max-h-screen overflow-y-scroll w-72">
               {state && state.length === 0 ? (
-                <div className="px-4 py-4 text-sm select-none w-72">
+                <div className="px-4 py-4 text-sm select-none ">
                   Your cart is empty. Add an item and check back here later.
                 </div>
               ) : (
                 state && (
-                <div className="flex flex-wrap justify-end max-w-screen-sm w-72">
+                <div className="flex flex-wrap justify-end max-w-screen-sm">
                   <div className="w-full h-1/2">
                     {state.map((myCartItem: ActionType['payload']) => (
                       <div

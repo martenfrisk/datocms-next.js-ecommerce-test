@@ -23,7 +23,7 @@ export default function Index(
             {CMS_NAME}
           </title>
         </Head>
-        <Header frontPage />
+        <Header />
         {heroProduct && (
         <HeroProduct
           productName={heroProduct.productName}
