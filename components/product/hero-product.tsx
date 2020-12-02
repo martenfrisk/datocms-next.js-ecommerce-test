@@ -83,7 +83,7 @@ export default function HeroProduct({
         <Image data={{ ...resHero, alt: 'Hero image' }} className="absolute top-0 z-0 object-cover w-screen h-full opacity-50 hero" />
       </div>
       <section
-        className={`flex  flex-wrap justify-start items-center w-full pt-2 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}
+        className={`flex  flex-wrap justify-center max-w-6xl mx-auto items-center w-full pt-2 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}
       >
         <div ref={drag} style={{ opacity }} className="z-10 hidden w-1/3 pb-12 pl-20 mt-8 cursor-move sm:block animate-float">
           <CoverImage
@@ -94,7 +94,7 @@ export default function HeroProduct({
           />
         </div>
 
-        <div className="z-0 flex flex-col flex-wrap items-center justify-center w-full px-2 mt-4 mb-16 sm:-ml-20 sm:w-1/3">
+        <div className="z-0 flex flex-col flex-wrap items-center justify-center w-full px-2 mt-4 mb-16 sm:w-1/2 lg:w-1/4">
           <Link as={`/products/${slug}`} href="/products/[slug]">
             <a
               className="text-6xl font-normal leading-none text-center hover:underline"
