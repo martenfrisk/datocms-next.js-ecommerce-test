@@ -94,7 +94,7 @@ export default function HeroProduct({
           />
         </div>
 
-        <div className="z-0 flex flex-col flex-wrap items-center justify-center w-full px-2 mt-4 mb-16 sm:w-1/2 lg:w-1/4">
+        <div className="z-0 flex flex-col flex-wrap items-center justify-center w-full px-2 mt-4 mb-16 sm:w-1/2 lg:w-1/3">
           <Link as={`/products/${slug}`} href="/products/[slug]">
             <a
               className="text-6xl font-normal leading-none text-center hover:underline"
@@ -112,7 +112,7 @@ export default function HeroProduct({
             </a>
           </Link>
           <p
-            className="px-2 py-2 m-2 text-base font-light leading-normal text-center text-white bg-blue-300 bg-opacity-50 shadow-xl"
+            className="px-4 py-3 m-2 mt-4 text-base font-light leading-normal text-center text-white bg-blue-300 bg-opacity-50 shadow-xl"
           >
             {descriptionShort}
           </p>
