@@ -77,6 +77,7 @@ export default function HeroProduct({
         className="absolute top-0 object-cover mt-20 overflow-hidden sm:mt-0 bg-gradient-to-r from-blue-700 to-blue-800"
         style={{
           height: '50vh',
+          minHeight: '380px',
           maxHeight: '420px',
         }}
       >
@@ -85,7 +86,7 @@ export default function HeroProduct({
       <section
         className={`flex  flex-wrap justify-center max-w-6xl mx-auto items-center w-full pt-2 overflow-hidden text-white ${!heroimg && 'bg-navy-700'}`}
       >
-        <div ref={drag} style={{ opacity }} className="z-10 hidden w-1/3 pb-12 pl-20 mt-8 cursor-move sm:block animate-float">
+        <div ref={drag} style={{ opacity }} className="z-10 flex justify-center w-full cursor-move sm:pb-12 sm:pl-20 sm:mt-8 sm:w-1/3 animate-float">
           <CoverImage
             productName={productName}
             responsiveImage={cover.responsiveImage}
@@ -94,7 +95,7 @@ export default function HeroProduct({
           />
         </div>
 
-        <div className="z-0 flex flex-col flex-wrap items-center justify-center w-full px-2 mt-4 mb-16 sm:w-1/2 lg:w-1/3">
+        <div className="z-0 flex flex-col flex-wrap items-center justify-center w-full px-2 mb-16 sm:mt-4 sm:w-1/2 lg:w-1/3">
           <Link as={`/products/${slug}`} href="/products/[slug]">
             <a
               className="text-6xl font-normal leading-none text-center hover:underline"

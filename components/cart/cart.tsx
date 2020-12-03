@@ -111,14 +111,13 @@ const Cart = () => {
             )}
             <div
               className="absolute top-0 w-auto px-4 pt-2 text-sm tracking-wide select-none"
-              style={{ width: 'max-content' }}
             >
               Your Shopping Cart
             </div>
             <div className="max-h-screen overflow-y-scroll w-72">
               {state && state.length === 0 ? (
                 <div className="px-4 py-4 text-sm select-none ">
-                  Your cart is empty. Add an item and check back here later.
+                  Your cart is empty.
                 </div>
               ) : (
                 state && (
