@@ -110,13 +110,13 @@ const Cart = () => {
               </div>
             )}
             <div
-              className="absolute top-0 w-auto px-4 pt-2 text-sm tracking-wide select-none"
+              className="absolute top-0 px-4 pt-2 text-sm tracking-wide select-none w-72"
             >
               Your Shopping Cart
             </div>
             <div className="max-h-screen overflow-y-scroll w-72">
               {state && state.length === 0 ? (
-                <div className="px-4 py-4 text-sm select-none ">
+                <div className="px-4 py-4 text-sm select-none">
                   Your cart is empty.
                 </div>
               ) : (
