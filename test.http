@@ -1,0 +1,29 @@
+POST http://martenf1.cdsuperstore.se/api/1/
+content-type: application/json
+accept: application/json, text/javascript, */*
+accept-language: sv-SE,sv;q=0.9,en-US;q=0.8,en;q=0.7,no;q=0.6
+authorization: Basic QWRtaW5pc3RyYXRvcjo0dUNAeUZHRnVz
+cache-control: no-cache
+x-requested-with: XMLHttpRequest
+Host: martenf1.cdsuperstore.se
+Origin: http://martenf1.cdsuperstore.se
+Pragma: no-cache
+Referer: http://martenf1.cdsuperstore.se/api_test/index.html
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36
+Content-Type: application/json
+Postman-Token: 118978e0-5cee-45c0-9ab6-dc1492533863
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+Content-Length: 227
+
+{
+    "data": {
+        "method": "login",
+        "params": {
+            "username": "testuser2",
+            "password": "losen123"
+        },
+        "appid": "1000",
+        "md": "84c3b84dab5199fe03bc8ff4c7a9e9e6"
+    }
+}

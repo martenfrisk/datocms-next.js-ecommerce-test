@@ -2,25 +2,25 @@ import { useRef, useEffect } from 'react';
 import { useCart } from '@/cart/cart-context'
 
 function useOutsideAlerter(ref) {
-  const { showCart } = useCart();
-  const [, setVisible] = showCart;
-  useEffect(() => {
-    /**
+	const { showCart } = useCart();
+	const [, setVisible] = showCart;
+	useEffect(() => {
+		/**
          * Alert if clicked on outside of element
          */
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setVisible(() => false)
-      }
-    }
+		function handleClickOutside(event) {
+			if (ref.current && !ref.current.contains(event.target)) {
+				setVisible(() => false)
+			}
+		}
 
-    // Bind the event listener
-    document.addEventListener('mouseup', handleClickOutside);
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mouseup', handleClickOutside);
-    };
-  }, [ref]);
+		// Bind the event listener
+		document.addEventListener('mouseup', handleClickOutside);
+		return () => {
+			// Unbind the event listener on clean up
+			document.removeEventListener('mouseup', handleClickOutside);
+		};
+	}, [ref]);
 }
 
 /**
@@ -28,8 +28,8 @@ function useOutsideAlerter(ref) {
  */
 // eslint-disable-next-line react/prop-types
 export default function OutsideCloseCart({ children }) {
-  const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef);
+	const wrapperRef = useRef(null);
+	useOutsideAlerter(wrapperRef);
 
-  return <div ref={wrapperRef}>{children}</div>;
+	return <div ref={wrapperRef}>{children}</div>;
 }

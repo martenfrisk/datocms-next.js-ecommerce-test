@@ -9,35 +9,35 @@ import MultiBackend, { TouchTransition } from 'react-dnd-multi-backend';
 import { CartProvider } from '../components/cart/cart-context'
 
 const MyPreview = () => {
-  const {
-    display, item, style, ref,
-  } = usePreview()
-  if (!display) {
-    return null
-  }
-  return <img src={item.cover.src} style={style} className="z-20 w-1/2 h-auto opacity-25 sm:hidden" ref={ref} alt="" />
+	const {
+		display, item, style, ref,
+	} = usePreview()
+	if (!display) {
+		return null
+	}
+	return <img src={item.cover} style={style} className="z-20 w-1/2 h-auto opacity-25 sm:hidden" ref={ref} alt="" />
 }
 function MyApp({ Component, pageProps }) {
-  const HTML5toTouch = {
-    backends: [
-      {
-        backend: HTML5Backend,
-      },
-      {
-        backend: TouchBackend,
-        preview: true,
-        transition: TouchTransition,
-      },
-    ],
-  }
-  return (
-    <CartProvider>
-      <DndProvider backend={MultiBackend} options={HTML5toTouch}>
-        <Component {...pageProps} />
-        <MyPreview />
-      </DndProvider>
-    </CartProvider>
-  )
+	const HTML5toTouch = {
+		backends: [
+			{
+				backend: HTML5Backend,
+			},
+			{
+				backend: TouchBackend,
+				preview: true,
+				transition: TouchTransition,
+			},
+		],
+	}
+	return (
+		<CartProvider>
+			<DndProvider backend={MultiBackend} options={HTML5toTouch}>
+				<Component {...pageProps} />
+				<MyPreview />
+			</DndProvider>
+		</CartProvider>
+	)
 }
 
 export default MyApp
