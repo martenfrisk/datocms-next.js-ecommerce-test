@@ -97,13 +97,6 @@ const reducer = (state: any, action: ActionType) => {
 	}
 };
 
-// const testItem = [
-//   {
-//     item: "Tomb Raider",
-//     id: uuid(),
-//     quantity: 2,
-//   },
-// ];
 function setLocalStorage(key: string, value: string) {
 	try {
 		window.localStorage.setItem(key, JSON.stringify(value));
@@ -120,18 +113,24 @@ function getLocalStorage(key: string, initialValue: any[]) {
 		return null
 	}
 }
+// function checkAuthenticated() {
+// 	if (getLocalStorage('user_data', null)) {
+// 		return true
+// 	}
+// 	return false
+// }
+
+// function sendCart(content: any) {
+
+// }
 
 export const CartProvider = ({ children }: { children: any }) => {
 	// eslint-disable-next-line no-unused-vars
 	const [localState, setLocalState] = useState(
 		() => isBrowser && getLocalStorage('cart', initialState),
 	);
-
 	const [visible, setVisible] = useState(false)
 	const [currentlyDragging, setCurrentlyDragging] = useState(false)
-	//   useEffect(() => {
-	//     setLocalState(getLocalStorage("cart", initialState));
-	//   }, []);
 
 	const [state, dispatch] = useReducer(reducer, localState);
 
@@ -153,11 +152,6 @@ export const CartProvider = ({ children }: { children: any }) => {
 		</CartDispatch.Provider>
 	);
 };
-
-// interface useCartContext {
-//   state: any,
-//   dispatch: any
-// }
 
 export const useCart = () => useContext<ICartContext>(CartContext)
 export const useDispatchCart = () => useContext(CartDispatch);

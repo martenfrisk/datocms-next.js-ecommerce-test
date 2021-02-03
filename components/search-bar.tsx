@@ -25,7 +25,7 @@ export default function SearchBar() {
 							const FuzzySearch = (await import('fuzzy-search')).default
 							const searcher = new FuzzySearch(
 								list,
-								['artnr', 'description', 'descriptionShort'],
+								['product', 'artnr', 'description', 'descriptionShort'],
 								{
 									sort: true,
 								},
@@ -42,19 +42,16 @@ export default function SearchBar() {
 						<div className="absolute z-20 flex flex-col px-4 py-4 mt-10 space-y-4 bg-white shadow-md bg-opacity-95">
 							{searchResults !== []
 								&& searchResults.slice(0, 5).map((hit) => (
-									<div className="underline" key={hit.slug}>
-										<Link href={`/products/${hit.slug}`}>
-											<>
-												{hit.productName}
-												{hit.subname && `: ${hit.subname}`}
-											</>
+									<div className="underline" key={hit.artnr}>
+										<Link href={`/products/${hit.artnr}`}>
+											{hit.product}
 										</Link>
 									</div>
 								))}
 							{searchTerm !== '' && (
 								<div className="text-sm italic">
 									<Link
-										href={`/search${searchTerm !== '' && `?${searchTerm}`}`}
+										href={`/search${searchTerm !== '' && `?s=${searchTerm}`}`}
 									>
 										More results
 									</Link>

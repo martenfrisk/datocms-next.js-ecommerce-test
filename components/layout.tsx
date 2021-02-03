@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
@@ -18,8 +19,8 @@ export default function Layout({ children, showCartButton = 'true' }: { children
 	return (
 		<>
 			<Meta />
-			<div className="bg-white  text-blueish-800">
-				<main className="min-h-screen">{children}</main>
+			<div className="bg-white text-blueish-800">
+				<main className="z-10 min-h-screen">{children}</main>
 				{showCartButton === 'true' && <Cart />}
 			</div>
 		</>

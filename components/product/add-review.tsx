@@ -23,12 +23,12 @@ const AddReview = ({ productId }: { productId: string }) => {
 	}
 
 	const singleLine = (value, inputName, id, label) => (
-		<div className="flex flex-col w-1/2 ">
+		<div className="flex justify-between w-full mb-1 ">
 			<span className="text-xs transform translate-y-1">
 				{label}
 			</span>
 			<input
-				className={`px-1 py-1 text-white bg-blue-700 border border-transparent rounded-sm ${value === '' && ' border-red-500'}`}
+				className={`px-1 py-1 text-white bg-blue-700 focus:border-transparent border-r-2 border-transparent rounded-sm ${value === '' && ' border-red-500'}`}
 				type="text"
 				id={id}
 				value={value}
@@ -53,27 +53,24 @@ const AddReview = ({ productId }: { productId: string }) => {
 	return (
 		<>
 			{reviewSubmitted ? (
-				<p className="flex flex-col w-1/2 px-4 py-3 mt-4 bg-blue-100 bg-opacity-25 rounded-lg ">
+				<p className="flex flex-col w-full px-4 py-3 mt-4 bg-blue-100 bg-opacity-25 rounded-lg sm:w-1/2 ">
 					Your review has been submitted
 				</p>
 
 			) : (
 
-				<details className="z-30 flex flex-col w-1/2 px-4 py-3 mt-4 bg-blue-100 bg-opacity-25 rounded-lg ">
+				<details className="flex flex-col items-center w-full px-4 py-3 mt-4 bg-blue-100 bg-opacity-25 rounded-lg  sm:w-1/2">
 					<summary className="mb-1 cursor-pointer focus:outline-none">Review this product</summary>
-					<p className="text-xs transform translate-y-1">Rating</p>
-					<ReactStarsRating value={userRating} onChange={handleRating} isEdit isHalf={false} primaryColor="#FCD34D" className="flex focus:outline-none" />
-					<span>
-						(
-						{userRating}
-						)
-					</span>
+					<div className="flex justify-between w-full mb-1">
+						<p className="text-xs transform translate-y-1">Rating</p>
+						<ReactStarsRating value={userRating} onChange={handleRating} isEdit isHalf={false} primaryColor="#FCD34D" className="flex justify-center focus:outline-none" />
+					</div>
 					{singleLine(user.name, 'name', 'userName', 'Name')}
 					{singleLine(user.email, 'email', 'userEmail', 'Email')}
-					<p className="text-xs transform translate-y-1">Comment</p>
-					<textarea className={`w-1/2 shadow-md border text-white bg-blue-700 border-transparent ${user.comment === '' && 'border-red-500'}`} id="userComment" value={user.comment} name="comment" onChange={handleChange} />
-					<div className="flex flex-wrap">
-						<h3 className="w-full">Show email in review?</h3>
+					<p className="text-xs ">Comment</p>
+					<textarea className={`w-full shadow-md focus:border-transparent border-r-2 text-white bg-blue-700 border-transparent ${user.comment === '' && 'border-red-500'}`} id="userComment" value={user.comment} name="comment" onChange={handleChange} />
+					<div className="flex flex-wrap justify-center w-full">
+						<h3 className="w-full text-center">Show email in review?</h3>
 						<div>
 							Yes
 							<input
@@ -97,22 +94,25 @@ const AddReview = ({ productId }: { productId: string }) => {
 							/>
 						</div>
 					</div>
-					{user.name === '' || user.email === '' || user.comment === '' ? (
-						<button
-							type="submit"
-							className="w-1/2 px-2 py-1 mt-2 bg-blue-700 border-2 border-white rounded-md"
-						>
-							Enter review first
-						</button>
-					) : (
-						<button
-							type="submit"
-							className="w-1/2 px-2 py-1 mt-2 bg-blue-700 border-2 border-white rounded-md"
-							onClick={submitReview}
-						>
-							Submit review
-						</button>
-					)}
+					<div className="flex justify-center w-full">
+
+						{user.name === '' || user.email === '' || user.comment === '' ? (
+							<button
+								type="submit"
+								className="w-2/3 px-2 py-1 mt-4 font-light bg-blue-700 border border-white rounded-md"
+							>
+								Enter review first
+							</button>
+						) : (
+							<button
+								type="submit"
+								className="w-2/3 px-2 py-1 mt-4 font-light bg-blue-700 border border-white rounded-md"
+								onClick={submitReview}
+							>
+								Submit review
+							</button>
+						)}
+					</div>
 				</details>
 
 			)}

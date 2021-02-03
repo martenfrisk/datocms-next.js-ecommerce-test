@@ -4,19 +4,20 @@ import '../styles/index.css'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { TouchBackend } from 'react-dnd-touch-backend'
-import { usePreview } from 'react-dnd-preview'
+// import { usePreview } from 'react-dnd-preview'
 import MultiBackend, { TouchTransition } from 'react-dnd-multi-backend';
 import { CartProvider } from '../components/cart/cart-context'
 
-const MyPreview = () => {
-	const {
-		display, item, style, ref,
-	} = usePreview()
-	if (!display) {
-		return null
-	}
-	return <img src={item.cover} style={style} className="z-20 w-1/2 h-auto opacity-25 sm:hidden" ref={ref} alt="" />
-}
+// const MyPreview = () => {
+// 	const {
+// 		display, item, style, ref,
+// 	} = usePreview()
+// 	if (!display) {
+// 		return null
+// 	}
+// 	return <img src={item.cover} style={style} c
+// lassName="z-20 w-1/2 h-auto opacity-25 sm:hidden" ref={ref} alt="" />
+// }
 function MyApp({ Component, pageProps }) {
 	const HTML5toTouch = {
 		backends: [
@@ -34,7 +35,7 @@ function MyApp({ Component, pageProps }) {
 		<CartProvider>
 			<DndProvider backend={MultiBackend} options={HTML5toTouch}>
 				<Component {...pageProps} />
-				<MyPreview />
+				{/* <MyPreview /> */}
 			</DndProvider>
 		</CartProvider>
 	)

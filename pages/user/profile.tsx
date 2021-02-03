@@ -3,16 +3,18 @@ import { useState, useEffect } from 'react'
 import Layout from '@/components/layout'
 import Header from '@/components/header'
 import {
-	getCustomer, getOrder, getOrders, loginUser,
+	getCustomer, getOrder, getOrders, getWishlist, loginUser,
 } from '@/lib/airapi'
 import { UserAuthenticated, UserDetails, UserOrder } from '@/lib/methods/types'
 import Link from 'next/link'
+import { AirProduct, ProductType } from '@/lib/types'
 
 export default function Profile() {
 	const [user, setUser] = useState<UserAuthenticated>(null)
 	const [authenticated, setAuthenticated] = useState(false)
 	const [login, setLogin] = useState({ username: 'testuser2', password: 'losen123' })
 	const [userOrders, setUserOrders] = useState<UserOrder[]>(null)
+	const [userWishlist, setUserWishlist] = useState<ProductType[]>(null)
 	const [userDetails, setUserDetails] = useState<UserDetails>(null)
 	const [showOrders, setShowOrders] = useState(false)
 
@@ -35,6 +37,28 @@ export default function Profile() {
 				})
 			})
 		setUserOrders(() => newOrder)
+	}
+
+	const getUserWishlist = async () => {
+		const wishlist = []
+		await getWishlist(user)
+			.then((data) => {
+				data.forEach(async (x: AirProduct) => {
+					const newObj = {
+						productName: x.title,
+						artnr: x.id,
+						slug: x.friendly_url === null ? x.title.toLowerCase().replace(' ', '') : x.friendly_url,
+						description: x.description,
+						descriptionShort: x.short_description,
+						retailPrice: x.price,
+						cover: `http://martenf1.cdsuperstore.se${x.image.normal}`,
+						heroimg: `http://martenf1.cdsuperstore.se${x.image.large}`,
+						platform: 'Video Game',
+					}
+					wishlist.push(newObj)
+				})
+			})
+		setUserWishlist(() => wishlist)
 	}
 
 	const handleLogin = async () => {
@@ -65,6 +89,7 @@ export default function Profile() {
 	useEffect(() => {
 		if (authenticated) {
 			getUserOrders()
+			getUserWishlist()
 		}
 	}, [user])
 
@@ -116,7 +141,7 @@ export default function Profile() {
 	}
 
 	const userDeets = (
-		userDetails && (
+		userDetails ? (
 			<>
 				<p className="flex justify-between">
 					<span>
@@ -143,6 +168,13 @@ export default function Profile() {
 					</span>
 				</p>
 			</>
+		) : (
+			<p className="flex items-center justify-center w-full">
+				<svg className="w-5 h-5 mr-3 -ml-1 text-blue-700 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+					<circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+					<path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+				</svg>
+			</p>
 		)
 	)
 	return (
@@ -205,6 +237,21 @@ export default function Profile() {
 									</button>
 								</div>
 							</div>
+							<div>
+								<p className="text-lg font-semibold">Your wishlist</p>
+								<div className="flex flex-col">
+									{userWishlist ? (
+										userWishlist.map((product) => (
+											<Link href={`/products/${product.artnr}`}>
+												{product.productName}
+											</Link>
+										))
+									) : (
+										<p>Your wishlist is empty</p>
+									)}
+								</div>
+							</div>
+
 							<div className="flex flex-col w-full pt-10 items-between sm:w-1/2">
 								<button
 									type="button"

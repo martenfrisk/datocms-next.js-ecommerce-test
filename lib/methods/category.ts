@@ -18,22 +18,21 @@ export const getCategory = (
 	},
 })
 
-export const getTopOffer = (
+export const getTopOfferMethod = (
 	id: string,
 	APPID: string,
 	MD5: string,
-) => `
-{
-	"data": {
-		"method": "get_top_offer",
-		"params": {
-			"category_id": "${id}",
-			"sort": "BeskrFallande"
+) => ({
+	data: {
+		method: 'get_top_offer',
+		params: {
+			category_id: id,
+			sort: 'BeskrFallande',
 		},
-		"appid": "${APPID}",
-		"md": "${MD5}"
-	}
-`;
+		appid: APPID,
+		md: MD5,
+	},
+})
 
 export const getArticleList = (
 	id: string,

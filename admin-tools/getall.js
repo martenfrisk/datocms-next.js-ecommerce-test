@@ -3,9 +3,18 @@ const fetch = require('isomorphic-unfetch')
 // const { SiteClient } = require('datocms-client')
 // const client = new SiteClient('7cb43e824fe1faf51e0931012e69dd')
 const fs = require('fs')
+const request = require('request')
 // const itemId = '9650724'
 
 let data = []
+
+const download = (url, path, callback) => {
+	request.head(url, (err, res, body) => {
+		request(url)
+			.pipe(fs.createWriteStream(path))
+			.on('close', callback)
+	})
+}
 
 async function getAll() {
 	const headers = {
@@ -51,11 +60,15 @@ async function getAll() {
 	 credentials: 'include'
  })
  		.then(res => res.json())
-    .then(result => {
-			console.log(result)
-			result.category.article_list.articles.forEach(item => {
+    .then((result) => {
+			result.category.article_list.articles.forEach(async (item) => {
+				const smallurl = `http://martenf1.cdsuperstore.se${item.image.small}`
+				const smallfile = item.image.small.split('/')[4].split('?')[0]
+				const smallpath = `./public/images/small/${smallfile}`
+				download(smallurl, smallpath, () => console.log(`done ${smallfile}`))
 				const newItem = {
 					artnr: item.id, 
+					product: item.title,
 					description: item.description,
 					descriptionShort: item.short_description,
 					cover: item.image.small
@@ -63,9 +76,9 @@ async function getAll() {
 				data.push(newItem)
 			})
 		})
-		.then(() => {
-			fs.writeFileSync('./admin-tools/searchlist.json', JSON.stringify(data), (err) => console.error(err))
-		})
+		// .then(() => {
+		// 	fs.writeFileSync('./admin-tools/searchlist.json', JSON.stringify(data), (err) => console.error(err))
+		// })
     .catch(err => console.error(err))
 }
 getAll()

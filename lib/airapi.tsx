@@ -1,13 +1,25 @@
 /* eslint-disable no-console */
 import 'isomorphic-unfetch';
 import md5 from 'blueimp-md5';
+
 import {
-	addGradeMethod, getArticleMethod, getAvgGradeMethod, getGradesMethod,
+	addGradeMethod,
+	addToWishlistMethod,
+	getArticleMethod,
+	getAvgGradeMethod,
+	getGradesMethod,
+	getWishlistMethod,
+	removeFromWishlistMethod,
 } from './methods/articles'
-import { getBrandMethod } from './methods/brands';
 import {
-	getCustomerMethod, getOrderMethod, getOrdersMethod, loginMethod,
+	getCustomerMethod,
+	getOrderMethod,
+	getOrdersMethod,
+	loginMethod,
 } from './methods/customer';
+import { UserAuthenticated } from './methods/types';
+import { getCategory, getTopOfferMethod } from './methods/category';
+import { AirProduct } from './types';
 
 const appKey = 'wyD4oDd3oyT6iT7N';
 const appId = '1000';
@@ -19,7 +31,7 @@ function getMd(dataMethod: string, ...input: any[]) {
 	return md;
 }
 
-async function fetchAPI(bodyData: any, proxy: boolean = false) {
+async function fetchAPI(bodyData: any, proxy: boolean = true) {
 	const url = proxy ? 'http://martenf1.cdsuperstore.se/apiproxy/' : API_URL
 	const headers = new Headers({
 		Accept: 'application/json, text/javascript, */*',
@@ -52,19 +64,64 @@ async function fetchAPI(bodyData: any, proxy: boolean = false) {
 	return json
 }
 
-export async function getAllProducts(limit: string = '30') {
-	const brandId = '1'
-	const brandmd = getMd('get_brand', brandId, limit)
-	const brandbody = getBrandMethod(brandId, limit, appId, brandmd)
-	const data = await fetchAPI(brandbody)
-	return data
+export async function getAllProducts(limit: number = 30, category: string = '7') {
+	const brandmd = getMd('get_category', category, limit, '0', 'BeskrFallande')
+	const brandbody = getCategory(category, limit, appId, brandmd)
+	const data = await fetchAPI(brandbody, true)
+	const products = []
+	data.category.article_list.articles.forEach(async (x: AirProduct) => {
+		const newObj = {
+			productName: x.title,
+			artnr: x.id,
+			slug: x.friendly_url === null ? x.title.toLowerCase().replace(' ', '') : x.friendly_url,
+			description: x.description,
+			descriptionShort: x.short_description,
+			retailPrice: x.price,
+			cover: x.image.normal.split('/')[3].split('?')[0].split('.')[0],
+			heroimg: x.image.normal.split('/')[3].split('?')[0].split('.')[0],
+			platform: x.categories,
+		}
+		products.push(newObj)
+	})
+	return products
+}
+export async function getTopOffer(category: string = '7') {
+	const brandmd = getMd('get_top_offer', category, 'BeskrFallande')
+	const brandbody = getTopOfferMethod(category, appId, brandmd)
+	const data = await fetchAPI(brandbody, true)
+	const product = {
+		productName: data.article_list.articles[0].title,
+		artnr: data.article_list.articles[0].id,
+		slug: data.article_list.articles[0].friendly_url === null ? data.article_list.articles[0].title.toLowerCase().replace(' ', '') : data.article_list.articles[0].friendly_url,
+		description: data.article_list.articles[0].description,
+		descriptionShort: data.article_list.articles[0].short_description,
+		retailPrice: data.article_list.articles[0].price,
+		cover: data.article_list.articles[0].image.normal.split('/')[3].split('?')[0].split('.')[0],
+		heroimg: data.article_list.articles[0].image.extra_images['2'].split('/')[4].split('?')[0].split('.')[0],
+		platform: data.article_list.articles[0].categories,
+	}
+	return product
 }
 
 export async function getProductByArtnr(artnr: string) {
 	const prodmd = getMd('get_article', artnr)
 	const prodbody = getArticleMethod(artnr, appId, prodmd)
 	const data = await fetchAPI(prodbody)
-	return data
+	let product: any
+	if (data) {
+		product = {
+			productName: data.article.title,
+			artnr: data.article.id,
+			slug: data.article.friendly_url === null ? data.article.title.toLowerCase().replace(' ', '') : data.article.friendly_url,
+			description: data.article.description,
+			descriptionShort: data.article.short_description,
+			retailPrice: data.article.price.toString(),
+			cover: data.article.image.normal.split('/')[3].split('?')[0].split('.')[0],
+			platform: data.article.categories,
+			rating: data.article.avg_grade,
+		}
+	}
+	return product
 }
 
 export async function loginUser(username: string, password: string) {
@@ -121,12 +178,53 @@ export async function addNewReview(
 	const data = await fetchAPI(gradeBody, true)
 	return data
 }
+export async function addToWishlist(
+	productId: string,
+	user: UserAuthenticated,
+) {
+	const wishMd = getMd('add_to_wishlist', productId)
+	const wishBody = addToWishlistMethod(
+		user,
+		productId,
+		appId,
+		wishMd,
+	)
+	const data = await fetchAPI(wishBody, true)
+	return data.method_status.status
+}
+
+export async function removeFromWishlist(
+	productId: string,
+	user: UserAuthenticated,
+) {
+	const wishMd = getMd('remove_from_wishlist', productId)
+	const wishBody = removeFromWishlistMethod(
+		user,
+		productId,
+		appId,
+		wishMd,
+	)
+	const data = await fetchAPI(wishBody, true)
+	return data.method_status.status
+}
+
+export async function getWishlist(
+	user: UserAuthenticated,
+) {
+	const wishMd = getMd('get_wishlist')
+	const wishBody = getWishlistMethod(
+		user,
+		appId,
+		wishMd,
+	)
+	const data = await fetchAPI(wishBody, true)
+	return data.wishlist
+}
 
 export async function getReviewsByProductId(productId: string) {
 	const reviewMd = getMd('get_grades', productId)
 	const reviewBody = getGradesMethod(productId, appId, reviewMd)
 	const data = await fetchAPI(reviewBody)
-	console.log({ data })
 	return data
 }
 

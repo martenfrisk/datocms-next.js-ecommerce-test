@@ -9,9 +9,9 @@ type MoreProductsProps = {
 
 export default function MoreProducts(
 	{
-		products, header = '', platform = '', animateFirst = false,
+		products, header = '', animateFirst = false,
 	}: {
-    products: MoreProductsProps['products'], header?: string, platform?: string, animateFirst?: boolean
+    products: MoreProductsProps['products'], header?: string, animateFirst?: boolean
   },
 ): React.ReactElement<MoreProductsProps> {
 	return (
@@ -25,40 +25,20 @@ export default function MoreProducts(
 				</h2>
 			)}
 			<div className="flex flex-wrap max-w-5xl mx-auto mb-0">
-				{platform === '' && (
-					products.map((product, index) => (
-						<ProductPreview
-							key={product.slug}
-							productName={product.productName}
-							artnr={product.artnr}
-							subname={product.subname}
-							slug={product.slug}
-							description={product.description}
-							descriptionShort={product.descriptionShort}
-							retailPrice={product.retailPrice}
-							cover={product.cover}
-							animate={animateFirst && index === 0}
-						/>
-					))
-				)}
-				{platform !== '' && (
-					<>
-						{products.filter((product) => product.platform === platform).map((product, index) => (
-							<ProductPreview
-								key={product.slug}
-								productName={product.productName}
-								artnr={product.artnr}
-								subname={product.subname}
-								slug={product.slug}
-								description={product.description}
-								descriptionShort={product.descriptionShort}
-								retailPrice={product.retailPrice}
-								cover={product.cover}
-								animate={animateFirst && index === 0}
-							/>
-						))}
-					</>
-				)}
+				{products.map((product, index) => (
+					<ProductPreview
+						key={product.slug}
+						productName={product.productName}
+						artnr={product.artnr}
+						subname={product.subname}
+						slug={product.slug}
+						description={product.description}
+						descriptionShort={product.descriptionShort}
+						retailPrice={product.retailPrice}
+						cover={product.cover}
+						animate={animateFirst && index === 0}
+					/>
+				))}
 			</div>
 		</section>
 	);
@@ -66,6 +46,5 @@ export default function MoreProducts(
 
 MoreProducts.defaultProps = {
 	header: '',
-	platform: '',
 	animateFirst: false,
 }

@@ -2,11 +2,18 @@
 import Link from 'next/link'
 import { useDispatchCart, useCart } from '@/cart/cart-context'
 import { ProductType, ItemTypes } from '@/lib/types'
-import Touch1 from '@carbon/icons-react/lib/touch--1/16'
+import {
+	BasketPlusOutline,
+	StarOutline,
+	OutlineTouchApp,
+	StarSharp,
+} from '@/components/icons'
 // import { Preview } from 'react-dnd-multi-backend'
 import { useDrag } from 'react-dnd'
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
+// import Image from 'next/image'
+import ImageOpt from '@/components/image'
+import { addToWishlist, removeFromWishlist } from '@/lib/airapi'
 
 export default function ProductPreview({
 	productName,
@@ -26,14 +33,38 @@ export default function ProductPreview({
     description: ProductType['description'],
     descriptionShort: ProductType['descriptionShort'],
     retailPrice: ProductType['retailPrice'],
-    cover: ProductType['cover']
+    cover: any
     animate?: boolean
 }) {
 	const [showDragTooltip, setShowDragTooltip] = useState(true)
+	const [onWishlist, setOnWishlist] = useState<Boolean>(null)
 	const dispatch: any = useDispatchCart()
 	const { showCart, dragging } = useCart()
 	const [, setVisible] = showCart
 	const [, setCurrentlyDragging] = dragging
+	function isAuthenticated() {
+		try {
+			const value = window.localStorage.getItem('user_data');
+			return value ? JSON.parse(value) : null;
+		} catch (e) {
+			console.error(e);
+			return null
+		}
+	}
+	const handleAddToWishlist = async () => {
+		const user = isAuthenticated()
+		if (user !== null) {
+			const res = await addToWishlist(artnr, user)
+			if (res === 1) setOnWishlist(true)
+		}
+	}
+	const handleRemoveFromWishlist = async () => {
+		const user = isAuthenticated()
+		if (user !== null) {
+			const res = await removeFromWishlist(artnr, user)
+			if (res === 1) setOnWishlist(false)
+		}
+	}
 	const handleAddToCart = () => {
 		dispatch({
 			type: 'ADD_ITEM',
@@ -83,23 +114,33 @@ export default function ProductPreview({
 
 						<div ref={drag} style={{ opacity }} className="flex self-center justify-center w-full cursor-move sm:-mt-12 sm:mb-2">
 							{animate && showDragTooltip && (
-								<div className="absolute z-10 flex items-center justify-around w-auto px-1 py-px mx-auto -mt-6 space-x-2 text-xs text-center bg-white border border-gray-300 rounded-lg shadow-md sm:ml-2 sm:-mt-4 sm:px-4 animate-smallbounce">
+								<div className="absolute z-10 flex items-center justify-around w-auto px-1 py-px mx-auto -mt-6 text-xs text-center whitespace-no-wrap bg-white border border-gray-300 rounded-lg shadow-md sm:ml-2 sm:-mt-4 sm:px-4 animate-smallbounce">
 									<span>
 										Try dragging me
 									</span>
-									<Touch1 className="hidden sm:inline-block" />
+									<div
+										className="w-4 h-4 ml-2"
+									>
+										<OutlineTouchApp className="hidden sm:inline-block" />
+									</div>
 								</div>
 							)}
 							<Link href={`/products/${encodeURIComponent(artnr)}`}>
 								<a className="w-full cursor-pointer" aria-label={`Link to ${productName}`}>
-									<Image
-										unoptimized
-										alt=""
+									<ImageOpt
 										src={cover}
 										width={500}
 										height={500}
 										className="w-full rounded-t-xl"
 									/>
+									{/* <Image
+										alt={`Cover of ${productName}`}
+										src={`/images/${cover}`}
+										width={225}
+										height={225}
+										layout="responsive"
+										className="w-full rounded-t-xl"
+									/> */}
 								</a>
 							</Link>
 
@@ -153,13 +194,32 @@ export default function ProductPreview({
 						>
 							{descriptionShort ? descriptionShort.replace(/(<([^>]+)>)/gi, '') : description.replace(/(<([^>]+)>)/gi, '')}
 						</p>
-						<button
-							type="button"
-							className="pt-2 pr-4 text-xs font-light tracking-wide text-blue-700 transition-all duration-100 transform cursor-pointer justify-self-end focus:outline-none hover:-translate-y-px"
-							onClick={handleAddToCart}
-						>
-							Add to cart
-						</button>
+						<div className="flex items-center justify-between w-full px-4 pt-3">
+							{onWishlist ? (
+								<div
+									className="w-5 h-5 text-blue-700 cursor-pointer"
+								>
+									<StarSharp
+										onClick={handleRemoveFromWishlist}
+									/>
+								</div>
+							) : (
+								<div
+									className="w-5 h-5 text-blue-700 cursor-pointer"
+								>
+									<StarOutline
+										onClick={handleAddToWishlist}
+									/>
+								</div>
+							)}
+							<div
+								className="w-5 h-5 text-blue-700"
+							>
+								<BasketPlusOutline
+									onClick={handleAddToCart}
+								/>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

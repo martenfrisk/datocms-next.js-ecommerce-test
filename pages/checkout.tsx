@@ -11,7 +11,8 @@ import TrashCan from '@carbon/icons-react/lib/trash-can/16'
 import Layout from '@/components/layout';
 import { useCart, useDispatchCart, ActionType } from '@/components/cart/cart-context';
 import Header from '@/components/header';
-import Image from 'next/image'
+// import Image from 'next/image'
+import ImageOpt from '@/components/image'
 
 export default function Checkout() {
 	const [user, setUser] = useState('')
@@ -97,12 +98,17 @@ export default function Checkout() {
 									{state.map((cartItem: ActionType['payload']) => (
 										<div className="flex flex-wrap items-center justify-between w-full px-2 py-2 mb-4 rounded-md shadow-md hover:shadow-lg">
 											<div className="w-1/5 h-auto">
-												<Image
-													unoptimized
+												<ImageOpt
 													src={cartItem.responsiveImage}
 													height={150}
 													width={150}
+													className=""
 												/>
+												{/* <Image
+													src={`/images/${cartItem.responsiveImage}`}
+													height={150}
+													width={150}
+												/> */}
 											</div>
 											<div className="flex flex-wrap w-4/5 px-2">
 

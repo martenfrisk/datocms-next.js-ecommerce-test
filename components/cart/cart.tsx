@@ -5,12 +5,9 @@ import Link from 'next/link';
 import { useDrop } from 'react-dnd'
 import { ItemTypes } from '@/lib/types'
 import OutsideCloseCart from '@/lib/click-outside';
-import ShoppingCart from '@carbon/icons-react/lib/shopping--cart/32'
-import AddAlt from '@carbon/icons-react/lib/add--alt/16'
-import Package from '@carbon/icons-react/lib/package/16'
-import SubtractAlt from '@carbon/icons-react/lib/subtract--alt/16'
-import TrashCan from '@carbon/icons-react/lib/trash-can/16'
-import Send from '@carbon/icons-react/lib/send/16'
+import {
+	CarbonShoppingCart, CarbonAddAlt, CarbonSubtractAlt, CarbonTrashCan, CarbonSend,
+} from '@/components/icons'
 
 import { useCart, useDispatchCart, ActionType } from './cart-context';
 
@@ -71,7 +68,7 @@ const Cart = () => {
 	return (
 		<>
 			<div
-				className={`sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0   flex-col md:flex-row md:ml-10 text-blueish-800 transition-all duration-100 pointer-events-none z-20 right-0 max-h-screen transform ${isActive && 'scale-y-105'}`}
+				className={`sticky w-full md:w-20 bottom-0 flex items-center md:items-end left-0 flex-col md:flex-row md:ml-10 text-blueish-800 transition-all duration-100 pointer-events-none z-20 right-0 max-h-screen transform ${isActive && 'scale-y-105'}`}
 				ref={drop}
 			>
 				{!visible && (
@@ -80,20 +77,24 @@ const Cart = () => {
 						className="flex flex-col items-center justify-center order-last w-12 h-12 p-2 mb-4 text-white bg-blue-600 border-2 border-white rounded-full cursor-pointer pointer-events-auto sm:mb-20 shadow-3xl md:order-first"
 					>
 						{state && state.length > 0 && (
-							<div className="absolute bottom-0 w-5 h-5 mb-4 ml-10 text-xs text-center text-blue-600 bg-white border-2 border-blue-600 rounded-full pointer-events-auto sm:mb-20">
+							<div className="absolute w-5 h-5 mb-4 ml-10 text-xs text-center text-blue-600 bg-white border-2 border-blue-600 rounded-full pointer-events-auto ">
 								{state.reduce(
 									(acc: number, curr: { quantity: number }) => acc + curr.quantity,
 									0,
 								)}
 							</div>
 						)}
-						<ShoppingCart className="mx-auto my-0" />
+						<div
+							className="absolute w-6 h-6 mx-auto my-0"
+						>
+							<CarbonShoppingCart />
+						</div>
 					</div>
 				)}
 
 				<OutsideCloseCart>
 					<div
-						className={`text-center bg-white rounded-lg pt-8 flex flex-col items-center justify-start w-auto shadow-lg pointer-events-auto mb-2 overflow-y-scroll  md:mb-6 border border-blue-400  ${
+						className={`text-center bg-white rounded-lg pt-8 flex flex-col items-center justify-start w-auto shadow-lg pointer-events-auto mb-2 overflow-y-scroll px-0 md:mb-6 border border-blue-400  ${
 							visible ? 'block' : 'hidden'
 						}`}
 						style={{ maxHeight: '50vh' }}
@@ -106,7 +107,6 @@ const Cart = () => {
 								<p className="w-full pt-4 text-gray-800 bg-white rounded-lg ">
 									Drop item here to add to cart.
 								</p>
-								<Package className="w-16 h-16 text-gray-800" style={{ filter: 'drop-shadow(-2px 2px 3px rgb(0 0 0 / 30%))' }} />
 							</div>
 						)}
 						<div
@@ -114,7 +114,7 @@ const Cart = () => {
 						>
 							Your Shopping Cart
 						</div>
-						<div className="max-h-screen overflow-y-scroll w-72">
+						<div className="max-h-screen p-0 mx-auto w-72">
 							{state && state.length === 0 ? (
 								<div className="px-4 py-4 text-sm select-none">
 									Your cart is empty.
@@ -155,7 +155,11 @@ const Cart = () => {
 															}`}
 															disabled={myCartItem.quantity === 1}
 														>
-															<SubtractAlt className="w-4 h-4" />
+															<div
+																className="w-4 h-4"
+															>
+																<CarbonSubtractAlt />
+															</div>
 														</button>
 														<span className="w-6 text-center">
 															{myCartItem.quantity}
@@ -165,13 +169,17 @@ const Cart = () => {
 															onClick={() => handleAdjustQuantity(myCartItem.id, 'INCREASE')}
 															className="focus:outline-none "
 														>
-															<AddAlt className="w-4 h-4" />
+															<div
+																className="w-4 h-4"
+															>
+																<CarbonAddAlt />
+															</div>
 														</button>
 														<span
-															className="pl-4 text-xs text-gray-700 cursor-pointer hover:underline"
+															className="w-4 h-4 ml-2 text-xs text-gray-700 cursor-pointer hover:underline"
 															onClick={() => handleRemoveItem(myCartItem.id)}
 														>
-															<TrashCan />
+															<CarbonTrashCan />
 														</span>
 													</div>
 												</div>
@@ -211,7 +219,9 @@ const Cart = () => {
 																checkout
 																{' '}
 															</span>
-															<Send />
+															<span className="w-4 h-4">
+																<CarbonSend />
+															</span>
 														</span>
 													</Link>
 												</span>
@@ -224,6 +234,15 @@ const Cart = () => {
 					</div>
 				</OutsideCloseCart>
 			</div>
+			<style jsx>
+				{
+					`
+					::-webkit-scrollbar {
+						display: none;
+					}				
+					`
+				}
+			</style>
 		</>
 	);
 };

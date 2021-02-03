@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import dynamic from 'next/dynamic'
 import ChevronDown from '@carbon/icons-react/lib/chevron--down/16';
 import ChevronUp from '@carbon/icons-react/lib/chevron--up/16';
 import List from '@carbon/icons-react/lib/list/24';
 import Grid from '@carbon/icons-react/lib/grid/24';
 
-import ProductPreview from '@/product/product-preview';
 import Header from '@/components/header';
 import Layout from '@/components/layout';
-import { ProductType, AirProduct } from '@/lib/types';
+import { ProductType } from '@/lib/types';
 import useSortableData from '@/lib/sorter';
-import Image from 'next/image';
+// import Image from 'next/image';
 import { getAllProducts } from '@/lib/airapi';
+import ImageOpt from '@/components/image';
+
+const ProductPreview = dynamic(import('@/product/product-preview'));
 
 export default function AllGames({ allProducts }: { allProducts: any[] }) {
 	const [productView, setProductView] = useState('grid');
@@ -35,7 +38,7 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
 				</Head>
 				<Header />
 				<section>
-					<div className="flex flex-col items-center justify-between w-full mb-2 sm:mt-8 sm:flex-row">
+					<div className="z-10 flex flex-col items-center justify-between w-full mb-2 sm:mt-8 sm:flex-row">
 						<div className="flex flex-wrap items-center w-full text-lg sm:w-3/4 justify-evenly sm:px-20 sm:space-x-5">
 							<p className="w-full mr-4 text-xl text-center sm:w-auto">Sort by</p>
 							<button
@@ -152,12 +155,17 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
 									<Link href={`/products/${product.slug}`} key={product.slug}>
 										<div className={`${i % 2 === 0 ? 'bg-blue-100' : 'bg-white'} hover:shadow-md flex my-2 px-2 py-2 items-center cursor-pointer`}>
 											<div className="w-8 h-8 sm:w-12 sm:h-12">
-												<Image
-													unoptimized
+												<ImageOpt
 													width={300}
 													height={300}
 													src={product.cover}
+													className=""
 												/>
+												{/* <Image
+													width={300}
+													height={300}
+													src={`/images/${product.cover}`}
+												/> */}
 											</div>
 											<div className="flex flex-wrap justify-between w-full px-4">
 												<p className="w-full sm:w-auto">
@@ -184,25 +192,11 @@ export default function AllGames({ allProducts }: { allProducts: any[] }) {
 }
 
 export async function getStaticProps() {
-	const data = await getAllProducts()
-	const products = []
-	data.brand.article_list.articles.forEach((x: AirProduct) => {
-		const newObj = {
-			productName: x.title,
-			artnr: x.id,
-			slug: x.friendly_url === null ? x.title.toLowerCase().replace(' ', '') : x.friendly_url,
-			description: x.description,
-			descriptionShort: x.short_description,
-			retailPrice: x.price,
-			cover: `http://martenf1.cdsuperstore.se${x.image.normal}`,
-			heroimg: `http://martenf1.cdsuperstore.se${x.image.large}`,
-			platform: 'Video Game',
-		}
-		products.push(newObj)
-	})
+	const allProducts = await getAllProducts(100)
+
 	return {
 		props: {
-			allProducts: products,
+			allProducts,
 		},
 	};
 }

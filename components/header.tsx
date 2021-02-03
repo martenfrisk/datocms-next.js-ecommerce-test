@@ -23,7 +23,3 @@ export default function Header() {
 		</div>
 	);
 }
-
-Header.defaultProps = {
-	frontPage: false,
-}
