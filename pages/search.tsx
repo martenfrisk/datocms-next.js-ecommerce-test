@@ -57,7 +57,7 @@ export default function Search({ products }: { products: ProductType }) {
 					onChange={handleSearch}
 				/>
 				{searchResults.length > 0 && (
-					<div className="flex flex-wrap max-w-5xl mx-auto mt-10 bg-white">
+					<div className="flex flex-wrap max-w-5xl p-2 mx-auto mt-2 bg-white rounded-t-lg shadow-lg sm:mt-10 sm:p-8">
 						{searchResults.slice(0, 12).map((hit) => (
 							<ProductPreview
 								key={hit.slug}
