@@ -8,7 +8,7 @@ export type ProductType = {
 	description: string
 	descriptionShort: string
 	retailPrice: string
-	platform: string
+	platform: string[]
 	cover: string
 	heroimg?: string
 }

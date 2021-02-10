@@ -20,6 +20,8 @@ import {
 import { UserAuthenticated } from './methods/types';
 import { getCategory, getTopOfferMethod } from './methods/category';
 import { AirProduct } from './types';
+import type { Cart } from './methods/cart'
+import { getCartMethod, updateCartMethod } from './methods/cart';
 
 const appKey = 'wyD4oDd3oyT6iT7N';
 const appId = '1000';
@@ -74,11 +76,9 @@ export async function getAllProducts(limit: number = 30, category: string = '7')
 			productName: x.title,
 			artnr: x.id,
 			slug: x.friendly_url === null ? x.title.toLowerCase().replace(' ', '') : x.friendly_url,
-			description: x.description,
 			descriptionShort: x.short_description,
 			retailPrice: x.price,
 			cover: x.image.normal.split('/')[3].split('?')[0].split('.')[0],
-			heroimg: x.image.normal.split('/')[3].split('?')[0].split('.')[0],
 			platform: x.categories,
 		}
 		products.push(newObj)
@@ -238,5 +238,24 @@ export async function getOrder(
 	const ordersMd = getMd('get_order', orderId)
 	const ordersBody = getOrderMethod(pass, session, user, id, orderId, appId, ordersMd)
 	const data = await fetchAPI(ordersBody, true)
+	return data
+}
+
+export async function updateCart(
+	user: UserAuthenticated,
+	productId: string,
+	quantity: string,
+) {
+	const cartMd = getMd('update_cart', 0, '', quantity, productId, '')
+	const cartBody = updateCartMethod(user, productId, quantity, appId, cartMd)
+	const data = await fetchAPI(cartBody, true)
+	return data
+}
+export async function getCart(
+	user: UserAuthenticated,
+) {
+	const cartMd = getMd('get_cart')
+	const cartBody = getCartMethod(user, appId, cartMd)
+	const data: Cart = await fetchAPI(cartBody, true)
 	return data
 }
