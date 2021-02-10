@@ -48,16 +48,15 @@ export default function Profile() {
 						productName: x.title,
 						artnr: x.id,
 						slug: x.friendly_url === null ? x.title.toLowerCase().replace(' ', '') : x.friendly_url,
-						description: x.description,
 						descriptionShort: x.short_description,
 						retailPrice: x.price,
-						cover: `http://martenf1.cdsuperstore.se${x.image.normal}`,
-						heroimg: `http://martenf1.cdsuperstore.se${x.image.large}`,
-						platform: 'Video Game',
+						cover: x.image.normal,
+						platform: x.categories,
 					}
 					wishlist.push(newObj)
 				})
 			})
+		window.localStorage.setItem('next-askas-wishlist', JSON.stringify(wishlist))
 		setUserWishlist(() => wishlist)
 	}
 
