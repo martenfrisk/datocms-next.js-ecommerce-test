@@ -62,23 +62,23 @@ async function getAll() {
  		.then(res => res.json())
     .then((result) => {
 			result.category.article_list.articles.forEach(async (item) => {
-				const smallurl = `http://martenf1.cdsuperstore.se${item.image.small}`
-				const smallfile = item.image.small.split('/')[4].split('?')[0]
-				const smallpath = `./public/images/small/${smallfile}`
-				download(smallurl, smallpath, () => console.log(`done ${smallfile}`))
+				// const smallurl = `http://martenf1.cdsuperstore.se${item.image.small}`
+				// const smallfile = item.image.small.split('/')[4].split('?')[0]
+				// const smallpath = `./public/images/small/${smallfile}`
+				// download(smallurl, smallpath, () => console.log(`done ${smallfile}`))
 				const newItem = {
 					artnr: item.id, 
 					product: item.title,
-					description: item.description,
 					descriptionShort: item.short_description,
-					cover: item.image.small
+					cover: item.image.small,
+					slug: item.friendly_url === null ? item.title.toLowerCase().replace(' ', '') : item.friendly_url,
 				}
 				data.push(newItem)
 			})
 		})
-		// .then(() => {
-		// 	fs.writeFileSync('./admin-tools/searchlist.json', JSON.stringify(data), (err) => console.error(err))
-		// })
+		.then(() => {
+			fs.writeFileSync('./admin-tools/searchlist2.json', JSON.stringify(data), (err) => console.error(err))
+		})
     .catch(err => console.error(err))
 }
 getAll()
