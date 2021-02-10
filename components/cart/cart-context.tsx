@@ -1,5 +1,7 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
+import { updateCart } from '@/lib/airapi';
 import {
 	useReducer,
 	useContext,
@@ -35,25 +37,120 @@ export type ActionType = {
 
 const initialState = [];
 
-function moveToFirst(fromIndex: number, array: any[]) {
-	const arr = [...array]
-	arr.splice(0, 0, ...arr.splice(fromIndex, 1));
-	return arr
+const cartUpdate = async (product: string, quantity: number) => {
+	const user = window.localStorage.getItem('user_data')
+	if (user) {
+		console.log({ product })
+		console.log({ quantity })
+		const res = await updateCart(JSON.parse(user), product, quantity.toString())
+		console.log({ res })
+	}
 }
+// function moveToFirst(fromIndex: number, array: any[]) {
+// 	const arr = [...array]
+// 	arr.splice(0, 0, ...arr.splice(fromIndex, 1));
+// 	return arr
+// }
+
+// const reducer = (state: any, action: ActionType) => {
+// 	switch (action.type) {
+// 	case 'ADD_ITEM':
+// 		console.log(action);
+// 		if (state.some((i: ActionType['payload']) => i.productName === action.payload.productName)) {
+// 			state.map((item: ActionType['payload']) => {
+// 				if (item.productName === action.payload.productName) {
+// 					// cartUpdate(item.responsiveImage, quant + 1)
+// 					return { ...item, quantity: item.quantity++ };
+// 				}
+// 				return item;
+// 			})
+// 			const elPos = state.findIndex((x: ActionType['payload']) => x.slug === action.payload.slug)
+// 			state = moveToFirst(elPos, state)
+// 			// const el = state.filter((x: ActionType['payload']) => x.slug === action.payload.slug)
+// 			// state.splice(elPos, 1)
+// 			// state.unshift(el)
+// 		} else {
+// 			const newObj = [{
+// 				productName: action.payload.productName,
+// 				// id: uuid(),
+// 				quantity: action.payload.quantity,
+// 				price: action.payload.price,
+// 				slug: action.payload.slug,
+// 				responsiveImage: action.payload.responsiveImage,
+// 			}]
+// 			// cartUpdate(action.payload.responsiveImage, action.payload.quantity)
+// 			return newObj.concat(state);
+// 		}
+// 		// eslint-disable-next-line no-fallthrough
+// 	case 'REMOVE':
+// 		// cartUpdate(action.payload.responsiveImage, 0)
+// 		return state.filter((i: ActionType['payload']) => i.slug !== action.payload.slug);
+// 	case 'INCREASE':
+// 		return state.map((i: ActionType['payload']) => {
+// 			if (i.slug === action.payload.slug) {
+// 				// cartUpdate(i.responsiveImage, quant + 1)
+// 				return { ...i, quantity: i.quantity++ };
+// 			}
+// 			return i;
+// 		});
+// 	case 'DECREASE':
+// 		return state.map((item: ActionType['payload']) => {
+// 			if (item.slug === action.payload.slug) {
+// 				// cartUpdate(item.responsiveImage, item.quantity - 1)
+// 				if (item.quantity === 1) {
+// 					return item;
+// 				}
+// 				return { ...item, quantity: item.quantity - 1 };
+// 			}
+// 			return item;
+// 		});
+// 	case 'CLEAR':
+// 		console.log('Clearing cart...')
+// 		// state.forEach((item: ActionType['payload']) => {
+// 		// 	cartUpdate(item.responsiveImage, 0)
+// 		// })
+// 		// eslint-disable-next-line no-return-assign
+// 		return (state = initialState);
+// 	default:
+// 		throw new Error(`Unknown action: ${action.type}`);
+// 	}
+// };
+
+// function setLocalStorage(key: string, value: string) {
+// 	try {
+// 		window.localStorage.setItem(key, JSON.stringify(value));
+// 	} catch (e) {
+// 		console.error(e);
+// 	}
+// }
+// function getLocalStorage(key: string, initialValue: any[]) {
+// 	try {
+// 		const value = window.localStorage.getItem(key);
+// 		return value ? JSON.parse(value) : initialValue;
+// 	} catch (e) {
+// 		console.error(e);
+// 		return null
+// 	}
+// }
 
 const reducer = (state: any, action: ActionType) => {
+	console.log(action)
+	console.log(state)
 	switch (action.type) {
 	case 'ADD_ITEM':
-		if (state.some((i: ActionType['payload']) => i.slug === action.payload.slug)) {
+		if (state.some((i: ActionType['payload']) => i.responsiveImage === action.payload.responsiveImage)) {
+			let prevQuantity: number
 			state.map((item: ActionType['payload']) => {
 				if (item.slug === action.payload.slug) {
+					prevQuantity = item.quantity
 					// eslint-disable-next-line no-plusplus
 					return { ...item, quantity: item.quantity++ };
 				}
 				return item;
 			})
-			const elPos = state.findIndex((x: ActionType['payload']) => x.slug === action.payload.slug)
-			state = moveToFirst(elPos, state)
+			cartUpdate(action.payload.responsiveImage, prevQuantity++)
+			// const elPos = state.findIndex((x: ActionType['payload']) => x.slug === action.payload.slug)
+			// state = moveToFirst(elPos, state)
 			// const el = state.filter((x: ActionType['payload']) => x.slug === action.payload.slug)
 			// state.splice(elPos, 1)
 			// state.unshift(el)
@@ -66,14 +163,17 @@ const reducer = (state: any, action: ActionType) => {
 				slug: action.payload.slug,
 				responsiveImage: action.payload.responsiveImage,
 			}]
+			cartUpdate(action.payload.responsiveImage, 1)
 			return newObj.concat(state);
 		}
 		// eslint-disable-next-line no-fallthrough
 	case 'REMOVE':
+		cartUpdate(action.payload.responsiveImage, 0)
 		return state.filter((i: ActionType['payload']) => i.id !== action.payload.id);
 	case 'INCREASE':
 		return state.map((i: ActionType['payload']) => {
 			if (i.id === action.payload.id) {
+				cartUpdate(action.payload.responsiveImage, i.quantity + 1)
 				return { ...i, quantity: i.quantity + 1 };
 			}
 			return i;
@@ -81,6 +181,7 @@ const reducer = (state: any, action: ActionType) => {
 	case 'DECREASE':
 		return state.map((item: ActionType['payload']) => {
 			if (item.id === action.payload.id) {
+				cartUpdate(action.payload.responsiveImage, item.quantity - 1)
 				if (item.quantity === 1) {
 					return item;
 				}
@@ -90,6 +191,9 @@ const reducer = (state: any, action: ActionType) => {
 		});
 	case 'CLEAR':
 		console.log('Clearing cart...')
+		state.forEach((item: ActionType['payload']) => {
+			cartUpdate(item.responsiveImage, 0)
+		})
 		// eslint-disable-next-line no-return-assign
 		return (state = initialState);
 	default:
@@ -113,16 +217,6 @@ function getLocalStorage(key: string, initialValue: any[]) {
 		return null
 	}
 }
-// function checkAuthenticated() {
-// 	if (getLocalStorage('user_data', null)) {
-// 		return true
-// 	}
-// 	return false
-// }
-
-// function sendCart(content: any) {
-
-// }
 
 export const CartProvider = ({ children }: { children: any }) => {
 	// eslint-disable-next-line no-unused-vars
