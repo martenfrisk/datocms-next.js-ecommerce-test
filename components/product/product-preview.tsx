@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 // import Image from 'next/image'
 import ImageOpt from '@/components/image'
 import { addToWishlist, removeFromWishlist } from '@/lib/airapi'
+import { useRouter } from 'next/router'
 
 export default function ProductPreview({
 	productName,
@@ -38,8 +39,14 @@ export default function ProductPreview({
 }) {
 	const [showDragTooltip, setShowDragTooltip] = useState(true)
 	const [onWishlist, setOnWishlist] = useState<Boolean>(null)
+	const router = useRouter()
 	const dispatch: any = useDispatchCart()
 	const { showCart, dragging } = useCart()
+	useEffect(() => {
+		const hasWishlist = window.localStorage.getItem('next-askas-wishlist')
+		const myWishlist = hasWishlist && JSON.parse(window.localStorage.getItem('next-askas-wishlist')).some((x: any) => x.artnr === artnr)
+		if (myWishlist) setOnWishlist(true)
+	}, [])
 	const [, setVisible] = showCart
 	const [, setCurrentlyDragging] = dragging
 	function isAuthenticated() {
@@ -56,6 +63,19 @@ export default function ProductPreview({
 		if (user !== null) {
 			const res = await addToWishlist(artnr, user)
 			if (res === 1) setOnWishlist(true)
+			const myWishlist = window.localStorage.getItem('next-askas-wishlist') ? JSON.parse(window.localStorage.getItem('next-askas-wishlist')) : []
+			myWishlist.push({
+				artnr,
+				cover,
+				descriptionShort,
+				// platform,
+				productName,
+				retailPrice,
+				slug,
+			})
+			window.localStorage.setItem('next-askas-wishlist', JSON.stringify(myWishlist))
+		} else {
+			router.push('/user/profile')
 		}
 	}
 	const handleRemoveFromWishlist = async () => {
@@ -63,6 +83,11 @@ export default function ProductPreview({
 		if (user !== null) {
 			const res = await removeFromWishlist(artnr, user)
 			if (res === 1) setOnWishlist(false)
+			const myWishlist = JSON.parse(window.localStorage.getItem('next-askas-wishlist'))
+			console.log(myWishlist)
+			window.localStorage.setItem('next-askas-wishlist', JSON.stringify(myWishlist.filter((x) => x.artnr !== artnr)))
+		} else {
+			router.push('/user/profile')
 		}
 	}
 	const handleAddToCart = () => {
@@ -213,7 +238,7 @@ export default function ProductPreview({
 								</div>
 							)}
 							<div
-								className="w-5 h-5 text-blue-700"
+								className="w-5 h-5 text-blue-700 cursor-pointer hover:text-blue-900"
 							>
 								<BasketPlusOutline
 									onClick={handleAddToCart}
