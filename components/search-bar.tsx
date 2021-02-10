@@ -25,7 +25,7 @@ export default function SearchBar() {
 							const FuzzySearch = (await import('fuzzy-search')).default
 							const searcher = new FuzzySearch(
 								list,
-								['product', 'artnr', 'description', 'descriptionShort'],
+								['product', 'artnr', 'descriptionShort'],
 								{
 									sort: true,
 								},
