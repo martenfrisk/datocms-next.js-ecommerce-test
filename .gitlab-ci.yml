@@ -1,7 +1,6 @@
 image: cypress/browsers:node10.16.0-chrome77
 lhci:
   script:
-    - npm install -g npm
     - npm install --force
     - ENV=production npm run build && npm run export
     - npm install -g @lhci/cli@0.3.x
