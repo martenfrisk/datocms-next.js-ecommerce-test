@@ -18,7 +18,7 @@ import { getAllProducts } from '@/lib/airapi';
 const ProductPreview = dynamic(import('@/product/product-preview'));
 const ProductListView = dynamic(import('@/components/product/product-list-view'));
 
-export default function AllGames({ allProducts }: { allProducts: any[] }) {
+export default function AllGames({ allProducts }: { allProducts: ProductType[] }) {
 	const [productView, setProductView] = useState('grid');
 	const [filter, setFilter] = useState('')
 	const [searchProduct, setSearchProduct] = useState('')

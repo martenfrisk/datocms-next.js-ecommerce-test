@@ -6,9 +6,10 @@ import Head from 'next/head'
 import ProductBody from '@/product/product-body';
 import Header from '@/components/header';
 import Layout from '@/components/layout';
+import Review from '@/product/review'
 // import Rating from '@/components/rating'
 import { useDispatchCart, useCart } from '@/cart/cart-context'
-import { ProductType, UserReview } from '@/lib/types'
+import { Grade, ProductType, UserReview } from '@/lib/types'
 import OutsideCloseCart from '@/lib/click-outside'
 import ProductTitle from '@/product/product-title';
 // import markdownToHtml from '@/lib/markdownToHtml';
@@ -28,7 +29,7 @@ export default function Product({
 }: {
 	product: ProductType,
 	moreProducts: ProductType[],
-	rating: any,
+	rating: Grade,
 	reviews: UserReview[]
 	samePlatform: ProductType[],
  }) {
@@ -157,19 +158,7 @@ export default function Product({
 						<div className="flex flex-col w-full md:w-1/4">
 							<h3 className="mb-2 text-lg">Reviews</h3>
 							{reviews.map((review: UserReview) => (
-								<div className="mb-4" key={review.time}>
-									{/* <Rating rating={Number(review.grade)} /> */}
-									<ReactStarsRating value={Number(review.grade)} className="flex mb-2" size={20} isEdit={false} />
-									<p>
-										&quot;
-										{review.comment}
-										&quot;
-									</p>
-									<p className="text-sm italic">
-										-
-										{review.name}
-									</p>
-								</div>
+								<Review review={review} />
 							))}
 						</div>
 					)}

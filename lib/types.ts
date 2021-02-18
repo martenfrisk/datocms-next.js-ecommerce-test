@@ -13,6 +13,11 @@ export type ProductType = {
 	heroimg?: string
 }
 
+export type Grade = {
+	grade: string
+	number_of_grades: string
+}
+
 export type UserReview = {
 	grade: string
 	time: string

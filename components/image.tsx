@@ -14,8 +14,8 @@ const ImageOpt = ({
 }: {
 	src: string
 	className: string
-	width?: any
-	height?: any
+	width?: number
+	height?: number
 	notLazy?: boolean
 	style?: any
 }) => (

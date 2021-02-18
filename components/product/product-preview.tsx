@@ -34,7 +34,7 @@ export default function ProductPreview({
     description: ProductType['description'],
     descriptionShort: ProductType['descriptionShort'],
     retailPrice: ProductType['retailPrice'],
-    cover: any
+    cover: ProductType['cover']
     animate?: boolean
 }) {
 	const [showDragTooltip, setShowDragTooltip] = useState(true)
