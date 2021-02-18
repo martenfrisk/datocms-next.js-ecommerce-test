@@ -6,6 +6,10 @@ module.exports = {
 	purge: {
 		enabled: process.env.NODE_ENV !== 'development',
 		mode: 'all',
+		options: {
+			keyframes: true,
+			fontFace: true,
+		},
 		content: [
 			'./pages/**/*.{js,jsx,ts,tsx}',
 			'./components/**/*.{js,jsx,ts,tsx}',
