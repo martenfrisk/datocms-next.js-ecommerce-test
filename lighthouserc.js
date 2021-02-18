@@ -6,6 +6,8 @@ module.exports = {
 			settings: {
 				skipAudits: ['uses-http2', 'is-on-https'],
 			},
+			chromeFlags: '--no-sandbox',
+			startServerReadyPattern: 'Serving!',
 		},
 		upload: {
 			target: 'temporary-public-storage',
