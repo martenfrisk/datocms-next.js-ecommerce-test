@@ -251,6 +251,7 @@ export async function updateCart(
 	const data = await fetchAPI(cartBody, true)
 	return data
 }
+
 export async function getCart(
 	user: UserAuthenticated,
 ) {
