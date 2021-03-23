@@ -5,3 +5,6 @@ node_modules/
 out/
 out_publish/
 out_functions/
+yarn-error.log
+yarn.lock
+.github/
