@@ -27,7 +27,7 @@
     "next": "^10.0.6",
     "next-compose-plugins": "^2.2.1",
     "next-plugin-preact": "^3.0.3",
-    "postcss": "^8.2.4",
+    "postcss": "^8.2.10",
     "preact": "^10.5.12",
     "preact-render-to-string": "^5.1.12",
     "react": "npm:@preact/compat",
